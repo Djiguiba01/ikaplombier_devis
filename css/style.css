@@ -160,6 +160,11 @@ section{
     /* section{
         padding: 2rem;
     } */
+
+     /* Section */
+     .home .content p{
+        font-size: 1.6rem;
+    }
 }
 
 
