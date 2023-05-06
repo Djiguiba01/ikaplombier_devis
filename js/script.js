@@ -1,7 +1,7 @@
 
 // Menu:::::::
 let menu = document.querySelector('#menu-btn');
-let navbar = document.querySelector('.navbar');
+let navbar = document.querySelector('.fa-bars');
 
 // Activé le menu en cas de click
 // menu.onclik = () =>{

@@ -12,6 +12,7 @@
     <!-- Lien js -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
 </head>
     
 <body>
@@ -24,15 +25,28 @@
         <!-- Menu desktop -->
         <nav class="navbar">
             <a href="#">Accueil</a>
-            <a href="#">Accueil</a>
-            <a href="#">Accueil</a>
-            <a href="#">Accueil</a>
+            <a href="#">A Propos</a>
+            <a href="#">Nos Services</a>
+            <a href="#">Notre Equipe</a>
+            <a href="#">Contact</a>
         </nav>
 
         <!-- Menu mobile -->
         <div id="menu-btn" class="fas fa-bars"></div>
     
     </header>
+
+    <script>
+        let btn = document.querySelector("#menu-btn");
+        let icon = menu.querySelector(".fas fa-bars");
+
+        menu.onclick = function (){
+            if(icon.classList.contains("fas fa-bars")){
+                icon.classList.replace("fas fa-bars", "fa-times");
+            }
+        }
+
+    </script>
     
     <!-- Home section:::::::::::::: -->
 
@@ -48,7 +62,6 @@
                  adipisicing elit. Eum et quis fugit saepe, 
                  quas eius laudantium? Quas minima, voluptate
                  ddddddddddddddddddddddddddddddddddddddd
-                 ffffffffff
             </p>
             <a href="#" class="btn"> Contact
                 <span class="fas fa-hevron-right"></span>
@@ -58,8 +71,8 @@
 
     <!-- Fin Home section:::::::::::::: -->
 
-    <!-- Réalisations Icon section:::::::::::: -->
 
+    <!-- Réalisations Icon section:::::::::::: -->
     <section class="icons-container" >
 
         <div class="icons">
@@ -79,12 +92,12 @@
             <h3>122</h3>
             <p>eeeeeeeeee</p>
         </div>
+
         <div class="icons">
             <i class="fas fa-hospital"></i>
             <h3>122</h3>
             <p>eeeeeeeeee</p>
         </div>
-
 
     </section>
     <!-- Fin Réalisations icon section:::::::::::: -->
@@ -155,7 +168,6 @@
     </section>
     <!-- Fin Service section:::::: -->
 
-
     <!-- About Section:::::::::::::: -->
 <section class="about" id="about">
 
@@ -164,7 +176,7 @@
     <div class="row">
 
         <div class="image">
-            <img src="images/logo.png" alt="">
+            <img src="images/2.jpg" alt="">
         </div>
 
         <div class="content">
@@ -195,7 +207,7 @@
         <div class="box-container">
 
             <div class="box">
-                <img src="images/devis.png" alt="">
+                <img src="images/1 (2).jpg" alt="">
                 <h3>Djiguiba Barema</h3>
                 <span>Développeur</span>
                 <div class="share">
@@ -207,7 +219,7 @@
             </div>
 
             <div class="box">
-                <img src="images/devis.png" alt="">
+                <img src="images/1 (1).jpg" alt="">
                 <h3>Djiguiba Barema</h3>
                 <span>Développeur</span>
                 <div class="share">
@@ -219,7 +231,7 @@
             </div>
 
             <div class="box">
-                <img src="images/devis.png" alt="">
+                <img src="images/1 (4).jpg" alt="">
                 <h3>Djiguiba Barema</h3>
                 <span>Développeur</span>
                 <div class="share">
@@ -236,10 +248,209 @@
 
     </section>
     <!-- Fin Equipes Section ::::::::-->
+    
 
+    <!-- booking:::::::::::::::::::: -->
+    <div class="book" id="book">
+
+
+        <h1 class="heading"> <span>Book</span>now</h1>
+
+        <div class="row">
+
+            <div class="image">
+                <img src="images/1 (7).jpg" alt="">
+            </div>
+
+            <form action="">
+                <h3>aaaaadddddddd</h3>
+                <input type="text" placeholder="votre nom" class="box">
+                <input type="number" placeholder="votre numéro" class="box">
+                <input type="email" placeholder="votre email" class="box">
+                <input type="date" class="box">
+                <input type="submit" value="Envoyer" class="btn">
+            </form>
+        </div>
+
+    </div>
+    <!-- Fin booking:::::::::::::::::::: -->
+
+
+    <!-- Clients section::::::::::::::::::::::::: -->
+    <section class="review" id="review">
+
+        <h1 class="heading"> <span>Client</span></h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="images/1 (5).jpg" alt="">
+            <h3>Djiguiba Barema</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-halt-alt"></i>
+            </div>
+            <p class="text">Lorem ipsum dolor sit amet consectetur 
+                adipisicing elit. Adipisci eius quia et cumque, 
+                consequuntur modi? Ipsum alias perspiciatis dolor 
+            </p>
+        </div>
+
+        <div class="box">
+            <img src="images/1 (5).jpg" alt="">
+            <h3>Djiguiba Barema</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-halt-alt"></i>
+            </div>
+            <p class="text">Lorem ipsum dolor sit amet consectetur 
+                adipisicing elit. Adipisci eius quia et cumque, 
+                consequuntur modi? Ipsum alias perspiciatis dolor 
+            </p>
+        </div>
+
+        <div class="box">
+            <img src="images/1 (5).jpg" alt="">
+            <h3>Djiguiba Barema</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-halt-alt"></i>
+            </div>
+            <p class="text">Lorem ipsum dolor sit amet consectetur 
+                adipisicing elit. Adipisci eius quia et cumque, 
+                consequuntur modi? Ipsum alias perspiciatis dolor 
+                
+            </p>
+        </div>
+
+    </div>
+
+    </section>
+    <!-- Fin client section::::::::::::::::::::::::: -->
+
+    <!-- Blogs section starts::::::::::::::: -->
+    <!-- <section class="blogs" id="blogs">
+
+        <h1 class="heading">votre <span>blogs</span></h1>
+
+        <div class="box-container">
+            <div class="box">
+                <div class="image">
+                    <img src="images/1 (1).jpg" alt="">
+                </div>
+                <div class="content">
+                    <div class="icon">
+                        <a href="#"><i class="fas fa-calendar"></i>05/05/2023</a>
+                        <a href="#"><i class="fas fa-user"></i>Admin</a>
+                    </div>
+                    <h3>booooooooooooooooooooooooo</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur 
+                        adipisicing elit. Vitae a laborum id esse! 
+                        Architecto non omnis eius autem vel, ea consectetur 
+                    </p>
+                    <a href="#" class="btn">Voir+ <span class="fas fa-chevron-right"></span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-container">
+            <div class="box">
+                <div class="image">
+                    <img src="images/1 (1).jpg" alt="">
+                </div>
+                <div class="content">
+                    <div class="icon">
+                        <a href="#"><i class="fas fa-calendar"></i>05/05/2023</a>
+                        <a href="#"><i class="fas fa-user"></i>Admin</a>
+                    </div>
+                    <h3>booooooooooooooooooooooooo</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur 
+                        adipisicing elit. Vitae a laborum id esse! 
+                        Architecto non omnis eius autem vel, ea consectetur 
+                    </p>
+                    <a href="#" class="btn">Voir+ <span class="fas fa-chevron-right"></span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-container">
+            <div class="box">
+                <div class="image">
+                    <img src="images/1 (1).jpg" alt="">
+                </div>
+                <div class="content">
+                    <div class="icon">
+                        <a href="#"><i class="fas fa-calendar"></i>05/05/2023</a>
+                        <a href="#"><i class="fas fa-user"></i>Admin</a>
+                    </div>
+                    <h3>booooooooooooooooooooooooo</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur 
+                        adipisicing elit. Vitae a laborum id esse! 
+                        Architecto non omnis eius autem vel, ea consectetur 
+                    </p>
+                    <a href="#" class="btn">Voir+ <span class="fas fa-chevron-right"></span></a>
+                </div>
+            </div>
+        </div>
+
+
+    </section> -->
+
+    <!-- Fin Blogs section starts::::::::::::::: -->
+
+
+    <!-- Pied de page::::::::::::::::::::: -->
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>Services</h3>
+                <a href="#"> <i class="fas fa-chevron-right"></i> home</a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> home</a>
+            </div>
+
+            <div class="box">
+                <h3>Services</h3>
+                <a href="#"> <i class="fas fa-chevron-right"></i> home</a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> home</a>
+            </div>
+
+            <div class="box">
+                <h3>Services</h3>
+                <a href="#"> <i class="fas fa-chevron-right"></i> home</a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> home</a>
+            </div>
+
+            <div class="box">
+                <h3>Réseaux</h3>
+                <a href="#"> <i class="fab fa-facebook-f"></i>facebook </i></a>
+                <a href="#"> <i class="fab fa-twitter"></i> site web</a>
+                <a href="#"> <i class="fab fa-twitter"></i> twiter</a>
+                <a href="#"> <i class="fab fa-instagram"></i> instagram</a>
+            </div>
+
+        </div>
+
+        <div class="credit">2023 ikaplombier Halles de Bamako <span>| tout droit reservé</span></div>
+
+    </section>
+    <!-- Fi Pied de page::::::::::::::::::::: -->
 
 
     <!-- Lien Script -->
     <script src="js/script.js"></script>
+      
+      
+      
 </body>
 </html>
