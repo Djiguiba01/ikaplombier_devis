@@ -3,7 +3,7 @@
   /* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,500&display=swap'); */
 
 :root{
-    /* --green:#FF5F49; */
+    --orange:#FF5F49;
     --green:#3f0dca;
     --black:#444;
     --light-color: #777;
@@ -303,6 +303,9 @@ section:nth-child(event){
 
 
 /* <!-- booking:::::::::::::::::::: --> */
+.book{
+    width: 95%;
+}
 .book .row{
     display: flex;
     align-items: center;
@@ -584,13 +587,18 @@ section:nth-child(event){
     }
 
     /* <!-- booking:::::::::::::::::::: --> */
+    .book{
+        width: 90%;
+    }
   .book .row{
     display: block;
    }
    .book .row form{
     margin-top: 2.2rem;
     padding: 2rem; 
+    margin-left: 8%
 }
+
 
 /* <!-- Clients section::::::::::::::::::::::::: --> */
 .review .box-container{
@@ -651,6 +659,7 @@ section:nth-child(event){
      .doctors .box-container{
         grid-template-columns: 1fr;
     }
+   
 
      /* <!-- Pied de page::::::::::::::::::::: --> */
 .footer .box-container{
