@@ -78,19 +78,12 @@ section{
     padding: 2rem 9%;
 }
 .home{
-    display: flex;
-    /* flex-wrap: wrap; */
-    justify-content: space-between;
     align-items: center;
-    gap:1.5rem;
-    padding-top: 10rem;
+    padding-top: 1rem;
 }
-.home .image{
-    flex:1 1 45rem;
-}
-.home .image img{
-    width: 100%;
-    height: 400px;
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    height: 55rem !important;
+    padding-top:2rem;
 }
 .home .content{
     flex: 1 1 45rem;
@@ -617,6 +610,12 @@ section:nth-child(event){
         font-size: 50%;
     }
 
+    /* <!-- Entête section --> */
+    .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+        height: 41rem !important;
+        padding-top: 1% !important;
+    }
+
      /* <!-- About Section:::::::::::::: --> */
      .about  .row .content h3{
         font-size: 1.7rem;
@@ -636,10 +635,12 @@ section:nth-child(event){
 
 
 @media (max-width:660px) {  
-    /* Home Section:::::::: */
-    .home{
-        display: block;  
-    }
+
+    /* <!-- Home section:::::::::::::: --> */
+
+    .carousel-inner .item img{
+    height: 1rem;
+ }
 
     /* <!-- Service section:::::: --> */
 .services .box-container{
