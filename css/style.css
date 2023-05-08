@@ -115,7 +115,6 @@ section{
     cursor: pointer;
     font-size: 1.5rem;
     background: #FFF;
-
 }
 .btn span{
     padding: .7rem 1rem;
@@ -172,9 +171,6 @@ section:nth-child(event){
 
 /* <!-- Service section:::::: --> */
 .services .box-container{
-   /* display: grid; 
-   grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
-   gap: 2rem; */
    display: grid;
     grid-template-columns: repeat(3, 1fr); /* crée 3 colonnes de largeur égale */
     grid-gap: 15px; /* définit l'espace entre les boîtes */
@@ -528,10 +524,6 @@ section:nth-child(event){
     }  
     
     /* Section:::::::: */
-    /* section{
-        padding: 2rem;
-    } */
-
      /* Section */
      .home .content p{
         font-size: 1.6rem;

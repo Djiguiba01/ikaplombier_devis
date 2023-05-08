@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+  /* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,500&display=swap'); */
+
+:root{
+    --orange:#FF5F49;
+    --green:#3f0dca;
+    --black:#444;
+    --light-color: #777;
+    --box-shadow: .5rem .5rem 0 rgba(22, 160, 133, .2);
+    --text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
+    --border:.2rem solid var(--green);
+}
+
+*{
+    font-family: 'Popins', sans-serif;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    outline: none; border: none;
+    text-transform: capitalize;
+    transition: all .2s ease-out;
+    text-decoration: none;
+}
+
+html{
+    font-size: 62.5;
+    overflow: scroll;
+    /* scroll-behavior: smooth; */
+    /* scroll-padding-top: 7rem; */
+}
+
+
+
+/* <!-- Service section:::::: --> */
+.services .box-container{
+    display: grid;
+     grid-template-columns: repeat(3, 1fr); /* crée 3 colonnes de largeur égale */
+     grid-gap: 15px; /* définit l'espace entre les boîtes */
+     padding-left: 4rem;
+     padding-right: 4rem;
+ }
+ .services .box-container .box{
+     background: #fff;
+     border-radius: .5rem;
+     box-shadow: var(--box-shadow);
+     border: var(--border);
+     padding: 2.5rem;
+ }
+ .heading{
+     text-align: center;
+     padding-bottom: 2rem;
+     text-shadow: var(--text-shadow);
+     text-transform: uppercase;
+     color: var(--black);
+     font-size: 5rem;
+     letter-spacing: .4rem;
+ }
+ .heading .span{
+     text-transform: uppercase;
+     color: var(--green);
+ }
+ .services .box-container .box i{
+     color: var(--green);
+     font-size: 5rem;
+     padding-bottom: .5rem;
+ }
+ .services .box-container .box h3{
+     color: var(--black);
+     font-size: 2.5rem;
+     padding: 1rem 0;
+ }
+ .services .box-container .box p{
+     color: var(--light-color);
+     font-size: 1.4rem;
+     line-height: 2;
+ }
+
+ /* Button::::::::::::::::::::::::::: */
+ .btn{
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .5rem;
+    padding-left: 1rem;
+    border: var(--border);
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    color: var(--green);
+    cursor: pointer;
+    font-size: 1.5rem;
+    background: #FFF;
+} 
+.btn span{
+    padding: .7rem 1rem;
+    border-radius: .5rem;
+    background: var(--green);
+    counter-reset: #fff;
+    margin-left: .5rem;
+}
+.btn:hover{
+    background: var(--green);
+    color: #FFF;
+}
+.btn:hover span{
+    color: var(--green);
+    background: #FFF;
+    margin-left: 1rem;
+}
+
+
+
+/* Responsive:::::::::::::::::: */
+@media (max-width:768px) {
+
+    /* <!-- Service section:::::: --> */
+.services .box-container{
+     grid-template-columns: repeat(2, 1fr); /* crée 2 colonnes de largeur égale */
+ }
+}
+
+@media (max-width:600px) {
+    /* <!-- Service section:::::: --> */
+   .services .box-container{
+    grid-template-columns: repeat(1, 1fr); /* crée 2 colonnes de largeur égale */
+}
+}
+
+@media (max-width:450px) {
+     /* <!-- Service section:::::: --> */
+    .services .box-container{
+        grid-template-columns: repeat(1, 1fr); /* crée 2 colonnes de largeur égale */
+}
+}
