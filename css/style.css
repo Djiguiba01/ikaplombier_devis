@@ -667,8 +667,8 @@ section:nth-child(event){
      .footer .box-container{
         grid-template-columns: repeat(1, 1fr); /* crée 3 colonnes de largeur égale */    
     }
-
 }
+
 
 
 /*  */

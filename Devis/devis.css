@@ -107,8 +107,63 @@ html{
 }
 
 
+ /* <!-- Pied de page::::::::::::::::::::: --> */
+ 
+ .footer .box-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* crée 3 colonnes de largeur égale */
+    grid-gap: 15px; /* définit l'espace entre les boîtes */
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 2rem;
+    
+}
+.footer .box-container .box h3{
+    font-size: 2.5rem;
+    color: var(--black);
+    padding: 1rem 0;
+}
+.footer .box-container .box a{
+    display: block;
+    font-size: 1.5rem;
+    color: var(--light-color);
+    padding: 1rem 0;
+}
+.footer .box-container .box a i{
+    padding-right: .5rem;
+    color: var(--green);
+}
+.footer .box-container .box a:hover i{
+    padding-right: 2rem;
+}
+.footer .credit{
+    padding: 1rem;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    text-align: center;
+    color: var(--light-color);
+    border-top: .1rem solid rgba(0, 0, 0, .1);
+}
+.footer .credit span{
+    color: var(--green);
+}
+
+
 
 /* Responsive:::::::::::::::::: */
+@media (max-width:991px) {
+
+    .footer .box-container{
+        grid-template-columns: repeat(3, 1fr); /* crée 3 colonnes de largeur égale */
+
+        
+    }
+}
+
+
+
 @media (max-width:768px) {
 
     /* <!-- Service section:::::: --> */
@@ -117,16 +172,38 @@ html{
  }
 }
 
+
 @media (max-width:600px) {
     /* <!-- Service section:::::: --> */
    .services .box-container{
     grid-template-columns: repeat(1, 1fr); /* crée 2 colonnes de largeur égale */
 }
+
+
+     /* <!-- Pied de page::::::::::::::::::::: --> */
+     .footer .box-container{
+        grid-template-columns: repeat(2, 1fr); /* crée 3 colonnes de largeur égale */    
+    }
 }
 
 @media (max-width:450px) {
+
      /* <!-- Service section:::::: --> */
     .services .box-container{
         grid-template-columns: repeat(1, 1fr); /* crée 2 colonnes de largeur égale */
 }
+.heading {
+    padding-top: 2rem;
+    font-size: 3rem;
+}
+
+
+}
+/*  */
+@media (max-width:330px) {
+
+    /* <!-- Pied de page::::::::::::::::::::: --> */
+    .footer .box-container{
+       grid-template-columns: repeat(1, 1fr); /* crée 3 colonnes de largeur égale */    
+   }
 }
