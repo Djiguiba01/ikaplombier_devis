@@ -25,11 +25,9 @@
 html{
     font-size: 62.5;
     overflow: scroll;
+    /* scroll-behavior: smooth; */
+    /* scroll-padding-top: 7rem; */
 }
-
-
-
-
 
 
 
@@ -163,6 +161,20 @@ html{
         
     }
 }
+
+
+/* Plomberie page:::::::::::::::::::: */
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media (max-width:768px) {
