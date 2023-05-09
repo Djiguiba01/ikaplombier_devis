@@ -72,6 +72,9 @@ html{
     cursor: pointer;
     display: none;
 }
+.tout{
+    visibility: hidden;
+}
 
 /* <!-- Home section:::::::::::::: --> */
 section{
@@ -535,6 +538,9 @@ section:nth-child(event){
 @media (max-width:768px) {
 
     /* <!-- Entête section --> */
+    header{
+        visibility: hidden;
+    }
     #menu-btn{
         display: initial;
     } 
@@ -598,82 +604,13 @@ section:nth-child(event){
 }
 
 
-      
-}
 
 
-
-
-@media (max-width:450px) {
-
-    html{
-        font-size: 50%;
-    }
-
-    /* <!-- Entête section --> */
-    .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
-        height: 41rem !important;
-        padding-top: 1% !important;
-    }
-
-     /* <!-- About Section:::::::::::::: --> */
-     .about  .row .content h3{
-        font-size: 1.7rem;
-    }
-    
-/* <!-- Equipes Section ::::::::--> */
-    .doctors .heading{
-        font-size: 3rem;
-    }
-
-    /* <!-- Clients section::::::::::::::::::::::::: --> */
-.review .box-container{
-    grid-template-columns: repeat(1, 1fr); 
-}
-
-}
-
-
-@media (max-width:660px) {  
-
-    /* <!-- Home section:::::::::::::: --> */
-
-    .carousel-inner .item img{
-    height: 1rem;
- }
-
-    /* <!-- Service section:::::: --> */
-.services .box-container{
-    grid-template-columns: 1fr;
-}
-
-     /* <!-- Service section:::::: --> */
-     .doctors .box-container{
-        grid-template-columns: 1fr;
-    }
-   
-
-     /* <!-- Pied de page::::::::::::::::::::: --> */
-.footer .box-container{
-    grid-template-columns: repeat(2, 1fr); /* crée 3 colonnes de largeur égale */    
-}
-}
-
-
-/*  */
-@media (max-width:330px) {
-
-     /* <!-- Pied de page::::::::::::::::::::: --> */
-     .footer .box-container{
-        grid-template-columns: repeat(1, 1fr); /* crée 3 colonnes de largeur égale */    
-    }
-}
-
-
+/* IkaPlombier:::::::: */
 
 /*Menu Mobile:::::::::::::::::::  */
-
 .tout{
+    visibility: visible;
     padding: 2rem ;
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -682,10 +619,12 @@ section:nth-child(event){
     align-items: center;
     justify-content: space-between;
     background: #FFF;
+    height: 11%;
+    /* display: flex;
+    justify-content: space-between; */
 }
 #menuToggle
 {
-    /* visibility: hidden; */
   display: block;
   position: relative;
   -webkit-user-select: none;
@@ -693,12 +632,14 @@ section:nth-child(event){
   
 }
 .tout .logo{
-    padding-left: 85%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 82%;
     font-size: 2.5rem;
     color: var(--black);
 }
 .tout .logo img{
-    margin-top: -8%;
+    margin-top: -7%;
     position: absolute;
     width:70px;
     height: 45px;
@@ -808,3 +749,82 @@ section:nth-child(event){
   transform: none;
 }
 /* Fin Menu Mobile::::::::::::::::::: */
+
+
+      
+}
+
+
+
+
+@media (max-width:450px) {
+
+    html{
+        font-size: 50%;
+    }
+
+    /* <!-- Entête section --> */
+    .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+        height: 41rem !important;
+        padding-top: 1% !important;
+    }
+    /* Mobile menu */
+    .tout .logo img{
+        margin-top: -11%;
+    }
+
+     /* <!-- About Section:::::::::::::: --> */
+     .about  .row .content h3{
+        font-size: 1.7rem;
+    }
+    
+/* <!-- Equipes Section ::::::::--> */
+    .doctors .heading{
+        font-size: 3rem;
+    }
+
+    /* <!-- Clients section::::::::::::::::::::::::: --> */
+.review .box-container{
+    grid-template-columns: repeat(1, 1fr); 
+}
+
+}
+
+
+@media (max-width:660px) {  
+
+    /* <!-- Home section:::::::::::::: --> */
+
+    .carousel-inner .item img{
+    height: 1rem;
+ }
+
+    /* <!-- Service section:::::: --> */
+.services .box-container{
+    grid-template-columns: 1fr;
+}
+
+     /* <!-- Service section:::::: --> */
+     .doctors .box-container{
+        grid-template-columns: 1fr;
+    }
+   
+
+     /* <!-- Pied de page::::::::::::::::::::: --> */
+.footer .box-container{
+    grid-template-columns: repeat(2, 1fr); /* crée 3 colonnes de largeur égale */    
+}
+}
+
+
+/*  */
+@media (max-width:330px) {
+
+     /* <!-- Pied de page::::::::::::::::::::: --> */
+     .footer .box-container{
+        grid-template-columns: repeat(1, 1fr); /* crée 3 colonnes de largeur égale */    
+    }
+}
+
+
+/* :::::::::::::::: */
