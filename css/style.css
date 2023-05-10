@@ -73,7 +73,8 @@ html{
     display: none;
 }
 .tout{
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
 }
 
 /* <!-- Home section:::::::::::::: --> */
@@ -233,9 +234,8 @@ section:nth-child(event){
 .about  .row .content{
     flex: 1 1 45rem;
 }
-.about  .row .content h3{
+.about  .row .content h2{
     color: var(--black);
-    text-shadow: var(--text-shadow);
     font-size: 3rem;
     line-height: 1.8;
 }
@@ -301,61 +301,8 @@ section:nth-child(event){
 }
 
 
-/* <!-- booking:::::::::::::::::::: --> */
-.book{
-    width: 95%;
-}
-.book .row{
-    display: flex;
-    align-items: center;
-    /* flex-wrap: wrap; */
-    gap: 2rem;
-}
-
-.book .row .image{
-    flex: 1 1 45rem;
-}
-
-.book .row .image{
-    flex: 1 1 45rem;
-}
-.book .row .image img{
-    width: 100%;
-}
-.book .row form{
-    flex: 1 1 45rem;
-    background: #fff;
-    border: var(--border);
-    box-shadow: var(--box-shadow);
-    text-align: center;
-    padding: 2rem;
-    border-radius: .5rem;
-}
-.book .row form h3{
-    color: var(--black);
-    padding-bottom: 1rem;
-    font-size: 3rem;
-}
-.book .row form .box{
-    width: 100%;
-    margin: .7rem 0;
-    border-radius: .5rem;
-    border: var(--border);
-    color: var(--black);
-    font-size: 1.6rem;
-    text-transform: none;
-    padding: 1rem;
-}
-.book .row form .btn{
-    padding: 1rem 4rem;
-}
-
 /* <!-- Clients section::::::::::::::::::::::::: --> */
 .review .box-container{
-     /* display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
-    gap: 2rem;  */
-
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* crée 3 colonnes de largeur égale */
     grid-gap: 15px;  /*définit l'espace entre les boîtes */
@@ -365,7 +312,7 @@ section:nth-child(event){
     border: var(--border);
     box-shadow: var(--box-shadow);
     border-radius: .5rem;
-    padding: 2.5rem;
+    padding: 1rem;
     background: #FFF;
     text-align: center;
     position: relative;
@@ -373,13 +320,13 @@ section:nth-child(event){
     z-index: 0;
 }
 .review .box-container .box img{
-    height: 10rem;
-    width: 10rem;
-    border-radius: 50%;
-    object-fit: cover;
-    border: .5rem solid #FFF;
+    height: 13rem;
+    width: 100%;
+   border-radius: 5%;
+      /* object-fit: unset; */
+   border: .2rem solid #FFF;
 }
-.review .box-container .box  h3{
+.review .box-container .box  h4{
     color: #FFF;
     font-size: 2.2rem;
     padding: .5rem 0;
@@ -466,23 +413,77 @@ section:nth-child(event){
  */
 
 
+ 
+/* <!-- booking:::::::::::::::::::: --> */
+.book{
+    width: 95%;
+}
+.book .row{
+    display: flex;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    gap: 2rem;
+}
+
+.book .row .image{
+    flex: 1 1 45rem;
+}
+
+.book .row .image{
+    flex: 1 1 45rem;
+}
+.book .row .image img{
+    width: 100%;
+}
+.book .row form{
+    flex: 1 1 45rem;
+    background: #fff;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    padding: 2rem;
+    border-radius: .5rem;
+}
+
+.book .row form h3{
+    color: var(--black);
+    padding-bottom: 1rem;
+    font-size: 3rem;
+}
+.book .row form .box{
+    width: 100%;
+    margin: .7rem 0;
+    border-radius: .5rem;
+    border: var(--border);
+    color: var(--black);
+    font-size: 1.6rem;
+    text-transform: none;
+    padding: 1rem;
+}
+.book .row form .btn{
+    padding: 1rem 4rem;
+}
+
+
+
  /* <!-- Pied de page::::::::::::::::::::: --> */
 .footer .box-container{
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* crée 3 colonnes de largeur égale */
     grid-gap: 15px; /* définit l'espace entre les boîtes */
-    
 }
 .footer .box-container .box h3{
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     color: var(--black);
     padding: 1rem 0;
+    font-weight: bold;
 }
 .footer .box-container .box a{
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     color: var(--light-color);
     padding: 1rem 0;
+    text-decoration: none;
 }
 .footer .box-container .box a i{
     padding-right: .5rem;
@@ -514,6 +515,7 @@ section:nth-child(event){
 
 
 
+
 /* Responsivitée::::::::::: */
 
 @media (max-width:991px) {
@@ -538,10 +540,22 @@ section:nth-child(event){
 @media (max-width:768px) {
 
     /* <!-- Entête section --> */
-    header{
+    .tout{
+        display: block;
+    }
+     header{
         visibility: hidden;
     }
-    #menu-btn{
+
+    /* Mobile::::::::: */
+    .tout #menuToggle #menu{
+        background: #FFF;
+        border: var(--border);
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        width: 30rem; 
+    }
+  /*  #menu-btn{
         display: initial;
     } 
 
@@ -557,7 +571,7 @@ section:nth-child(event){
         opacity:0;
         transform-origin: top right;
         transition: none; 
-    }
+    } */
 
     .header .navbar.active{
         transform: scale(0);
@@ -584,7 +598,14 @@ section:nth-child(event){
         font-size: 3rem;
     }
 
-    /* <!-- booking:::::::::::::::::::: --> */
+   
+
+/* <!-- Clients section::::::::::::::::::::::::: --> */
+.review .box-container{
+    grid-template-columns: repeat(2, 1fr); 
+}
+
+ /* <!-- booking:::::::::::::::::::: --> */
     .book{
         width: 90%;
     }
@@ -596,13 +617,6 @@ section:nth-child(event){
     padding: 2rem; 
     margin-left: 8%
 }
-
-
-/* <!-- Clients section::::::::::::::::::::::::: --> */
-.review .box-container{
-    grid-template-columns: repeat(2, 1fr); 
-}
-
 
 
 
@@ -628,9 +642,9 @@ section:nth-child(event){
   display: block;
   position: relative;
   -webkit-user-select: none;
-  user-select: none;
-  
+  user-select: none;  
 }
+
 .tout .logo{
     display: flex;
     justify-content: space-between;
@@ -774,9 +788,11 @@ section:nth-child(event){
     }
 
      /* <!-- About Section:::::::::::::: --> */
-     .about  .row .content h3{
+     .about  .row .content h2{
         font-size: 1.7rem;
+        font-weight: bold;
     }
+   
     
 /* <!-- Equipes Section ::::::::--> */
     .doctors .heading{
