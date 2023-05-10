@@ -469,7 +469,7 @@ section:nth-child(event){
  /* <!-- Pied de page::::::::::::::::::::: --> */
 .footer .box-container{
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* crée 3 colonnes de largeur égale */
+    grid-template-columns: repeat(2, 1fr); /* crée 3 colonnes de largeur égale */
     grid-gap: 15px; /* définit l'espace entre les boîtes */
 }
 .footer .box-container .box h3{
@@ -804,6 +804,7 @@ section:nth-child(event){
     grid-template-columns: repeat(1, 1fr); 
 }
 
+
 }
 
 
@@ -834,7 +835,7 @@ section:nth-child(event){
 
 
 /*  */
-@media (max-width:330px) {
+@media (max-width:410px) {
 
      /* <!-- Pied de page::::::::::::::::::::: --> */
      .footer .box-container{
