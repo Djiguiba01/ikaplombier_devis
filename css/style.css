@@ -467,6 +467,10 @@ section:nth-child(event){
 
 
  /* <!-- Pied de page::::::::::::::::::::: --> */
+ hr {
+
+    border-top: 2px solid #b3abab !important;
+}
 .footer .box-container{
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* crée 3 colonnes de largeur égale */
@@ -553,7 +557,7 @@ section:nth-child(event){
         border: var(--border);
         border-radius: .5rem;
         box-shadow: var(--box-shadow);
-        width: 30rem; 
+        width: 25rem; 
     }
   /*  #menu-btn{
         display: initial;
