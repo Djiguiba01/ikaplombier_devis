@@ -15,7 +15,7 @@ function afficherPDF(){
             <img src="logo.png" alt="">
             <p>Générateur PDF</p>
         </div>
-
+ 
         <h1>Pièce d'identité Partielle</h1>
 
         <div class="elements">
@@ -33,25 +33,25 @@ function afficherPDF(){
     </div>
 
     <div class="generateurBtn">
-    <button class="submit" onclick='generateurPDF()'>Télécharger PDF</button>
+    <button class="submit" onclick="generateurPDF()">Télécharger PDF</button>
     <a href="pdf.html" class="submit">Générer un autre PDF</a>
     </div>
     ` 
 
     // ::::::::::::Générer puis télécharger PDF::::::::::::
-    // function generateurPDF(){
-    //     const piece =document.querySelector(".piece")
-    //     html2pdf()
-    //     .from(piece)
-    //     .save()
-    // }   
-
     function generateurPDF(){
-        const piece = document.querySelector(".piece");
+        const piece =document.querySelector(".piece")
         html2pdf()
-            .from(piece)
-            .save();
-    }
-    ``    
+        .from(piece)
+        .save()
+    }   
+
+    // function generateurPDF(){
+    //     const piece = document.querySelector(".piece");
+    //     html2pdf()
+    //         .from(piece)
+    //         .save();
+    // }
+    // ``    
     
 }
