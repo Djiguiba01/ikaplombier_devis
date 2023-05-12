@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+  /* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,500&display=swap'); */
+
+:root{
+    --orange:#FF5F49;
+    --green:#3f0dca;
+    --black:#444;
+    --light-color: #777;
+    --box-shadow: .5rem .5rem 0 rgba(22, 160, 133, .2);
+    --text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
+    --border:.2rem solid var(--green);
+}
+
+*{
+    font-family: 'Popins', sans-serif;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    outline: none; border: none;
+    text-transform: capitalize;
+    transition: all .2s ease-out;
+    text-decoration: none;
+}
+
+html{
+    font-size: 62.5;
+    overflow: scroll;
+    /* scroll-behavior: smooth; */
+    /* scroll-padding-top: 7rem; */
+}
+
+/* Facture Plomberie:::::::::::::::::: */
+#sectioncorps{
+    margin-left: 2%;
+    margin-right: 2%;
+    background: #fff;
+    border-radius: .5rem;
+    /* box-shadow: var(--box-shadow); */
+    /* border: var(--border); */
+    border: 1px solid #444;
+    margin-top: 4%;
+    padding: 2rem;
+}
+#sectioncorps .header{
+    display: flex;
+    justify-content: space-between;
+
+}
+#sectioncorps .header img{
+    width: 5%;
+}
