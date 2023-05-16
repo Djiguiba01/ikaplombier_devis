@@ -1,5 +1,3 @@
-
-
 :root{
     --orange:#FF5F49;
     --green:#3f0dca;
@@ -15,13 +13,18 @@
 }
 
 body{
-    background: url(image-services/11.jpg);
+    /* background: url(image-services/11.jpg); */
     background-size: cover;
     font-family: arial;
     color: #333;
     font-size: 13px;
     margin: 0;
 }
+Input {
+    Width : 100% ;
+    Padding : 12px ;
+    Border-radius : 10px ;
+  }
 input, select, button{
     font-family: arial;
     color: #333;
@@ -151,6 +154,7 @@ button:hover{
 
 /* Responsivité:::::::::::::::::::::::::::::: */
 @media(max-width: 767px){
+
     .inner{
         display: block;
     }
@@ -162,4 +166,29 @@ button:hover{
         padding: 5px 0 30px;
     }
   
+}
+
+/* :::::::::::::::CSS AFFICHAGE DU FORMULAIRE:::::::::::::::::: */
+.container{
+Border-radius : 5px ;
+Background-color : blanchedalmond ;
+Padding : 20px ;
+Margin-left : auto ;
+Margin-right : auto ;
+Display : block ;
+}
+
+table, td, th {
+Border : 1px solid black ;
+}
+
+table {
+Border-collapse : collapse ;
+Width : 95% ;
+margin-left: 2.5%;
+margin-right: 2.5%;
+}
+
+th {
+Height : 50px ;
 }
