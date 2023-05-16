@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-wrapper">
-          <input type="text" min="1" placeholder="Quantité" class="form-control" id="quantite">
+          <input type="text" min="1" placeholder="Quantité" class="form-control" id="quantite" onchange="calculateMontant()">
         </div>
 
         <!-- <div class="form-wrapper">
@@ -54,7 +54,7 @@
         </div> -->
 
         <div class="form-wrapper">
-          <input type="text" placeholder="Prix Unitaire" class="form-control" id="prixUnitaire">
+          <input type="text" placeholder="Prix Unitaire" class="form-control" id="prixUnitaire" onchange="calculateMontant()">
         </div>
 
         <div class="form-wrapper">
@@ -62,10 +62,12 @@
         </div>
 
 
-        <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" onclick="AddRow()">
+        <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="AddRow()">
            AJOUTER 
           <span class="fas fa-chevron-right"></span>
       </a>
+
+      
         
       </form>
 
@@ -102,7 +104,19 @@
 
 		var n = 1 ;
 		var x = 0 ;
+    // var x = 1 ;
 
+
+    // Calcul Prix Unitaire * Quantité
+    function calculateMontant() {
+    var quantite = document.getElementById("quantite").value;
+    var prixUnitaire = document.getElementById("prixUnitaire").value;
+    var montant = quantite * prixUnitaire;
+    document.getElementById("montant").value = montant;
+}
+
+
+    // Ajout ligne automatiquement
 		function AddRow(){
 			var AddRown = document.getElementById(`show`) ;
 			var NewRow = AddRown.insertRow(n);
@@ -129,6 +143,12 @@
 
 			n++ ;
 			x++ ;
+      
+      // Incrémation id à chaque ajout
+      var id = document.getElementById("idt").value;
+      id++; // Incrémente la valeur de l'ID
+      document.getElementById("idt").value = id;
+
 		}
 
     //  :::::::::TELECHARGEMENT PDF :::::::::::::::
