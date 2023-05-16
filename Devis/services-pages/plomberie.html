@@ -33,8 +33,8 @@
         <h3>Devis Plomberie</h3>
 
         <div class="form-group">
-          <!-- <input type="text" placeholder="Nom" class="form-control"> -->
-          <input type="text" placeholder="N°:" class="form-control" id="idt">
+          <input type="text" placeholder="Main Œuvres" class="form-control" id="oeuvres">
+          <input type="text" placeholder="N°:" class="form-control" id="idt" style="display: none;">
         </div>
 
         <div class="form-wrapper">
@@ -87,6 +87,15 @@
     </tr>
 
 </table>
+
+<div class="MainOeuvre" style="display: none;">
+  <h2 style="margin-left: 60%;  ">MainOeuvre : <span></span></h2>
+</div>
+
+<div class="montantTTC" style="display: none;">
+  <h2 style="margin-left: 60%;  ">MontantTTC : <span></span></h2>
+</div>
+
  </div>
 
   <button onclick="downloadPDF()">Télécharger</button>
@@ -118,6 +127,13 @@
 
     // Ajout ligne automatiquement
 		function AddRow(){
+
+        // Incrémation id à chaque ajout(id="idt")
+        var id = document.getElementById("idt").value;
+        id++; // Incrémente la valeur de l'ID
+        document.getElementById("idt").value = id;
+
+        // Tableau
 			var AddRown = document.getElementById(`show`) ;
 			var NewRow = AddRown.insertRow(n);
 
@@ -129,27 +145,67 @@
 			list5[x] = document.getElementById("montant").value ;
 
       // Insertion de nouveau ligne à chaque clique sur boutton
-			var cel1 = NewRow.insertCell(0) ;
-			var cel2 = NewRow.insertCell(1) ;
-			var cel3 = NewRow.insertCell(2) ;
-			var cel4 = NewRow.insertCell(3) ;
-			var cel5 = NewRow.insertCell(4) ;
+      var cel1 = NewRow.insertCell(0) ;
+      var cel2 = NewRow.insertCell(1) ;
+      var cel3 = NewRow.insertCell(2) ;
+      var cel4 = NewRow.insertCell(3) ;
+      var cel5 = NewRow.insertCell(4) ;
 
-			cel1.innerHTML = list1[x] ;
-			cel2.innerHTML = list2[x] ;
-			cel3.innerHTML = list3[x] ;
-			cel4.innerHTML = list4[x] ;
-			cel5.innerHTML = list5[x] ;
+      cel1.innerHTML = list1[x] ;
+      cel2.innerHTML = list2[x] ;
+      cel3.innerHTML = list3[x] ;
+      cel4.innerHTML = list4[x] ;
+      cel5.innerHTML = list5[x] ;
 
-			n++ ;
-			x++ ;
-      
-      // Incrémation id à chaque ajout
-      var id = document.getElementById("idt").value;
-      id++; // Incrémente la valeur de l'ID
-      document.getElementById("idt").value = id;
+      n++ ;
+      x++ ;
+
+      calculateTotalAmount();
 
 		}
+
+    // Fonction Récupérer Automatique input Main d'oeuvres
+    var mainOeuvreInput = document.getElementById("oeuvres");
+    var mainOeuvreSpan = document.querySelector(".MainOeuvre");
+
+    mainOeuvreInput.addEventListener("input", function() {
+      if (mainOeuvreInput.value.trim() !== "") {
+        mainOeuvreSpan.style.display = "block";
+        mainOeuvreSpan.querySelector("span").textContent = mainOeuvreInput.value;
+      } else {
+        mainOeuvreSpan.style.display = "none";
+      }
+    });
+
+
+
+    // Fonction de la Somme total 
+  // Calculer le montant total
+  function calculateTotalAmount() {
+    var table = document.getElementById("show");
+    var total = 0;
+
+    for (var i = 1; i < table.rows.length; i++) {
+      var cellValue = table.rows[i].cells[4].innerHTML.trim();
+      if (cellValue !== "") {
+        total += parseFloat(cellValue);
+      }
+    }
+
+    var montantTTCElement = document.querySelector(".montantTTC span");
+
+    if (total === 0) {
+      montantTTCElement.textContent = ""; // Efface le contenu du span
+      document.querySelector(".montantTTC").style.display = "none"; // Masque l'élément
+    } else {
+      montantTTCElement.textContent = total;
+      document.querySelector(".montantTTC").style.display = "block"; // Affiche l'élément
+    }
+  }
+
+
+
+
 
     //  :::::::::TELECHARGEMENT PDF :::::::::::::::
     function downloadPDF() {
