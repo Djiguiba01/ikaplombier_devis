@@ -176,8 +176,8 @@ button:hover{
 }
 .gauche, .droite{
     width: 20%;
-    margin-left: 2%;
-    margin-right: 2%;
+    /* margin-left: 2%;
+    margin-right: 2%; */
 }
 .gauche img{
     width: 80%;
@@ -197,6 +197,14 @@ button:hover{
 }
 .telepdf .entetepdf .milieu h4{
     font-size: 16px;
+}
+.MainOeuvre {
+    margin-left: 60%;
+    font-size: 10px;
+}
+.montantTTC{
+    margin-left: 60%;
+    font-size: 10px;
 }
 @media (max-width:991px){
     
@@ -233,6 +241,9 @@ button:hover{
     }
 }
 @media (max-width:660px){
+    .gauche, .droite {
+    width: 35%;
+   }
     .gauche img {
         width: 100%;
         height: 13rem;
@@ -247,9 +258,42 @@ button:hover{
         padding-right: 0.6rem;
     }
     .telepdf .entetepdf .milieu h3 {
-
         font-size: 20px;
     }
+
+}
+@media (max-width:515px){
+    .MainOeuvre{
+            margin-left: 45%;
+    }
+    .montantTTC{
+        margin-left: 45%;
+}
+
+}
+
+@media (max-width:380px){
+    .gauche, .droite {
+    width: 35%;
+   }
+   .telepdf .entetepdf .milieu h3 {
+    font-size: 16px;
+}
+.milieu {
+    padding-top: 17%;
+}
+.telepdf .entetepdf .milieu h4 {
+    font-size: 12px;
+}
+.telepdf .entetepdf .milieu h4, p {
+    line-height: 1;
+}
+.MainOeuvre{
+    margin-left: 38%;
+}
+.montantTTC{
+    margin-left: 38%;
+}
 }
 
 

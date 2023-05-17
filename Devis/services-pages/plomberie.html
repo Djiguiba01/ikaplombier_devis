@@ -33,11 +33,16 @@
         <h3>Devis Plomberie</h3>
 
         <div class="form-group">
-          <input type="text" placeholder="Nom destinateur" class="form-control" id="">
-          <input type="text" placeholder="Object" class="form-control" id="">
+          <input type="text" placeholder="Nom destinateur" class="form-control" id="destinateur">
+          <input type="text" placeholder="Object" class="form-control" id="objet">
         </div>
 
-       
+        <div class="form-group">
+          <input type="text" placeholder="N°: facture" class="form-control" id="numfacture">
+          <input type="text" placeholder="Main Œuvres" class="form-control" id="oeuvres">
+          <input type="text" placeholder="N°:" class="form-control" id="idt" style="display: none;">
+        </div>
+
 
         <div class="form-wrapper">
           <input type="text" placeholder="Désignation" class="form-control" id="Designation">
@@ -63,16 +68,16 @@
           <input type="text" placeholder="Montant" class="form-control" id="montant">
         </div>
 
-        <div class="form-group">
-          <input type="text" placeholder="Main Œuvres" class="form-control" id="oeuvres">
-          <input type="text" placeholder="N°:" class="form-control" id="idt" style="display: none;">
-        </div>
 
-
-        <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="AddRow()">
+        <!-- <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="AddRow()">
            AJOUTER 
           <span class="fas fa-chevron-right"></span>
+      </a> -->
+      <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="AddRow(); clearFields()">
+        AJOUTER 
+        <span class="fas fa-chevron-right"></span>
       </a>
+      
 
       
         
@@ -102,7 +107,16 @@
     </div>
 
   </div>
-  <!-- <img src="image-services/logo.png" alt=""> -->
+
+  <hr style="border: 1px solid #3f0dca; margin-top: 1.5%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+  
+  <div class="numdoitobjet" style="margin-left: 10%; margin-right: 10%;">
+    <h2 class="numfact">FACTURE PRO-FORMAT N° <span></span></h2>
+    <div class="doit">DOIT : <span></span></div>
+    <div class="objet">OBJET : <span></span></div>
+  </div>
+
+
   <table id="show">		
     <tr>
         <th>N°:</th>
@@ -115,11 +129,11 @@
 </table>
 
 <div class="MainOeuvre" style="display: none;">
-  <h2 style="margin-left: 60%;  ">MainOeuvre : <span></span></h2>
+  <h2 >MainOeuvre : <span> </span> fcfa</h2>
 </div>
 
 <div class="montantTTC" style="display: none;">
-  <h2 style="margin-left: 60%;  ">MontantTTC : <span></span></h2>
+  <h2 >MontantTTC : <span></span> fcfa</h2>
 </div>
 
  </div>
@@ -190,7 +204,54 @@
 
 		}
 
-    // Fonction Récupérer Automatique input Main d'oeuvres
+
+    
+    // Fonction Récupérer Automatique input Facture::::::::::::::::::::::
+    function recupererNumFacture() {
+    var numFactureInput = document.getElementById("numfacture");
+    var numFactureSpan = document.querySelector(".numfact");
+
+   if (numFactureInput.value.trim() !== "") {
+    numFactureSpan.querySelector("span").textContent = numFactureInput.value;
+  }
+}
+  // Récupération automatique lorsqu'un changement est apporté à l'élément "numfacture"
+  var numFactureInput = document.getElementById("numfacture");
+  numFactureInput.addEventListener("input", recupererNumFacture);
+
+
+
+    // Fonction Récupérer Automatique input (objet):::::::::::::::::::::::::::::
+    function recupererObjet() {
+    var objetInput = document.getElementById("objet");
+    var objetSpan = document.querySelector(".objet");
+
+  if (objetInput.value.trim() !== "") {
+    objetSpan.querySelector("span").textContent = objetInput.value;
+  }
+}
+// Récupération automatique lorsqu'un changement est apporté à l'élément "objet"
+var objetInput = document.getElementById("objet");
+objetInput.addEventListener("input", recupererObjet);
+
+
+
+  // Fonction Récupérer Automatique input destinateur:::::::::::::::::::::::::::
+  function recupererDestinateur() {
+  var destinateurInput = document.getElementById("destinateur");
+  var doitSpan = document.querySelector(".doit");
+  if (destinateurInput.value.trim() !== "") {
+    doitSpan.querySelector("span").textContent = destinateurInput.value;
+  }
+}
+// Récupération automatique lorsqu'un changement est apporté à l'élément "destinateur"
+var destinateurInput = document.getElementById("destinateur");
+destinateurInput.addEventListener("input", recupererDestinateur);
+
+
+
+
+    // Fonction Récupérer Automatique input Main d'oeuvres:::::::::::::::::::::::::::
     var mainOeuvreInput = document.getElementById("oeuvres");
     var mainOeuvreSpan = document.querySelector(".MainOeuvre");
 
@@ -228,6 +289,15 @@
       document.querySelector(".montantTTC").style.display = "block"; // Affiche l'élément
     }
   }
+
+  // Fonction pour vider les differents champs::::::::::::::::::::
+  function clearFields() {
+  document.getElementById("Designation").value = "";
+  document.getElementById("quantite").value = "";
+  document.getElementById("prixUnitaire").value = "";
+  document.getElementById("montant").value = "";
+}
+
 
 
 
