@@ -33,9 +33,11 @@
         <h3>Devis Plomberie</h3>
 
         <div class="form-group">
-          <input type="text" placeholder="Main Œuvres" class="form-control" id="oeuvres">
-          <input type="text" placeholder="N°:" class="form-control" id="idt" style="display: none;">
+          <input type="text" placeholder="Nom destinateur" class="form-control" id="">
+          <input type="text" placeholder="Object" class="form-control" id="">
         </div>
+
+       
 
         <div class="form-wrapper">
           <input type="text" placeholder="Désignation" class="form-control" id="Designation">
@@ -61,6 +63,11 @@
           <input type="text" placeholder="Montant" class="form-control" id="montant">
         </div>
 
+        <div class="form-group">
+          <input type="text" placeholder="Main Œuvres" class="form-control" id="oeuvres">
+          <input type="text" placeholder="N°:" class="form-control" id="idt" style="display: none;">
+        </div>
+
 
         <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="AddRow()">
            AJOUTER 
@@ -76,6 +83,25 @@
 
   <!-- :::::::::::::AFFICHAGE DU FORMULAIRE::::::::::::: -->
  <div class="telepdf">
+
+  <div class="entetepdf">
+
+    <div class="gauche">
+      <img src="image-services/logo.png" alt="img">
+    </div>
+
+    <div class="milieu">
+      <h3>IKA PLOMBIER SARL</h3>
+      <h4>RCC : MA BKO.2016.B9400, NIF / 086139811A</h4>
+      <p> Halles de Bamako, Bloc Adrar des Ifogas, Magasin 481-482</p>
+      <p> Email: bbarou19860@gmail.com; Tel: 74 24 00 74</p>
+    </div>
+
+    <div class="droite">
+      <img src="image-services/logo.png" alt="img">
+    </div>
+
+  </div>
   <!-- <img src="image-services/logo.png" alt=""> -->
   <table id="show">		
     <tr>
@@ -104,7 +130,7 @@
 <!-- :::::::::::::JAVASCRIPT::::::::::::::::::: -->
   <script>
 		
-    // Déclaration des variables
+    // Déclaration des variables pour tableau
 		var list1 = [] ;
 		var list2 = [] ;
 		var list3 = [] ;
