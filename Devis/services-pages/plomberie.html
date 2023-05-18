@@ -69,10 +69,7 @@
         </div>
 
 
-        <!-- <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="AddRow()">
-           AJOUTER 
-          <span class="fas fa-chevron-right"></span>
-      </a> -->
+        <!-- Button Ajouter:::::::::::::: -->
       <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="AddRow(); clearFields()">
         AJOUTER 
         <span class="fas fa-chevron-right"></span>
@@ -136,9 +133,18 @@
   <h2 >MontantTTC : <span></span> fcfa</h2>
 </div>
 
+<div class="gerantdestinat">
+  <div class="gauchedest">Pour accord</div>
+  <div class="droitegerant">Le Gérant <p></p></div>
+</div>
+
  </div>
 
-  <button onclick="downloadPDF()">Télécharger</button>
+  <!-- <button>Télécharger</button> -->
+   <a href="#Devis/plomberiefact.html" class="btn" style="">
+         Télécharger PDF 
+          <span class="fas fa-chevron-right"></span>
+      </a>
 
 
 <!-- :::::::::::::JAVASCRIPT::::::::::::::::::: -->
@@ -299,31 +305,20 @@ destinateurInput.addEventListener("input", recupererDestinateur);
 }
 
 
+// Fonction qui prend automatiquement la date du jour:::::::::::::::::::::
+function ajouterDateDuJour() {
+  var dateDuJour = new Date();
+  var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  var dateFormatee = dateDuJour.toLocaleDateString('fr-FR', options);
+  var paragraphe = document.querySelector('.droitegerant > p');
+  paragraphe.textContent = dateFormatee;
+}
+ajouterDateDuJour();
 
 
+// Faire disparaître :::::::::::::::::::::::::::::
 
 
-    //  :::::::::TELECHARGEMENT PDF :::::::::::::::
-    function downloadPDF() {
-
-      const element = document.querySelector('.telepdf');
-      // Créer une instance de jsPDF
-      const pdf = new jsPDF();
-      // Obtenir les dimensions de l'élément
-      const width = element.offsetWidth;
-      const height = element.offsetHeight;
-      // Convertir l'élément en une image au format base64
-      html2canvas(element).then(function(canvas) {
-      const imgData = canvas.toDataURL('image/png');
-      // Ajouter l'image convertie au PDF
-      pdf.addImage(imgData, 'PNG', 0, 0, width, height);
-      // Télécharger le PDF
-      pdf.save('contenu_telepdf.pdf');
-      });
-      }
-      // Ajouter un écouteur d'événement au bouton de téléchargement
-      const downloadButton = document.querySelector('button');
-      downloadButton.addEventListener('click', downloadPDF);
 
 	</script>
 

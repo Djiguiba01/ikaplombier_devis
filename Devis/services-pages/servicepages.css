@@ -123,7 +123,7 @@ button:hover{
 .btn{
     display: inline-block;
     margin-top: 1rem;
-    padding: .2rem;
+    /* padding: .2rem; */
     padding-left: 1rem;
     border: #fff;
     border-radius: .5rem;
@@ -132,6 +132,9 @@ button:hover{
     cursor: pointer;
     font-size: 1.5rem;
     background: #fff;
+
+    text-decoration: none; 
+    margin-left: 35%;
 }
 .btn span{
     padding: .7rem 1rem;
@@ -263,11 +266,18 @@ button:hover{
 
 }
 @media (max-width:515px){
+    .btn{
+        margin-left: 14%;
+    }
     .MainOeuvre{
             margin-left: 45%;
     }
     .montantTTC{
         margin-left: 45%;
+}
+/* :::Gérant::: */
+.gerantdestinat .gauchedest, .droitegerant{
+    font-size: 15px;
 }
 
 }
@@ -300,7 +310,6 @@ button:hover{
 
 
 
-
 /* Tableau:::: */
 .container{
 Border-radius : 5px ;
@@ -324,4 +333,27 @@ margin-right: 2.5%;
 
 th {
 Height : 50px ;
+}
+
+/* ::::::::: */
+.numdoitobjet{
+    margin-bottom: 2%;
+    line-height: 1.5rem;
+}
+
+.numdoitobjet .doit, .objet{
+    font-weight: bold;
+    font-size: 15px;
+}
+.numdoitobjet span{
+    font-weight: normal;
+}
+.gerantdestinat{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+    margin-left: 6%;
+    margin-right: 6%;
+    font-weight: bold;
+    font-size: 18px;
 }
