@@ -74,9 +74,7 @@
         AJOUTER 
         <span class="fas fa-chevron-right"></span>
       </a>
-      
-
-      
+     
         
       </form>
 
@@ -141,7 +139,7 @@
  </div>
 
   <!-- <button>Télécharger</button> -->
-   <a href="#Devis/plomberiefact.html" class="btn" style="">
+   <a href="#Devis/plomberiefact.html" class="btn" id="telecharger">
          Télécharger PDF 
           <span class="fas fa-chevron-right"></span>
       </a>
@@ -316,8 +314,43 @@ function ajouterDateDuJour() {
 ajouterDateDuJour();
 
 
-// Faire disparaître :::::::::::::::::::::::::::::
+// FAIRE DISPARAITRE TOUT LE CONTENU DU (class="telepdf" et class="telecharger"):::::::::::::::: :::::::::::::::::::::::::::::
+// Fonction pour vérifier si des événements ont eu lieu sur les inputs
+function verifierEvenements() {
+  var inputs = document.getElementsByTagName("input");
+  var telechargerElement = document.getElementById("telecharger");
+  var telepdfElements = document.getElementsByClassName("telepdf");
 
+  // Vérifier si au moins un input a une valeur
+  var evenementDetecte = false;
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].value.trim() !== "") {
+      evenementDetecte = true;
+      break;
+    }
+  }
+
+  // Modifier la visibilité des éléments en fonction des événements détectés
+  if (evenementDetecte) {
+    telechargerElement.style.display = "block";
+    for (var j = 0; j < telepdfElements.length; j++) {
+      telepdfElements[j].style.display = "block";
+    }
+  } else {
+    telechargerElement.style.display = "none";
+    for (var k = 0; k < telepdfElements.length; k++) {
+      telepdfElements[k].style.display = "none";
+    }
+  }
+}
+
+// Appeler la fonction pour vérifier les événements à chaque modification d'un input
+var inputs = document.getElementsByTagName("input");
+for (var i = 0; i < inputs.length; i++) {
+  inputs[i].addEventListener("input", verifierEvenements);
+}
+// Appeler la fonction une première fois pour initialiser la visibilité des éléments
+verifierEvenements();
 
 
 	</script>
