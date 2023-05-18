@@ -11,10 +11,11 @@
   <!-- ::::::cdn icon:::::::: -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- ::::PDF::::::::: -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
-    
+ <!-- ::::PDF::::::::: -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+
 </head>
 <body>
   
@@ -353,7 +354,36 @@ for (var i = 0; i < inputs.length; i++) {
 verifierEvenements();
 
 
+
+
+// :::::::::::::////////////////
+function telechargerPDF() {
+  var telepdfElement = document.querySelector('.telepdf');
+  var telechargerElement = document.getElementById('telecharger');
+
+  telechargerElement.addEventListener('click', function() {
+    html2canvas(telepdfElement).then(function(canvas) {
+      var pdf = new jsPDF('p', 'mm', 'a4');
+      var imgData = canvas.toDataURL('image/png');
+      pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+      pdf.save('telechargement.pdf');
+    });
+  });
+}
+telechargerPDF();
+
+var doc = new jsPDF();
+doc.text('Hello world!', 10, 10);
+doc.save('sample.pdf');
+
+
+
+
 	</script>
+
+
+<!-- <script src="jsPDF-master/dist/jspdf.umd.min.js"></script> -->
+<script src="jspdf.umd.js"></script> 
 
  
 </body>
