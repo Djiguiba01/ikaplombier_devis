@@ -275,6 +275,10 @@ button:hover{
     .montantTTC{
         margin-left: 45%;
 }
+/* ::::::::::numfact::::::::: */
+.numfact{
+    font-size: 1rem;
+}
 /* :::Gérant::: */
 .gerantdestinat .gauchedest, .droitegerant{
     font-size: 15px;
@@ -283,6 +287,11 @@ button:hover{
 }
 
 @media (max-width:380px){
+    /* ::::::::::numfact::::::::: */
+.numfact{
+    font-size: 0.9rem;
+}
+/* ::::::::::::: */
     .gauche, .droite {
     width: 35%;
    }
