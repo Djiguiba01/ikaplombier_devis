@@ -154,7 +154,7 @@
  </div>
 
 
-  <button class="btn" id="telecharger" onclick="generatePDF()">
+  <button class="btn" id="telecharger" onclick="downloadPDF()">
     Télécharger PDF
   </button>
   <!-- <a href="#Devis" class="btn" id="telecharger" onclick="makePDF()">
@@ -425,15 +425,18 @@ verifierEvenements();
 }
 
 
-    function generatePDF() {
-  var element = document.getElementById("capture");
-  html2canvas(element).then(function(canvas) {
-    var pdf = new jsPDF();
-    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
-    pdf.save("document.pdf");
+function downloadPDF() {
+  generatePDF().then(pdfData => {
+    const blob = new Blob([pdfData], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "plomberie.pdf";
+    link.click();
+    URL.revokeObjectURL(url);
   });
-  generatePDF();
 }
+
 
 
 
