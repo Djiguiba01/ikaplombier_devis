@@ -55,7 +55,7 @@
 
 
         <div class="form-wrapper">
-          <input type="text" placeholder="Désignation" class="form-control" id="Designation">
+          <input type="text" maxlength="20" placeholder="Désignation" class="form-control" id="Designation">
         </div>
 
         <div class="form-wrapper">
@@ -154,7 +154,7 @@
  </div>
 
 
-  <button class="btn" id="telecharger" onclick="downloadPDF()">
+  <button class="btn" id="telecharger" onclick=" makePDF()">
     Télécharger PDF
   </button>
   <!-- <a href="#Devis" class="btn" id="telecharger" onclick="makePDF()">
@@ -405,6 +405,23 @@ verifierEvenements();
       doc.save("plomberie");
     });
   }
+
+  // Fonction pour générer le PDF à partir du contenu de la classe "telepdf"
+function makePDF() {
+  var pdf = new jsPDF();
+  var element = document.getElementById("capture");
+
+  html2canvas(element).then(function (canvas) {
+    var imageData = canvas.toDataURL("image/png");
+    pdf.addImage(imageData, "PNG", 0, 0, 210, 297); // Définir la taille du PDF selon vos besoins
+    pdf.save("document.pdf");
+  });
+}
+
+// Ajoutez un gestionnaire d'événement au bouton de téléchargement
+var telechargerButton = document.getElementById("telecharger");
+telechargerButton.addEventListener("click", makePDF);
+
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
