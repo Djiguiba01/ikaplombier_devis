@@ -153,7 +153,7 @@
 
  </div>
 
-  <button class="btn" id="telecharger" onclick="makePDF()"> 
+  <button class="btn" id="telecharger" onclick="telechargerPDF()"> 
     Télécharger PDF
   </button>
   <!-- <a href="#Devis" class="btn" id="telecharger" onclick="makePDF()">
@@ -376,72 +376,38 @@ verifierEvenements();
 
 
 // :::::::::::::FUNCTION PDF TELECHARGEMENT::::::::::::::::::::::
-window.html2canvas = html2canvas;
-window.jsPDF = window.jspdf.jsPDF;
+  // window.html2canvas = html2canvas;
+  // window.jsPDF = window.jspdf.jsPDF;
+  // function makePDF(){
 
-function makePDF() {
-  var tableRows = document.querySelectorAll("#capture tr");
-  var rowsPerPage = 20; // Nombre de lignes par page
-  var totalPages = Math.ceil(tableRows.length / rowsPerPage); // Nombre total de pages
-  var currentPage = 1; // Page actuelle
+  //   html2canvas(document.querySelector("#capture"),{
 
-  function generatePDF() {
-    html2canvas(document.querySelector("#capture"), {
-      allowTaint: true,
-      useCORS: true,
-      scale: 1
-    }).then(canvas => {
-      var img = canvas.toDataURL("image/png");
-      var doc = new jsPDF();
+  //     allowTaint:true,
+  //     useCORS: true,
+  //     scale: 1
+  //   }).then(canvas => {
+  //     // document.body.appendChild(canvas)
+  //     var img = canvas.toDataURL("image/png");
 
-      doc.setFont('Arial');
-      doc.getFontSize(11);
-      doc.addImage(img, 'PNG', 7, 13, 195, 105);
-      doc.save("plomberie");
-
-      currentPage++;
-
-      if (currentPage <= totalPages) {
-        doc.addPage(); // Ajouter une nouvelle page
-        adjustTableContent(doc);
-        generatePDF(); // Générer le PDF pour la page suivante
-      }
-    });
-  }
-
-  function adjustTableContent(doc) {
-    var startRow = (currentPage - 1) * rowsPerPage;
-    var endRow = startRow + rowsPerPage;
-    var table = document.getElementById("capture");
-
-    for (var i = startRow; i < endRow; i++) {
-      var row = table.rows[i];
-
-      for (var j = 0; j < row.cells.length; j++) {
-        var cell = row.cells[j];
-
-        // Adapter la taille du contenu du tableau à la taille de la page
-        doc.setFontSize(11);
-        doc.text(cell.innerText, 10, 10 + (i % rowsPerPage) * 10);
-      }
-    }
-  }
-
-  generatePDF();
-}
-
+  //     var doc = new jsPDF();
+  //     doc.setFont('Arial');
+  //     doc.getFontSize(11);
+  //     doc.addImage(img,'PNG',7,13,195,105);
+  //     doc.save("plomberie");
+  //   });
+  // }
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
-// function telechargerPDF() {
-//   const element = document.querySelector('.telepdf'); // Sélectionnez l'élément contenant le contenu que vous souhaitez convertir en PDF
-//   html2canvas(element).then((canvas) => {
-//     const pdf = new jsPDF();
-//     const imageData = canvas.toDataURL('image/png');
-//     pdf.addImage(imageData, 'PNG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
-//     pdf.save('nom-du-fichier.pdf'); // Spécifiez le nom du fichier PDF à télécharger
-//   });
-// }
+function telechargerPDF() {
+  const element = document.querySelector('.telepdf'); // Sélectionnez l'élément contenant le contenu que vous souhaitez convertir en PDF
+  html2canvas(element).then((canvas) => {
+    const pdf = new jsPDF();
+    const imageData = canvas.toDataURL('image/png');
+    pdf.addImage(imageData, 'PNG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    pdf.save('nom-du-fichier.pdf'); // Spécifiez le nom du fichier PDF à télécharger
+  });
+}
 
 
 
