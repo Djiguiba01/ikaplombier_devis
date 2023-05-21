@@ -94,6 +94,8 @@
   <!-- :::::::::::::AFFICHAGE DU FORMULAIRE::::::::::::: -->
  <div class="telepdf" id="capture" style="padding: 10px; background: #fff;">
 
+ <div class="traitcontainer">
+
   <div class="entetepdf">
 
     <div class="gauche">
@@ -112,8 +114,11 @@
     </div>
 
   </div>
-
   <hr style="border: 1px solid #3f0dca; margin-top: 1.5%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+
+
+ </div>
+
   
   <div class="numdoitobjet" style="margin-left: 10%; margin-right: 10%;">
     <h2 class="numfact">FACTURE PRO-FORMAT N° <span></span></h2>
@@ -151,6 +156,7 @@
   <button class="btn" id="telecharger" onclick="makePDF()"> 
     Télécharger PDF
   </button>
+
   <!-- <a href="#Devis" class="btn" id="telecharger" onclick="makePDF()">
     Télécharger PDF 
     <span class="fas fa-chevron-right"></span>
@@ -403,6 +409,27 @@ verifierEvenements();
 //     pdf.save('nom-du-fichier.pdf'); // Spécifiez le nom du fichier PDF à télécharger
 //   });
 // }
+
+function ajouterNouvellePage() {
+  var lignePDF = 20; // Numéro de la ligne du PDF où vous souhaitez ajouter une nouvelle page
+
+  var table = document.getElementById("show");
+  var numRows = table.rows.length;
+
+  if (numRows === lignePDF) {
+    // Créer une nouvelle page avec la classe "traitcontainer"
+    var nouvellePage = document.createElement("div");
+    nouvellePage.className = "traitcontainer";
+
+    // Copier le contenu de la ligne actuelle et l'ajouter à la nouvelle page
+    var ligneActuelle = table.rows[lignePDF - 1].cloneNode(true);
+    nouvellePage.appendChild(ligneActuelle);
+
+    // Insérer la nouvelle page après la dernière page
+    var dernierPage = document.getElementsByClassName("traitcontainer")[numRows - 1];
+    dernierPage.parentNode.insertBefore(nouvellePage, dernierPage.nextSibling);
+  }
+}
 
 
 	</script>
