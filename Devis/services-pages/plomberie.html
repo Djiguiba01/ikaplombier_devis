@@ -154,7 +154,7 @@
  </div>
 
 
-  <button class="btn" id="telecharger" onclick=" makePDF()">
+  <button class="btn" id="telecharger" onclick="downloadPDF()">
     Télécharger PDF
   </button>
   <!-- <a href="#Devis" class="btn" id="telecharger" onclick="makePDF()">
@@ -406,23 +406,6 @@ verifierEvenements();
     });
   }
 
-  // Fonction pour générer le PDF à partir du contenu de la classe "telepdf"
-function makePDF() {
-  var pdf = new jsPDF();
-  var element = document.getElementById("capture");
-
-  html2canvas(element).then(function (canvas) {
-    var imageData = canvas.toDataURL("image/png");
-    pdf.addImage(imageData, "PNG", 0, 0, 210, 297); // Définir la taille du PDF selon vos besoins
-    pdf.save("document.pdf");
-  });
-}
-
-// Ajoutez un gestionnaire d'événement au bouton de téléchargement
-var telechargerButton = document.getElementById("telecharger");
-telechargerButton.addEventListener("click", makePDF);
-
-
 
   // ::::::::::::A EFFACE::::::::::::::::::
   function createPDFPages() {
@@ -445,16 +428,14 @@ telechargerButton.addEventListener("click", makePDF);
     }
 
     function downloadPDF() {
-      // Fusionner toutes les pages PDF en un seul PDF
-      var mergedPDF = new jsPDF();
-      for (var i = 0; i < pdfPages.length; i++) {
-        if (i > 0) mergedPDF.addPage();
-        mergedPDF.addPage(pdfPages[i]);
-      }
+  var element = document.getElementById("capture");
+  html2canvas(element).then(function(canvas) {
+    var pdf = new jsPDF();
+    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    pdf.save("document.pdf");
+  });
+}
 
-      // Télécharger le fichier PDF
-      mergedPDF.save("devis.pdf");
-    }
 
 
 
