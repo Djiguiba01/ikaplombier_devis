@@ -154,7 +154,7 @@
  </div>
 
 
-  <button class="btn" id="telecharger" onclick="downloadPDF()">
+  <button class="btn" id="telecharger" onclick="generatePDF()">
     Télécharger PDF
   </button>
   <!-- <a href="#Devis" class="btn" id="telecharger" onclick="makePDF()">
@@ -425,7 +425,13 @@ verifierEvenements();
 }
 
 
-function downloadPDF() {
+    function generatePDF() {
+  var element = document.getElementById("capture");
+  html2canvas(element).then(function(canvas) {
+    var pdf = new jsPDF();
+    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    pdf.save("document.pdf");
+  });
   generatePDF();
 }
 
