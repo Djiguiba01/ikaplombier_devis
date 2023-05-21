@@ -153,10 +153,10 @@
 
  </div>
 
- <button class="btn" id="telecharger" onclick="makePDF()">
-  Télécharger PDF
-</button>
 
+  <button class="btn" id="telecharger" onclick="downloadPDF()">
+    Télécharger PDF
+  </button>
   <!-- <a href="#Devis" class="btn" id="telecharger" onclick="makePDF()">
     Télécharger PDF 
     <span class="fas fa-chevron-right"></span>
@@ -179,6 +179,9 @@
 		var n = 1 ;
 		var x = 0 ;
     // var x = 1 ;
+    var currentPage = 1;
+    var rowsPerPage = 20;
+    var pdfPages = [];
 
 
     // Calcul Prix Unitaire * Quantité
@@ -224,6 +227,11 @@
 
       n++ ;
       x++ ;
+
+        // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
+        if (n % rowsPerPage === 0) {
+        createPDFPages();
+      }
 
       calculateTotalAmount();
 
@@ -377,109 +385,59 @@ verifierEvenements();
 
 
 // :::::::::::::FUNCTION PDF TELECHARGEMENT::::::::::::::::::::::
-function makePDF() {
-  // Capture de l'élément contenant le contenu à convertir en PDF
-  var captureElement = document.getElementById("capture");
+  // window.html2canvas = html2canvas;
+  // window.jsPDF = window.jspdf.jsPDF;
+  // function makePDF(){
 
-  // Conversion du contenu en une image avec html2canvas
-  html2canvas(captureElement).then(function(canvas) {
-    // Création d'un objet jspdf
-    var pdf = new jsPDF();
+  //   html2canvas(document.querySelector("#capture"),{
 
-    // Calcul du nombre de pages nécessaires en fonction de la taille de l'image et de la page PDF
-    var imgData = canvas.toDataURL("image/png");
-    var imgWidth = 210; // Largeur de la page PDF en mm (A4 par défaut)
-    var pageHeight = (canvas.height / canvas.width) * imgWidth;
-    var position = 0;
+  //     allowTaint:true,
+  //     useCORS: true,
+  //     scale: 1
+  //   }).then(canvas => {
+  //     // document.body.appendChild(canvas)
+  //     var img = canvas.toDataURL("image/png");
 
-    // Ajout de la première page avec l'image capturée
-    pdf.addImage(imgData, "PNG", 0, position, imgWidth, pageHeight);
-
-    // Vérification si d'autres pages sont nécessaires
-    var rows = document.getElementById("show").rows.length;
-    var idt = parseInt(document.getElementById("idt").value);
-
-    if (rows > idt) {
-      // Ajout des lignes restantes sur de nouvelles pages
-      var remainingRows = rows - idt;
-      var totalPages = Math.ceil(remainingRows / 20); // 20 lignes par page
-
-      for (var i = 1; i < totalPages; i++) {
-        pdf.addPage();
-        position -= pageHeight;
-
-        // Ajout des lignes sur la nouvelle page
-        for (var j = 0; j < 20; j++) {
-          var rowIndex = idt + i * 20 + j;
-          var row = document.getElementById("show").rows[rowIndex];
-          if (row) {
-            var rowData = [];
-            for (var k = 0; k < row.cells.length; k++) {
-              rowData.push(row.cells[k].innerHTML);
-            }
-            pdf.autoTable({
-              startY: position + 10,
-              head: [["N°:", "DESIGNATION", "QUANTITE", "PRIX UNITAIRE", "MONTANT"]],
-              body: [rowData],
-            });
-          }
-        }
-      }
-    }
-
-    // Téléchargement du PDF
-    pdf.save("devis_plomberie.pdf");
-  });
-}
-
+  //     var doc = new jsPDF();
+  //     doc.setFont('Arial');
+  //     doc.getFontSize(11);
+  //     doc.addImage(img,'PNG',7,13,195,105);
+  //     doc.save("plomberie");
+  //   });
+  // }
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
+  function createPDFPages() {
+      // Générer une nouvelle page PDF
+      var pdf = new jsPDF();
 
-  // Fonction pour créer une nouvelle page PDF
-function createNewPage() {
-  var pdf = new jsPDF();
-  pdf.addPage();
-  return pdf;
-}
+      // Ajouter les lignes de la table à la page PDF actuelle
+      var startRow = (currentPage - 1) * rowsPerPage;
+      var endRow = startRow + rowsPerPage;
+      for (var i = startRow; i < endRow; i++) {
+        if (i >= list1.length) break; // Arrêter si toutes les lignes ont été ajoutées
+        pdf.text(10, (i % rowsPerPage + 1) * 10, `${list1[i]} ${list2[i]} ${list3[i]} ${list4[i]} ${list5[i]}`);
+      }
 
-// Fonction pour ajouter les lignes restantes à une nouvelle page PDF
-function addRemainingRows(pdf) {
-  var table = document.getElementById("show");
-  var rowCount = table.rows.length;
+      // Ajouter la page PDF à la liste des pages
+      pdfPages.push(pdf);
 
-  for (var i = 1; i < rowCount; i++) {
-    var newRow = table.rows[i].cloneNode(true);
-    pdf.autoTableHtmlToJson(newRow);
-    pdf.addTableHeader(["N°:", "DESIGNATION", "QUANTITE", "PRIX UNITAIRE", "MONTANT"]);
-    pdf.addTableRow(newRow.cells.map(cell => cell.innerHTML));
-  }
+      // Incrémenter le numéro de page actuelle
+      currentPage++;
+    }
 
-  return pdf;
-}
+    function downloadPDF() {
+      // Fusionner toutes les pages PDF en un seul PDF
+      var mergedPDF = new jsPDF();
+      for (var i = 0; i < pdfPages.length; i++) {
+        if (i > 0) mergedPDF.addPage();
+        mergedPDF.addPage(pdfPages[i]);
+      }
 
-// Fonction pour générer le PDF
-function makePDF() {
-  var table = document.getElementById("show");
-  var rowCount = table.rows.length;
-
-  // Vérifier si la ligne id="idt" de la table est égale à 20
-  var idtValue = parseInt(document.getElementById("idt").value);
-  if (idtValue === 20) {
-    // Créer une nouvelle page PDF
-    var pdf = createNewPage();
-
-    // Ajouter les lignes restantes à la nouvelle page PDF
-    pdf = addRemainingRows(pdf);
-
-    // Télécharger le PDF
-    pdf.save("devis.pdf");
-  } else {
-    alert("La condition n'est pas remplie. La valeur de idt doit être égale à 20.");
-  }
-}
-
-
+      // Télécharger le fichier PDF
+      mergedPDF.save("devis.pdf");
+    }
 
 
 
