@@ -409,34 +409,56 @@ verifierEvenements();
 
   // ::::::::::::A EFFACE::::::::::::::::::
   function createPDFPages() {
-      // Générer une nouvelle page PDF
-      var pdf = new jsPDF();
+    var table = document.getElementById("show");
+    var totalPages = Math.ceil(table.rows.length / rowsPerPage);
 
-      // Ajouter les lignes de la table à la page PDF actuelle
-      var startRow = (currentPage - 1) * rowsPerPage;
-      var endRow = startRow + rowsPerPage;
-      for (var i = startRow; i < endRow; i++) {
-        if (i >= list1.length) break; // Arrêter si toutes les lignes ont été ajoutées
-        pdf.text(10, (i % rowsPerPage + 1) * 10, `${list1[i]} ${list2[i]} ${list3[i]} ${list4[i]} ${list5[i]}`);
+    for (var i = currentPage; i <= totalPages; i++) {
+      var canvas = document.createElement("canvas");
+      var context = canvas.getContext("2d");
+      var imgData;
+
+      html2canvas(table, {
+        canvas: canvas,
+        logging: false,
+        onclone: function (documentClone) {
+          // Masquer les lignes qui ne sont pas sur la page actuelle
+          var rows = documentClone.getElementById("show").rows;
+          for (var j = 0; j < rows.length; j++) {
+            if (j < (i - 1) * rowsPerPage || j >= i * rowsPerPage) {
+              rows[j].style.display = "none";
+            }
+          }
+        },
+      }).then(function (canvas) {
+        imgData = canvas.toDataURL("image/png");
+        pdfPages.push(imgData);
+
+        if (pdfPages.length === totalPages) {
+          generatePDF();
+        }
+      });
+    }
+  }
+
+  function generatePDF() {
+    var doc = new jsPDF();
+    var x = 0;
+    var y = 0;
+
+    for (var i = 0; i < pdfPages.length; i++) {
+      if (i !== 0) {
+        doc.addPage();
       }
 
-      // Ajouter la page PDF à la liste des pages
-      pdfPages.push(pdf);
-
-      // Incrémenter le numéro de page actuelle
-      currentPage++;
+      doc.addImage(pdfPages[i], "PNG", x, y);
     }
 
-    function downloadPDF() {
-  var element = document.getElementById("capture");
-  html2canvas(element).then(function(canvas) {
-    var pdf = new jsPDF();
-    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
-    pdf.save("document.pdf");
-  });
-}
+    doc.save("devis.pdf");
+  }
 
-
+  function downloadPDF() {
+    createPDFPages();
+  }
 
 
 	</script>
