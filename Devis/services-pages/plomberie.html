@@ -385,26 +385,26 @@ verifierEvenements();
 
 
 // :::::::::::::FUNCTION PDF TELECHARGEMENT::::::::::::::::::::::
-  // window.html2canvas = html2canvas;
-  // window.jsPDF = window.jspdf.jsPDF;
-  // function makePDF(){
+  window.html2canvas = html2canvas;
+  window.jsPDF = window.jspdf.jsPDF;
+  function makePDF(){
 
-  //   html2canvas(document.querySelector("#capture"),{
+    html2canvas(document.querySelector("#capture"),{
 
-  //     allowTaint:true,
-  //     useCORS: true,
-  //     scale: 1
-  //   }).then(canvas => {
-  //     // document.body.appendChild(canvas)
-  //     var img = canvas.toDataURL("image/png");
+      allowTaint:true,
+      useCORS: true,
+      scale: 1
+    }).then(canvas => {
+      // document.body.appendChild(canvas)
+      var img = canvas.toDataURL("image/png");
 
-  //     var doc = new jsPDF();
-  //     doc.setFont('Arial');
-  //     doc.getFontSize(11);
-  //     doc.addImage(img,'PNG',7,13,195,105);
-  //     doc.save("plomberie");
-  //   });
-  // }
+      var doc = new jsPDF();
+      doc.setFont('Arial');
+      doc.getFontSize(11);
+      doc.addImage(img,'PNG',7,13,195,105);
+      doc.save("plomberie");
+    });
+  }
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
