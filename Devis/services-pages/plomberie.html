@@ -228,11 +228,10 @@
       n++ ;
       x++ ;
 
-       // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
-  if (n % rowsPerPage === 0) {
-    createNewPage();
-  }
-
+        // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
+        if (n % rowsPerPage === 0) {
+        createPDFPages();
+      }
 
       calculateTotalAmount();
 
@@ -409,38 +408,34 @@ verifierEvenements();
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
-  function createNewPage() {
-  var table = document.getElementById("show");
-  var currentPageRows = table.rows.length - 1;
-  var remainingRows = currentPageRows - rowsPerPage;
+  function createPDFPages() {
+      // Générer une nouvelle page PDF
+      var pdf = new jsPDF();
 
-  // Créer une nouvelle page avec le contenu restant
-  var newPageContent = "<tr><th>N°:</th><th>DESIGNATION</th><th>QUANTITE</th><th>PRIX UNITAIRE</th><th>MONTANT</th></tr>";
-  for (var i = currentPageRows - remainingRows; i < currentPageRows; i++) {
-    newPageContent += table.rows[i].innerHTML;
-  }
+      // Ajouter les lignes de la table à la page PDF actuelle
+      var startRow = (currentPage - 1) * rowsPerPage;
+      var endRow = startRow + rowsPerPage;
+      for (var i = startRow; i < endRow; i++) {
+        if (i >= list1.length) break; // Arrêter si toutes les lignes ont été ajoutées
+        pdf.text(10, (i % rowsPerPage + 1) * 10, `${list1[i]} ${list2[i]} ${list3[i]} ${list4[i]} ${list5[i]}`);
+      }
 
-  // Ajouter la nouvelle page au tableau des pages PDF
-  pdfPages.push(newPageContent);
-}
+      // Ajouter la page PDF à la liste des pages
+      pdfPages.push(pdf);
 
+      // Incrémenter le numéro de page actuelle
+      currentPage++;
+    }
 
-function downloadPDF() {
-  generatePDF().then(pdfData => {
-    const blob = new Blob([pdfData], { type: "application/pdf" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "plomberie.pdf";
-    link.click();
-    URL.revokeObjectURL(url);
+    function downloadPDF() {
+  var element = document.getElementById("capture");
+  html2canvas(element).then(function(canvas) {
+    var pdf = new jsPDF();
+    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    pdf.save("document.pdf");
   });
 }
 
-
-
-
-// :::::::::::::::::::::::::::::::::::::
 
 
 
