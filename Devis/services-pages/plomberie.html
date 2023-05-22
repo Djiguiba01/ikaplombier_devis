@@ -233,6 +233,11 @@
         createPDFPages();
       }
 
+      // ::::::::
+      if (n === 20) {
+        createSecondTable();
+      }
+
       calculateTotalAmount();
 
 		}
@@ -429,7 +434,6 @@ verifierEvenements();
 }
 
 
-
     function downloadPDF() {
     var element = document.getElementById("capture");
     html2canvas(element).then(function(canvas) {
@@ -439,6 +443,30 @@ verifierEvenements();
   });
 }
 
+
+function createSecondTable() {
+  var idtElement = document.getElementById("idt");
+  var showTable = document.getElementById("show");
+
+  if (idtElement.value == 20) {
+    // Créer une nouvelle table avec un nouvel ID
+    var secondTable = document.createElement("table");
+    secondTable.id = "secondShow";
+
+    // Copier les en-têtes de colonne de la première table
+    var firstRow = showTable.rows[0].cloneNode(true);
+    secondTable.appendChild(firstRow);
+
+    // Copier les lignes de la première table à partir de la ligne 21
+    for (var i = 20; i < showTable.rows.length; i++) {
+      var row = showTable.rows[i].cloneNode(true);
+      secondTable.appendChild(row);
+    }
+
+    // Ajouter la nouvelle table après la première table
+    showTable.parentNode.insertBefore(secondTable, showTable.nextSibling);
+  }
+}
 
 
 
