@@ -233,12 +233,11 @@
         createPDFPages();
       }
 
-      // ::::::::
-      if (n === 20) {
-        createSecondTable();
-      }
-
       calculateTotalAmount();
+
+      document.getElementById("idt").value = id;
+      checkID();
+
 
 		}
 
@@ -413,26 +412,24 @@ verifierEvenements();
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
-  function createPDFPagesWithImages() {
-  var pdf = new jsPDF();
-  var pages = Math.ceil(imageList.length / imagesPerPage);
+  function createPDFPages() {
+      // Générer une nouvelle page PDF
+      var pdf = new jsPDF();
 
-  for (var i = 0; i < pages; i++) {
-    pdf.addPage();
-
-    for (var j = 0; j < imagesPerPage; j++) {
-      var imageIndex = i * imagesPerPage + j;
-
-      if (imageIndex < imageList.length) {
-        var image = imageList[imageIndex];
-        pdf.addImage(image, 'JPEG', imageX, imageY, imageWidth, imageHeight);
+      // Ajouter les lignes de la table à la page PDF actuelle
+      var startRow = (currentPage - 1) * rowsPerPage;
+      var endRow = startRow + rowsPerPage;
+      for (var i = startRow; i < endRow; i++) {
+        if (i >= list1.length) break; // Arrêter si toutes les lignes ont été ajoutées
+        pdf.text(10, (i % rowsPerPage + 1) * 10, `${list1[i]} ${list2[i]} ${list3[i]} ${list4[i]} ${list5[i]}`);
       }
+
+      // Ajouter la page PDF à la liste des pages
+      pdfPages.push(pdf);
+
+      // Incrémenter le numéro de page actuelle
+      currentPage++;
     }
-  }
-
-  pdf.save('document.pdf');
-}
-
 
     function downloadPDF() {
     var element = document.getElementById("capture");
@@ -443,30 +440,20 @@ verifierEvenements();
   });
 }
 
-
-function createSecondTable() {
-  var idtElement = document.getElementById("idt");
-  var showTable = document.getElementById("show");
-
-  if (idtElement.value == 20) {
-    // Créer une nouvelle table avec un nouvel ID
-    var secondTable = document.createElement("table");
-    secondTable.id = "secondShow";
-
-    // Copier les en-têtes de colonne de la première table
-    var firstRow = showTable.rows[0].cloneNode(true);
-    secondTable.appendChild(firstRow);
-
-    // Copier les lignes de la première table à partir de la ligne 21
-    for (var i = 20; i < showTable.rows.length; i++) {
-      var row = showTable.rows[i].cloneNode(true);
-      secondTable.appendChild(row);
-    }
-
-    // Ajouter la nouvelle table après la première table
-    showTable.parentNode.insertBefore(secondTable, showTable.nextSibling);
+// :::::::::::::::::
+function checkID() {
+  var idt = parseInt(document.getElementById("idt").value);
+  if (idt === 20) {
+    createSecondPage();
   }
 }
+
+function createSecondPage() {
+  var wrapper = document.getElementsByClassName("wrapper")[0];
+  var newPage = wrapper.cloneNode(true);
+  document.body.appendChild(newPage);
+}
+
 
 
 
