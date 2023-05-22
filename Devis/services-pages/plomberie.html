@@ -182,6 +182,7 @@
     var currentPage = 1;
     var rowsPerPage = 20;
     var pdfPages = [];
+    var idCounter = 0;
 
 
     // Calcul Prix Unitaire * Quantité
@@ -200,6 +201,9 @@
         var id = document.getElementById("idt").value;
         id++; // Incrémente la valeur de l'ID
         document.getElementById("idt").value = id;
+        idCounter++;
+        document.getElementById("idt").value = idCounter;
+
 
         // Tableau
 			var AddRown = document.getElementById(`show`) ;
@@ -213,17 +217,24 @@
 			list5[x] = document.getElementById("montant").value ;
 
       // Insertion de nouveau ligne à chaque clique sur boutton
-      var cel1 = NewRow.insertCell(0) ;
-      var cel2 = NewRow.insertCell(1) ;
-      var cel3 = NewRow.insertCell(2) ;
-      var cel4 = NewRow.insertCell(3) ;
-      var cel5 = NewRow.insertCell(4) ;
+      var table = document.getElementById("show");
+      var rowCount = table.rows.length;
+      var row = table.insertRow(rowCount);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      var cell5 = row.insertCell(4);
 
-      cel1.innerHTML = list1[x] ;
-      cel2.innerHTML = list2[x] ;
-      cel3.innerHTML = list3[x] ;
-      cel4.innerHTML = list4[x] ;
-      cel5.innerHTML = list5[x] ;
+      cell1.innerHTML = idCounter;
+      cell2.innerHTML = document.getElementById("Designation").value;
+      cell3.innerHTML = document.getElementById("quantite").value;
+      cell4.innerHTML = document.getElementById("prixUnitaire").value;
+      cell5.innerHTML = document.getElementById("montant").value;
+
+      if (idCounter === 20) {
+        createSecondId();
+      }
 
       n++ ;
       x++ ;
@@ -233,11 +244,21 @@
         createPDFPages();
       }
 
-      checkID();
-    calculateTotalAmount();
+      calculateTotalAmount();
 
 		}
 
+    function createSecondId() {
+      var telepdf = document.createElement("div");
+      telepdf.id = "telepdf";
+      telepdf.classList.add("telepdf");
+      telepdf.style.padding = "10px";
+      telepdf.style.background = "#fff";
+      document.body.appendChild(telepdf);
+
+      var captureElement = document.getElementById("capture");
+      captureElement.style.display = "none";
+    }
 
     
     // Fonction Récupérer Automatique input Facture::::::::::::::::::::::
@@ -429,51 +450,16 @@ verifierEvenements();
     }
 
     function downloadPDF() {
-    var element = document.getElementById("capture");
-    html2canvas(element).then(function(canvas) {
-    var pdf = new jsPDF();
-    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
-    pdf.save("plombier.pdf");
-  });
-}
-
-
-
-
-  // Fonction pour vérifier si l'ID atteint 20 et générer une seconde table
-  function checkID() {
-    var id = document.getElementById("idt").value;
-    if (id === "idt" && n === 20) {
-      generateSecondTable();
+      var element = document.getElementById("capture");
+      html2canvas(element, {
+        onrendered: function (canvas) {
+          var imgData = canvas.toDataURL("image/png");
+          var doc = new jsPDF("p", "mm", "a4");
+          doc.addImage(imgData, "PNG", 10, 10);
+          doc.save("devis.pdf");
+        }
+      });
     }
-  }
-
-  // Fonction pour générer une seconde table
-  function generateSecondTable() {
-    // Créer une nouvelle table avec un nouvel ID
-    var secondTable = document.createElement("table");
-    secondTable.id = "secondTable";
-
-    // Ajouter les lignes restantes à la seconde table
-    for (var i = n; i < list1.length; i++) {
-      var newRow = secondTable.insertRow();
-      var cel1 = newRow.insertCell();
-      var cel2 = newRow.insertCell();
-      var cel3 = newRow.insertCell();
-      var cel4 = newRow.insertCell();
-      var cel5 = newRow.insertCell();
-
-      cel1.textContent = list1[i];
-      cel2.textContent = list2[i];
-      cel3.textContent = list3[i];
-      cel4.textContent = list4[i];
-      cel5.textContent = list5[i];
-    }
-
-    // Ajouter la seconde table à l'élément parent (div avec l'ID "capture")
-    var parentElement = document.getElementById("capture");
-    parentElement.appendChild(secondTable);
-  }
 
 
 
