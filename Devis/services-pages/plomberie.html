@@ -233,7 +233,8 @@
         createPDFPages();
       }
 
-      calculateTotalAmount();
+      checkID();
+    calculateTotalAmount();
 
 		}
 
@@ -435,6 +436,44 @@ verifierEvenements();
     pdf.save("plombier.pdf");
   });
 }
+
+
+
+
+  // Fonction pour vérifier si l'ID atteint 20 et générer une seconde table
+  function checkID() {
+    var id = document.getElementById("idt").value;
+    if (id === "idt" && n === 20) {
+      generateSecondTable();
+    }
+  }
+
+  // Fonction pour générer une seconde table
+  function generateSecondTable() {
+    // Créer une nouvelle table avec un nouvel ID
+    var secondTable = document.createElement("table");
+    secondTable.id = "secondTable";
+
+    // Ajouter les lignes restantes à la seconde table
+    for (var i = n; i < list1.length; i++) {
+      var newRow = secondTable.insertRow();
+      var cel1 = newRow.insertCell();
+      var cel2 = newRow.insertCell();
+      var cel3 = newRow.insertCell();
+      var cel4 = newRow.insertCell();
+      var cel5 = newRow.insertCell();
+
+      cel1.textContent = list1[i];
+      cel2.textContent = list2[i];
+      cel3.textContent = list3[i];
+      cel4.textContent = list4[i];
+      cel5.textContent = list5[i];
+    }
+
+    // Ajouter la seconde table à l'élément parent (div avec l'ID "capture")
+    var parentElement = document.getElementById("capture");
+    parentElement.appendChild(secondTable);
+  }
 
 
 
