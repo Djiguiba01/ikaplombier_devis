@@ -385,26 +385,26 @@ verifierEvenements();
 
 
 // :::::::::::::FUNCTION PDF TELECHARGEMENT::::::::::::::::::::::
-  window.html2canvas = html2canvas;
-  window.jsPDF = window.jspdf.jsPDF;
-  function makePDF(){
+  // window.html2canvas = html2canvas;
+  // window.jsPDF = window.jspdf.jsPDF;
+  // function makePDF(){
 
-    html2canvas(document.querySelector("#capture"),{
+  //   html2canvas(document.querySelector("#capture"),{
 
-      allowTaint:true,
-      useCORS: true,
-      scale: 1
-    }).then(canvas => {
-      // document.body.appendChild(canvas)
-      var img = canvas.toDataURL("image/png");
+  //     allowTaint:true,
+  //     useCORS: true,
+  //     scale: 1
+  //   }).then(canvas => {
+  //     // document.body.appendChild(canvas)
+  //     var img = canvas.toDataURL("image/png");
 
-      var doc = new jsPDF();
-      doc.setFont('Arial');
-      doc.getFontSize(11);
-      doc.addImage(img,'PNG',7,13,195,105);
-      doc.save("plomberie");
-    });
-  }
+  //     var doc = new jsPDF();
+  //     doc.setFont('Arial');
+  //     doc.getFontSize(11);
+  //     doc.addImage(img,'PNG',7,13,195,105);
+  //     doc.save("plomberie");
+  //   });
+  // }
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
@@ -428,11 +428,11 @@ verifierEvenements();
     }
 
     function downloadPDF() {
-  var element = document.getElementById("capture");
-  html2canvas(element).then(function(canvas) {
+    var element = document.getElementById("capture");
+    html2canvas(element).then(function(canvas) {
     var pdf = new jsPDF();
     pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
-    pdf.save("document.pdf");
+    pdf.save("plombier.pdf");
   });
 }
 
