@@ -228,16 +228,14 @@
       n++ ;
       x++ ;
 
-        // Appel de la fonction createPDFPages
+        // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
+        if (n % rowsPerPage === 0) {
         createPDFPages();
+      }
 
       calculateTotalAmount();
 
 		}
-    // Appeler la fonction createPDFPages au chargement de la page pour vérifier si une page PDF doit être générée
-window.addEventListener("load", function () {
-  createPDFPages();
-});
 
 
     
@@ -410,41 +408,24 @@ verifierEvenements();
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
- // Fonction pour créer les pages PDF
-function createPDFPages() {
-  var table = document.getElementById("show");
+  function createPDFPages() {
+      // Générer une nouvelle page PDF
+      var pdf = new jsPDF();
 
-  // Vérifier si le nombre de lignes atteint 20
-  if (table.rows.length >= 20) {
-    // Générer une nouvelle page PDF
-    var pdfElement = document.getElementById("capture");
-    html2canvas(pdfElement).then(function (canvas) {
-      var imageData = canvas.toDataURL("image/png");
-      pdfPages.push(imageData);
-      clearTable();
+      // Ajouter les lignes de la table à la page PDF actuelle
+      var startRow = (currentPage - 1) * rowsPerPage;
+      var endRow = startRow + rowsPerPage;
+      for (var i = startRow; i < endRow; i++) {
+        if (i >= list1.length) break; // Arrêter si toutes les lignes ont été ajoutées
+        pdf.text(10, (i % rowsPerPage + 1) * 10, `${list1[i]} ${list2[i]} ${list3[i]} ${list4[i]} ${list5[i]}`);
+      }
+
+      // Ajouter la page PDF à la liste des pages
+      pdfPages.push(pdf);
+
+      // Incrémenter le numéro de page actuelle
       currentPage++;
-      displayCurrentPage();
-    });
-  }
-}
-// Fonction pour effacer le contenu du tableau
-function clearTable() {
-  var table = document.getElementById("show");
-  while (table.rows.length > 1) {
-    table.deleteRow(1);
-  }
-}
-
-// Fonction pour afficher la page PDF actuelle
-function displayCurrentPage() {
-  var pdfElement = document.getElementById("capture");
-  if (currentPage <= pdfPages.length) {
-    pdfElement.innerHTML = '<img src="' + pdfPages[currentPage - 1] + '" />';
-  } else {
-    pdfElement.innerHTML = "";
-  }
-}
-
+    }
 
     function downloadPDF() {
     var element = document.getElementById("capture");
