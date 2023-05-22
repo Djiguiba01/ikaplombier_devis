@@ -461,6 +461,55 @@ verifierEvenements();
       });
     }
 
+    // Fonction pour créer de nouvelles pages PDF
+  function createPDFPages() {
+    var table = document.getElementById("show");
+
+    // Créer une nouvelle page PDF
+    var page = document.createElement("div");
+    page.classList.add("telepdf");
+
+    // Copier le contenu de la table actuelle sur la nouvelle page
+    var newTable = document.createElement("table");
+    newTable.innerHTML = table.innerHTML;
+    page.appendChild(newTable);
+
+    // Ajouter la nouvelle page au tableau des pages PDF
+    pdfPages.push(page);
+
+    // Réinitialiser la table actuelle pour la prochaine page
+    table.innerHTML = `
+      <tr>
+        <th>N°:</th>
+        <th>DESIGNATION</th>
+        <th>QUANTITE</th>
+        <th>PRIX UNITAIRE</th>
+        <th>MONTANT</th>
+      </tr>
+    `;
+    n = 1;
+  }
+
+  // Fonction pour générer et télécharger le PDF
+  function downloadPDF() {
+    createPDFPages();
+
+    var pdf = new jsPDF();
+
+    // Parcourir les pages PDF et les ajouter au document PDF
+    for (var i = 0; i < pdfPages.length; i++) {
+      if (i > 0) {
+        pdf.addPage();
+      }
+      html2canvas(pdfPages[i]).then(function(canvas) {
+        var imgData = canvas.toDataURL("image/png");
+        pdf.addImage(imgData, "PNG", 0, 0);
+        if (i === pdfPages.length - 1) {
+          pdf.save("devis.pdf");
+        }
+      });
+    }
+  }
 
 
 
