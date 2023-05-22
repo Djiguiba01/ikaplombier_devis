@@ -230,16 +230,15 @@
 
 
        // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
-        if (n % rowsPerPage === 0) {
-          createPDFPages();
-        }
+  if (n % rowsPerPage === 0) {
+    createPDFPage();
+  }
 
       calculateTotalAmount();
 
 		}
 
 
-    
     // Fonction Récupérer Automatique input Facture::::::::::::::::::::::
     function recupererNumFacture() {
     var numFactureInput = document.getElementById("numfacture");
@@ -409,21 +408,21 @@ verifierEvenements();
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
-  function createPDFPages() {
-  // Vérifier si la page actuelle est vide
-  if (pdfPages[currentPage] === undefined) {
-    pdfPages[currentPage] = '<div class="traitcontainer"></div>';
-  }
+ // Fonction pour créer une nouvelle page PDF
+function createPDFPage() {
+  var page = document.createElement("div");
+  page.classList.add("telepdf");
+  page.style.padding = "10px";
+  page.style.background = "#fff";
+  pdfPages.push(page);
+  document.body.appendChild(page);
+}
 
-  // Ajouter la ligne actuelle à la page actuelle
+// Fonction pour créer les pages PDF en fonction du nombre de lignes dans la table
+function createPDFPages() {
   var table = document.getElementById("show");
-  var lastRow = table.rows[table.rows.length - 1].innerHTML;
-  pdfPages[currentPage] += lastRow;
-
-  // Créer une nouvelle page si nécessaire
   if (table.rows.length % rowsPerPage === 0) {
-    currentPage++;
-    pdfPages[currentPage] = '<div class="traitcontainer"></div>';
+    createPDFPage();
   }
 }
 
