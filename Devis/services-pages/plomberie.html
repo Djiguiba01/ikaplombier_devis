@@ -138,6 +138,48 @@
 
 </table>
 
+
+<!-- ::::::::SECOND TABLE SI LA LIGNE DU PREMIERE TABLE EST SUPERIEUR 20:::::::::::::: -->
+<div class="page2" style="display: none;">
+  <!-- Contenu de la deuxième page -->
+  <div class="traitcontainer">
+
+    <div class="entetepdf">
+  
+      <div class="gauche">
+        <img src="image-services/logo.png" alt="img">
+      </div>
+  
+      <div class="milieu">
+        <h3>IKA PLOMBIER SARL</h3>
+        <h4>RCC : MA BKO.2016.B9400, NIF / 086139811A</h4>
+        <p> Halles de Bamako, Bloc Adrar des Ifogas, Magasin 481-482</p>
+        <p> <em style="font-weight: bold;">Email:</em> bbarou19860@gmail.com <em style="font-weight: bold;">Tel:</em> 74 24 00 74</p>
+      </div>
+  
+      <div class="droite">
+        <img src="image-services/logo.png" alt="img">
+      </div>
+  
+    </div>
+    <hr style="border: 1px solid #3f0dca; margin-top: 1.5%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+  
+  
+   </div>
+  <table id="show">	
+    
+    <tr>
+        <th>N°:</th>
+        <th>DESIGNATION</th>
+        <th>QUANTITE</th>
+        <th>PRIX UNITAIRE</th>
+        <th>MONTANT</th>
+    </tr>
+
+</table>
+</div>
+
+
 <div class="MainOeuvre" style="display: none;">
   <h2 >MainOeuvre : <span> </span> fcfa</h2>
 </div>
@@ -228,36 +270,16 @@
       n++ ;
       x++ ;
 
-       // Vérifier si le nombre de lignes atteint 20 pour diviser le tableau en deux parties
-  if (n >= 20) {
-    var tableRows = AddRown.getElementsByTagName("tr");
+        // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
+        if (n % rowsPerPage === 0) {
+        createPDFPages();
+      }
 
-    // Diviser le tableau en deux parties
-    var firstHalf = Array.prototype.slice.call(tableRows, 0, 20);
-    var secondHalf = Array.prototype.slice.call(tableRows, 20);
-
-    // Effacer le contenu actuel du tableau
-    AddRown.innerHTML = "";
-
-    // Ajouter la première moitié au tableau
-    for (var i = 0; i < firstHalf.length; i++) {
-      AddRown.appendChild(firstHalf[i]);
-    }
-
-    // Créer un nouveau tableau pour la deuxième moitié
-    var newTable = document.createElement("table");
-    newTable.id = "show2";
-    newTable.appendChild(document.createElement("tbody"));
-
-    // Ajouter la deuxième moitié au nouveau tableau
-    for (var i = 0; i < secondHalf.length; i++) {
-      newTable.getElementsByTagName("tbody")[0].appendChild(secondHalf[i]);
-    }
-
-    // Insérer le nouveau tableau après le tableau d'origine
-    AddRown.parentNode.insertBefore(newTable, AddRown.nextSibling);
-  }
-
+      // Vérifier si le nombre de lignes atteint 20 pour créer une deuxième page
+if (n >= 20) {
+    var page2 = document.querySelector('.page2');
+    page2.style.display = 'block';
+}
 
       calculateTotalAmount();
 
