@@ -194,48 +194,50 @@
 
 
     // Ajout ligne automatiquement
-		function AddRow(){
+		function AddRow() {
+  // Incrémenter l'ID à chaque ajout (id="idt")
+  var id = document.getElementById("idt").value;
+  id++; // Incrémente la valeur de l'ID
+  document.getElementById("idt").value = id;
 
-        // Incrémation id à chaque ajout(id="idt")
-        var id = document.getElementById("idt").value;
-        id++; // Incrémente la valeur de l'ID
-        document.getElementById("idt").value = id;
+  // Tableau
+  var AddRown = document.getElementById("show");
+  var NewRow = AddRown.insertRow(n);
 
-        // Tableau
-			var AddRown = document.getElementById(`show`) ;
-			var NewRow = AddRown.insertRow(n);
+  // Récupération des données input (par leurs "id")
+  list1[x] = document.getElementById("idt").value;
+  list2[x] = document.getElementById("Designation").value;
+  list3[x] = document.getElementById("quantite").value;
+  list4[x] = document.getElementById("prixUnitaire").value;
+  list5[x] = document.getElementById("montant").value;
 
-      // Récupération des données input les ("id")
-			list1[x] = document.getElementById("idt").value ;
-			list2[x] = document.getElementById("Designation").value ;
-			list3[x] = document.getElementById("quantite").value ;
-			list4[x] = document.getElementById("prixUnitaire").value ;
-			list5[x] = document.getElementById("montant").value ;
+  // Insertion d'une nouvelle ligne à chaque clic sur le bouton
+  var cel1 = NewRow.insertCell(0);
+  var cel2 = NewRow.insertCell(1);
+  var cel3 = NewRow.insertCell(2);
+  var cel4 = NewRow.insertCell(3);
+  var cel5 = NewRow.insertCell(4);
 
-      // Insertion de nouveau ligne à chaque clique sur boutton
-      var cel1 = NewRow.insertCell(0) ;
-      var cel2 = NewRow.insertCell(1) ;
-      var cel3 = NewRow.insertCell(2) ;
-      var cel4 = NewRow.insertCell(3) ;
-      var cel5 = NewRow.insertCell(4) ;
+  cel1.innerHTML = list1[x];
+  cel2.innerHTML = list2[x];
+  cel3.innerHTML = list3[x];
+  cel4.innerHTML = list4[x];
+  cel5.innerHTML = list5[x];
 
-      cel1.innerHTML = list1[x] ;
-      cel2.innerHTML = list2[x] ;
-      cel3.innerHTML = list3[x] ;
-      cel4.innerHTML = list4[x] ;
-      cel5.innerHTML = list5[x] ;
+  // Ajout de la classe "telepdf" à la nouvelle ligne
+  NewRow.classList.add("telepdf");
 
-      n++ ;
-      x++ ;
+  n++;
+  x++;
 
-        // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
-        if (n % rowsPerPage === 0) {
-        createPDFPages();
-      }
+  // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
+  if (n % rowsPerPage === 0) {
+    createPDFPages();
+  }
 
-      calculateTotalAmount();
+  calculateTotalAmount();
+}
 
-		}
 
 
     
