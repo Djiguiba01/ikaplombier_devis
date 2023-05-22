@@ -408,55 +408,29 @@ verifierEvenements();
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
-  function createPDFPages() {
-      var table = document.getElementById("show");
-      var totalRows = table.rows.length;
+  function createPDFPagesWithImages() {
+  // Générer une nouvelle page PDF
+  var pdf = new jsPDF();
 
-      var startRow = (currentPage - 1) * rowsPerPage + 1;
-      var endRow = Math.min(startRow + rowsPerPage - 1, totalRows - 1);
+  // Ajouter les lignes de la table à la page PDF actuelle
+  var startRow = (currentPage - 1) * rowsPerPage;
+  var endRow = startRow + rowsPerPage;
+  for (var i = startRow; i < endRow; i++) {
+    if (i >= list1.length) break; // Arrêter si toutes les lignes ont été ajoutées
+    pdf.text(10, (i % rowsPerPage + 1) * 10, `${list1[i]} ${list2[i]} ${list3[i]} ${list4[i]} ${list5[i]}`);
+  }
 
-      var pageTable = document.createElement("table");
-      var pageTableHead = pageTable.createTHead();
-      var pageTableBody = pageTable.createTBody();
+  // Ajouter une image à la page PDF
+  var image = new Image();
+  image.src = 'path/to/image.jpg'; // Remplacez 'path/to/image.jpg' par le chemin d'accès à votre image
+  pdf.addImage(image, 'JPEG', 10, 10, 50, 50); // Remplacez les coordonnées et la taille de l'image selon vos besoins
 
-      var headerRow = table.rows[0].cloneNode(true);
-      pageTableHead.appendChild(headerRow);
+  // Ajouter la page PDF à la liste des pages
+  pdfPages.push(pdf);
 
-      for (var i = startRow; i <= endRow; i++) {
-        var row = table.rows[i].cloneNode(true);
-        pageTableBody.appendChild(row);
-      }
-
-      pdfPages.push(pageTable);
-
-      if (endRow === totalRows - 1) {
-        // On a atteint la dernière ligne de la table, ajouter une nouvelle page PDF
-        addPDFPage();
-      }
-
-      currentPage++;
-    }
-
-    function addPDFPage() {
-      var container = document.getElementById("pdf-container");
-
-      var pageDiv = document.createElement("div");
-      pageDiv.classList.add("pdf-page");
-      pageDiv.appendChild(pdfPages.shift());
-
-      container.appendChild(pageDiv);
-    }
-
-    function downloadPDF() {
-      var container = document.getElementById("pdf-container");
-
-      html2canvas(container).then(function(canvas) {
-        var imgData = canvas.toDataURL("image/png");
-        var pdf = new jsPDF();
-        pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-        pdf.save("devis.pdf");
-      });
-    }
+  // Incrémenter le numéro de page actuelle
+  currentPage++;
+}
 
 
     function downloadPDF() {
