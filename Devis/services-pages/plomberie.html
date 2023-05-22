@@ -228,17 +228,17 @@
       n++ ;
       x++ ;
 
-
-       // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
-  if (n % rowsPerPage === 0) {
-    createPDFPage();
-  }
+        // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
+        if (n % rowsPerPage === 0) {
+        createPDFPages();
+      }
 
       calculateTotalAmount();
 
 		}
 
 
+    
     // Fonction Récupérer Automatique input Facture::::::::::::::::::::::
     function recupererNumFacture() {
     var numFactureInput = document.getElementById("numfacture");
@@ -408,23 +408,55 @@ verifierEvenements();
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
- // Fonction pour créer une nouvelle page PDF
-function createPDFPage() {
-  var page = document.createElement("div");
-  page.classList.add("telepdf");
-  page.style.padding = "10px";
-  page.style.background = "#fff";
-  pdfPages.push(page);
-  document.body.appendChild(page);
-}
+  function createPDFPages() {
+      var table = document.getElementById("show");
+      var totalRows = table.rows.length;
 
-// Fonction pour créer les pages PDF en fonction du nombre de lignes dans la table
-function createPDFPages() {
-  var table = document.getElementById("show");
-  if (table.rows.length % rowsPerPage === 0) {
-    createPDFPage();
-  }
-}
+      var startRow = (currentPage - 1) * rowsPerPage + 1;
+      var endRow = Math.min(startRow + rowsPerPage - 1, totalRows - 1);
+
+      var pageTable = document.createElement("table");
+      var pageTableHead = pageTable.createTHead();
+      var pageTableBody = pageTable.createTBody();
+
+      var headerRow = table.rows[0].cloneNode(true);
+      pageTableHead.appendChild(headerRow);
+
+      for (var i = startRow; i <= endRow; i++) {
+        var row = table.rows[i].cloneNode(true);
+        pageTableBody.appendChild(row);
+      }
+
+      pdfPages.push(pageTable);
+
+      if (endRow === totalRows - 1) {
+        // On a atteint la dernière ligne de la table, ajouter une nouvelle page PDF
+        addPDFPage();
+      }
+
+      currentPage++;
+    }
+
+    function addPDFPage() {
+      var container = document.getElementById("pdf-container");
+
+      var pageDiv = document.createElement("div");
+      pageDiv.classList.add("pdf-page");
+      pageDiv.appendChild(pdfPages.shift());
+
+      container.appendChild(pageDiv);
+    }
+
+    function downloadPDF() {
+      var container = document.getElementById("pdf-container");
+
+      html2canvas(container).then(function(canvas) {
+        var imgData = canvas.toDataURL("image/png");
+        var pdf = new jsPDF();
+        pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
+        pdf.save("devis.pdf");
+      });
+    }
 
 
     function downloadPDF() {
