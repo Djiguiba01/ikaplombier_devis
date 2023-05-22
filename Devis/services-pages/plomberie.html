@@ -409,28 +409,25 @@ verifierEvenements();
 
   // ::::::::::::A EFFACE::::::::::::::::::
   function createPDFPagesWithImages() {
-  // Générer une nouvelle page PDF
   var pdf = new jsPDF();
+  var pages = Math.ceil(imageList.length / imagesPerPage);
 
-  // Ajouter les lignes de la table à la page PDF actuelle
-  var startRow = (currentPage - 1) * rowsPerPage;
-  var endRow = startRow + rowsPerPage;
-  for (var i = startRow; i < endRow; i++) {
-    if (i >= list1.length) break; // Arrêter si toutes les lignes ont été ajoutées
-    pdf.text(10, (i % rowsPerPage + 1) * 10, `${list1[i]} ${list2[i]} ${list3[i]} ${list4[i]} ${list5[i]}`);
+  for (var i = 0; i < pages; i++) {
+    pdf.addPage();
+
+    for (var j = 0; j < imagesPerPage; j++) {
+      var imageIndex = i * imagesPerPage + j;
+
+      if (imageIndex < imageList.length) {
+        var image = imageList[imageIndex];
+        pdf.addImage(image, 'JPEG', imageX, imageY, imageWidth, imageHeight);
+      }
+    }
   }
 
-  // Ajouter une image à la page PDF
-  var image = new Image();
-  image.src = 'path/to/image.jpg'; // Remplacez 'path/to/image.jpg' par le chemin d'accès à votre image
-  pdf.addImage(image, 'JPEG', 10, 10, 50, 50); // Remplacez les coordonnées et la taille de l'image selon vos besoins
-
-  // Ajouter la page PDF à la liste des pages
-  pdfPages.push(pdf);
-
-  // Incrémenter le numéro de page actuelle
-  currentPage++;
+  pdf.save('document.pdf');
 }
+
 
 
     function downloadPDF() {
