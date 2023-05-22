@@ -138,48 +138,6 @@
 
 </table>
 
-
-<!-- ::::::::SECOND TABLE SI LA LIGNE DU PREMIERE TABLE EST SUPERIEUR 20:::::::::::::: -->
-<div class="page2" style="display: none;">
-  <!-- Contenu de la deuxième page -->
-  <div class="traitcontainer">
-
-    <div class="entetepdf">
-  
-      <div class="gauche">
-        <img src="image-services/logo.png" alt="img">
-      </div>
-  
-      <div class="milieu">
-        <h3>IKA PLOMBIER SARL</h3>
-        <h4>RCC : MA BKO.2016.B9400, NIF / 086139811A</h4>
-        <p> Halles de Bamako, Bloc Adrar des Ifogas, Magasin 481-482</p>
-        <p> <em style="font-weight: bold;">Email:</em> bbarou19860@gmail.com <em style="font-weight: bold;">Tel:</em> 74 24 00 74</p>
-      </div>
-  
-      <div class="droite">
-        <img src="image-services/logo.png" alt="img">
-      </div>
-  
-    </div>
-    <hr style="border: 1px solid #3f0dca; margin-top: 1.5%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
-  
-  
-   </div>
-  <table id="show">	
-    
-    <tr>
-        <th>N°:</th>
-        <th>DESIGNATION</th>
-        <th>QUANTITE</th>
-        <th>PRIX UNITAIRE</th>
-        <th>MONTANT</th>
-    </tr>
-
-</table>
-</div>
-
-
 <div class="MainOeuvre" style="display: none;">
   <h2 >MainOeuvre : <span> </span> fcfa</h2>
 </div>
@@ -270,20 +228,16 @@
       n++ ;
       x++ ;
 
-        // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
-        if (n % rowsPerPage === 0) {
+        // Appel de la fonction createPDFPages
         createPDFPages();
-      }
-
-      // Vérifier si le nombre de lignes atteint 20 pour créer une deuxième page
-if (n >= 20) {
-    var page2 = document.querySelector('.page2');
-    page2.style.display = 'block';
-}
 
       calculateTotalAmount();
 
 		}
+    // Appeler la fonction createPDFPages au chargement de la page pour vérifier si une page PDF doit être générée
+window.addEventListener("load", function () {
+  createPDFPages();
+});
 
 
     
@@ -456,24 +410,41 @@ verifierEvenements();
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
-  function createPDFPages() {
-      // Générer une nouvelle page PDF
-      var pdf = new jsPDF();
+ // Fonction pour créer les pages PDF
+function createPDFPages() {
+  var table = document.getElementById("show");
 
-      // Ajouter les lignes de la table à la page PDF actuelle
-      var startRow = (currentPage - 1) * rowsPerPage;
-      var endRow = startRow + rowsPerPage;
-      for (var i = startRow; i < endRow; i++) {
-        if (i >= list1.length) break; // Arrêter si toutes les lignes ont été ajoutées
-        pdf.text(10, (i % rowsPerPage + 1) * 10, `${list1[i]} ${list2[i]} ${list3[i]} ${list4[i]} ${list5[i]}`);
-      }
-
-      // Ajouter la page PDF à la liste des pages
-      pdfPages.push(pdf);
-
-      // Incrémenter le numéro de page actuelle
+  // Vérifier si le nombre de lignes atteint 20
+  if (table.rows.length >= 20) {
+    // Générer une nouvelle page PDF
+    var pdfElement = document.getElementById("capture");
+    html2canvas(pdfElement).then(function (canvas) {
+      var imageData = canvas.toDataURL("image/png");
+      pdfPages.push(imageData);
+      clearTable();
       currentPage++;
-    }
+      displayCurrentPage();
+    });
+  }
+}
+// Fonction pour effacer le contenu du tableau
+function clearTable() {
+  var table = document.getElementById("show");
+  while (table.rows.length > 1) {
+    table.deleteRow(1);
+  }
+}
+
+// Fonction pour afficher la page PDF actuelle
+function displayCurrentPage() {
+  var pdfElement = document.getElementById("capture");
+  if (currentPage <= pdfPages.length) {
+    pdfElement.innerHTML = '<img src="' + pdfPages[currentPage - 1] + '" />';
+  } else {
+    pdfElement.innerHTML = "";
+  }
+}
+
 
     function downloadPDF() {
     var element = document.getElementById("capture");
