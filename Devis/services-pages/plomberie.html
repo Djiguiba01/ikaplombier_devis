@@ -228,10 +228,11 @@
       n++ ;
       x++ ;
 
-        // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
+
+       // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
         if (n % rowsPerPage === 0) {
-        createPDFPages();
-      }
+          createPDFPages();
+        }
 
       calculateTotalAmount();
 
@@ -424,18 +425,6 @@ verifierEvenements();
     currentPage++;
     pdfPages[currentPage] = '<div class="traitcontainer"></div>';
   }
-}
-
-// Utilisation de la fonction dans la fonction AddRow()
-function AddRow() {
-  // ...
-
-  // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
-  if (n % rowsPerPage === 0) {
-    createPDFPages();
-  }
-
-  // ...
 }
 
 
