@@ -151,14 +151,6 @@
   <div class="droitegerant">Le Gérant <p></p></div>
 </div>
 
-
-<!-- ::::::::::::::::::SECOND PAGE:::::::::::::::: -->
-<div id="page2" class="telepdf" style="padding: 10px; background: #fff;">
-  
-</div>
-<!-- ::::::::::::::::::SECOND PAGE:::::::::::::::: -->
-
-
  </div>
 
 
@@ -238,8 +230,8 @@
 
         // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
         if (n % rowsPerPage === 0) {
-  createPDFPages();
-}
+        createPDFPages();
+      }
 
       calculateTotalAmount();
 
@@ -431,59 +423,18 @@ verifierEvenements();
       // Ajouter la page PDF à la liste des pages
       pdfPages.push(pdf);
 
-      // Vérifier si la page 2 existe déjà
-  var page2 = document.getElementById("page2");
-
-// Vérifier si la ligne actuelle est la première ligne de la deuxième page
-if (n === rowsPerPage) {
-  // Déplacer le contenu de la première page vers la deuxième page
-  page2.innerHTML = document.getElementById("capture").innerHTML;
-
-  // Effacer le contenu de la première page
-  document.getElementById("capture").innerHTML = "";
-}
-
-// Ajouter les lignes suivantes à la deuxième page
-if (n > rowsPerPage) {
-  var newRow = page2.insertRow(n - rowsPerPage);
-  newRow.innerHTML = document.getElementById("show").rows[n].innerHTML;
-}
-
-// Incrémenter le numéro de page actuelle
-currentPage++;
-
-// Ajouter la deuxième page au tableau des pages PDF
-pdfPages.push(page2);
-
-
-
-      
+      // Incrémenter le numéro de page actuelle
+      currentPage++;
     }
 
     function downloadPDF() {
-  // Créer un nouveau document PDF
-  const doc = new jsPDF();
-
-  // Ajouter toutes les pages générées à partir de la liste "pages"
-  for (let i = 0; i < pages.length; i++) {
-    const pageContent = pages[i];
-
-    // Ajouter une nouvelle page
-    if (i > 0) {
-      doc.addPage();
-    }
-
-    // Définir la police et la taille du texte
-    doc.setFont("Arial", 12);
-
-    // Ajouter le contenu de la page
-    doc.text(10, 10, pageContent);
-  }
-
-  // Enregistrer le fichier PDF
-  doc.save("fichier.pdf");
+    var element = document.getElementById("capture");
+    html2canvas(element).then(function(canvas) {
+    var pdf = new jsPDF();
+    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    pdf.save("plombier.pdf");
+  });
 }
-
 
 
 
