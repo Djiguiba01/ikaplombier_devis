@@ -182,7 +182,6 @@
     var currentPage = 1;
     var rowsPerPage = 20;
     var pdfPages = [];
-    var idCounter = 0;
 
 
     // Calcul Prix Unitaire * Quantité
@@ -201,9 +200,6 @@
         var id = document.getElementById("idt").value;
         id++; // Incrémente la valeur de l'ID
         document.getElementById("idt").value = id;
-        idCounter++;
-        document.getElementById("idt").value = idCounter;
-
 
         // Tableau
 			var AddRown = document.getElementById(`show`) ;
@@ -217,24 +213,17 @@
 			list5[x] = document.getElementById("montant").value ;
 
       // Insertion de nouveau ligne à chaque clique sur boutton
-      var table = document.getElementById("show");
-      var rowCount = table.rows.length;
-      var row = table.insertRow(rowCount);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      var cell4 = row.insertCell(3);
-      var cell5 = row.insertCell(4);
+      var cel1 = NewRow.insertCell(0) ;
+      var cel2 = NewRow.insertCell(1) ;
+      var cel3 = NewRow.insertCell(2) ;
+      var cel4 = NewRow.insertCell(3) ;
+      var cel5 = NewRow.insertCell(4) ;
 
-      cell1.innerHTML = idCounter;
-      cell2.innerHTML = document.getElementById("Designation").value;
-      cell3.innerHTML = document.getElementById("quantite").value;
-      cell4.innerHTML = document.getElementById("prixUnitaire").value;
-      cell5.innerHTML = document.getElementById("montant").value;
-
-      if (idCounter === 20) {
-        createSecondId();
-      }
+      cel1.innerHTML = list1[x] ;
+      cel2.innerHTML = list2[x] ;
+      cel3.innerHTML = list3[x] ;
+      cel4.innerHTML = list4[x] ;
+      cel5.innerHTML = list5[x] ;
 
       n++ ;
       x++ ;
@@ -248,17 +237,6 @@
 
 		}
 
-    function createSecondId() {
-      var telepdf = document.createElement("div");
-      telepdf.id = "telepdf";
-      telepdf.classList.add("telepdf");
-      telepdf.style.padding = "10px";
-      telepdf.style.background = "#fff";
-      document.body.appendChild(telepdf);
-
-      var captureElement = document.getElementById("capture");
-      captureElement.style.display = "none";
-    }
 
     
     // Fonction Récupérer Automatique input Facture::::::::::::::::::::::
@@ -450,66 +428,14 @@ verifierEvenements();
     }
 
     function downloadPDF() {
-      var element = document.getElementById("capture");
-      html2canvas(element, {
-        onrendered: function (canvas) {
-          var imgData = canvas.toDataURL("image/png");
-          var doc = new jsPDF("p", "mm", "a4");
-          doc.addImage(imgData, "PNG", 10, 10);
-          doc.save("devis.pdf");
-        }
-      });
-    }
-
-    // Fonction pour créer de nouvelles pages PDF
-  function createPDFPages() {
-    var table = document.getElementById("show");
-
-    // Créer une nouvelle page PDF
-    var page = document.createElement("div");
-    page.classList.add("telepdf");
-
-    // Copier le contenu de la table actuelle sur la nouvelle page
-    var newTable = document.createElement("table");
-    newTable.innerHTML = table.innerHTML;
-    page.appendChild(newTable);
-
-    // Ajouter la nouvelle page au tableau des pages PDF
-    pdfPages.push(page);
-
-    // Réinitialiser la table actuelle pour la prochaine page
-    table.innerHTML = `
-      <tr>
-        <th>N°:</th>
-        <th>DESIGNATION</th>
-        <th>QUANTITE</th>
-        <th>PRIX UNITAIRE</th>
-        <th>MONTANT</th>
-      </tr>
-    `;
-    n = 1;
-  }
-
-  // Fonction pour générer et télécharger le PDF
-  function downloadPDF() {
-    createPDFPages();
-
+    var element = document.getElementById("capture");
+    html2canvas(element).then(function(canvas) {
     var pdf = new jsPDF();
+    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    pdf.save("plombier.pdf");
+  });
+}
 
-    // Parcourir les pages PDF et les ajouter au document PDF
-    for (var i = 0; i < pdfPages.length; i++) {
-      if (i > 0) {
-        pdf.addPage();
-      }
-      html2canvas(pdfPages[i]).then(function(canvas) {
-        var imgData = canvas.toDataURL("image/png");
-        pdf.addImage(imgData, "PNG", 0, 0);
-        if (i === pdfPages.length - 1) {
-          pdf.save("devis.pdf");
-        }
-      });
-    }
-  }
 
 
 
