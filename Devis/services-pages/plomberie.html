@@ -459,14 +459,14 @@ verifierEvenements();
     }
 
 
-//     function downloadPDF() {
-//     var element = document.getElementById("capture");
-//     html2canvas(element).then(function(canvas) {
-//     var pdf = new jsPDF();
-//     pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
-//     pdf.save("plombier.pdf");
-//   });
-// }
+    function downloadPDF() {
+    var element = document.getElementById("capture");
+    html2canvas(element).then(function(canvas) {
+    var pdf = new jsPDF();
+    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    pdf.save("plombier.pdf");
+  });
+}
 
 
 
