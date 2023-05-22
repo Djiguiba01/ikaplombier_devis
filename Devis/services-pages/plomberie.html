@@ -194,50 +194,74 @@
 
 
     // Ajout ligne automatiquement
-		function AddRow() {
-  // Incrémenter l'ID à chaque ajout (id="idt")
-  var id = document.getElementById("idt").value;
-  id++; // Incrémente la valeur de l'ID
-  document.getElementById("idt").value = id;
+		function AddRow(){
 
-  // Tableau
-  var AddRown = document.getElementById("show");
-  var NewRow = AddRown.insertRow(n);
+        // Incrémation id à chaque ajout(id="idt")
+        var id = document.getElementById("idt").value;
+        id++; // Incrémente la valeur de l'ID
+        document.getElementById("idt").value = id;
 
-  // Récupération des données input (par leurs "id")
-  list1[x] = document.getElementById("idt").value;
-  list2[x] = document.getElementById("Designation").value;
-  list3[x] = document.getElementById("quantite").value;
-  list4[x] = document.getElementById("prixUnitaire").value;
-  list5[x] = document.getElementById("montant").value;
+        // Tableau
+			var AddRown = document.getElementById(`show`) ;
+			var NewRow = AddRown.insertRow(n);
 
-  // Insertion d'une nouvelle ligne à chaque clic sur le bouton
-  var cel1 = NewRow.insertCell(0);
-  var cel2 = NewRow.insertCell(1);
-  var cel3 = NewRow.insertCell(2);
-  var cel4 = NewRow.insertCell(3);
-  var cel5 = NewRow.insertCell(4);
+      // Récupération des données input les ("id")
+			list1[x] = document.getElementById("idt").value ;
+			list2[x] = document.getElementById("Designation").value ;
+			list3[x] = document.getElementById("quantite").value ;
+			list4[x] = document.getElementById("prixUnitaire").value ;
+			list5[x] = document.getElementById("montant").value ;
 
-  cel1.innerHTML = list1[x];
-  cel2.innerHTML = list2[x];
-  cel3.innerHTML = list3[x];
-  cel4.innerHTML = list4[x];
-  cel5.innerHTML = list5[x];
+      // Insertion de nouveau ligne à chaque clique sur boutton
+      var cel1 = NewRow.insertCell(0) ;
+      var cel2 = NewRow.insertCell(1) ;
+      var cel3 = NewRow.insertCell(2) ;
+      var cel4 = NewRow.insertCell(3) ;
+      var cel5 = NewRow.insertCell(4) ;
 
-  // Ajout de la classe "telepdf" à la nouvelle ligne
-  NewRow.classList.add("telepdf");
+      cel1.innerHTML = list1[x] ;
+      cel2.innerHTML = list2[x] ;
+      cel3.innerHTML = list3[x] ;
+      cel4.innerHTML = list4[x] ;
+      cel5.innerHTML = list5[x] ;
 
-  n++;
-  x++;
+      n++ ;
+      x++ ;
 
-  // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
-  if (n % rowsPerPage === 0) {
-    createPDFPages();
+       // Vérifier si le nombre de lignes atteint 20 pour diviser le tableau en deux parties
+  if (n >= 20) {
+    var tableRows = AddRown.getElementsByTagName("tr");
+
+    // Diviser le tableau en deux parties
+    var firstHalf = Array.prototype.slice.call(tableRows, 0, 20);
+    var secondHalf = Array.prototype.slice.call(tableRows, 20);
+
+    // Effacer le contenu actuel du tableau
+    AddRown.innerHTML = "";
+
+    // Ajouter la première moitié au tableau
+    for (var i = 0; i < firstHalf.length; i++) {
+      AddRown.appendChild(firstHalf[i]);
+    }
+
+    // Créer un nouveau tableau pour la deuxième moitié
+    var newTable = document.createElement("table");
+    newTable.id = "show2";
+    newTable.appendChild(document.createElement("tbody"));
+
+    // Ajouter la deuxième moitié au nouveau tableau
+    for (var i = 0; i < secondHalf.length; i++) {
+      newTable.getElementsByTagName("tbody")[0].appendChild(secondHalf[i]);
+    }
+
+    // Insérer le nouveau tableau après le tableau d'origine
+    AddRown.parentNode.insertBefore(newTable, AddRown.nextSibling);
   }
 
-  calculateTotalAmount();
-}
 
+      calculateTotalAmount();
+
+		}
 
 
     
@@ -411,31 +435,23 @@ verifierEvenements();
 
   // ::::::::::::A EFFACE::::::::::::::::::
   function createPDFPages() {
-  // Récupérer le contenu de la table
-  var table = document.getElementById("show");
-  var html = table.outerHTML;
+      // Générer une nouvelle page PDF
+      var pdf = new jsPDF();
 
-  // Générer un nouvel objet jsPDF
-  var doc = new jsPDF();
+      // Ajouter les lignes de la table à la page PDF actuelle
+      var startRow = (currentPage - 1) * rowsPerPage;
+      var endRow = startRow + rowsPerPage;
+      for (var i = startRow; i < endRow; i++) {
+        if (i >= list1.length) break; // Arrêter si toutes les lignes ont été ajoutées
+        pdf.text(10, (i % rowsPerPage + 1) * 10, `${list1[i]} ${list2[i]} ${list3[i]} ${list4[i]} ${list5[i]}`);
+      }
 
-  // Définir les marges et la position de départ pour l'ajout du contenu
-  var margin = 10;
-  var startY = 10;
-  var currentPage = doc.internal.getCurrentPageInfo().pageNumber;
+      // Ajouter la page PDF à la liste des pages
+      pdfPages.push(pdf);
 
-  // Vérifier si la page actuelle est déjà la première page
-  // Si ce n'est pas le cas, ajouter une nouvelle page avant d'ajouter le contenu
-  if (currentPage !== 1) {
-    doc.addPage();
-  }
-
-  // Ajouter le contenu de la table à la page PDF
-  doc.fromHTML(html, margin, startY, {}, function () {
-    // Sauvegarder le PDF
-    doc.save("table.pdf");
-  });
-}
-
+      // Incrémenter le numéro de page actuelle
+      currentPage++;
+    }
 
     function downloadPDF() {
     var element = document.getElementById("capture");
