@@ -408,6 +408,35 @@ verifierEvenements();
 
 
   // ::::::::::::A EFFACE::::::::::::::::::
+  function createPDFPages() {
+  // Vérifier si la page actuelle est vide
+  if (pdfPages[currentPage] === undefined) {
+    pdfPages[currentPage] = '<div class="traitcontainer"></div>';
+  }
+
+  // Ajouter la ligne actuelle à la page actuelle
+  var table = document.getElementById("show");
+  var lastRow = table.rows[table.rows.length - 1].innerHTML;
+  pdfPages[currentPage] += lastRow;
+
+  // Créer une nouvelle page si nécessaire
+  if (table.rows.length % rowsPerPage === 0) {
+    currentPage++;
+    pdfPages[currentPage] = '<div class="traitcontainer"></div>';
+  }
+}
+
+// Utilisation de la fonction dans la fonction AddRow()
+function AddRow() {
+  // ...
+
+  // Vérifier si le nombre de lignes atteint 20 pour créer de nouvelles pages PDF
+  if (n % rowsPerPage === 0) {
+    createPDFPages();
+  }
+
+  // ...
+}
 
 
     function downloadPDF() {
