@@ -409,23 +409,31 @@ verifierEvenements();
 
   // ::::::::::::A EFFACE::::::::::::::::::
   function createPDFPages() {
-      // Générer une nouvelle page PDF
-      var pdf = new jsPDF();
+  // Récupérer le contenu de la table
+  var table = document.getElementById("show");
+  var html = table.outerHTML;
 
-      // Ajouter les lignes de la table à la page PDF actuelle
-      var startRow = (currentPage - 1) * rowsPerPage;
-      var endRow = startRow + rowsPerPage;
-      for (var i = startRow; i < endRow; i++) {
-        if (i >= list1.length) break; // Arrêter si toutes les lignes ont été ajoutées
-        pdf.text(10, (i % rowsPerPage + 1) * 10, `${list1[i]} ${list2[i]} ${list3[i]} ${list4[i]} ${list5[i]}`);
-      }
+  // Générer un nouvel objet jsPDF
+  var doc = new jsPDF();
 
-      // Ajouter la page PDF à la liste des pages
-      pdfPages.push(pdf);
+  // Définir les marges et la position de départ pour l'ajout du contenu
+  var margin = 10;
+  var startY = 10;
+  var currentPage = doc.internal.getCurrentPageInfo().pageNumber;
 
-      // Incrémenter le numéro de page actuelle
-      currentPage++;
-    }
+  // Vérifier si la page actuelle est déjà la première page
+  // Si ce n'est pas le cas, ajouter une nouvelle page avant d'ajouter le contenu
+  if (currentPage !== 1) {
+    doc.addPage();
+  }
+
+  // Ajouter le contenu de la table à la page PDF
+  doc.fromHTML(html, margin, startY, {}, function () {
+    // Sauvegarder le PDF
+    doc.save("table.pdf");
+  });
+}
+
 
     function downloadPDF() {
     var element = document.getElementById("capture");
