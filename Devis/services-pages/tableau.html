@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tableau</title>
+
+    <link rel="stylesheet" href="servicepages.css">
 
 
     <!-- ::::PDF::::::::: -->
@@ -13,13 +15,30 @@
 
 
     <style>
-        table {
+        /* table {
           margin-bottom: 20px;
+          width: 96%;
+          margin-left: 2%;
+          margin-right: 2%;
         }
         th, td {
           padding: 5px 10px;
           border: 1px solid black;
+        } */
+        /* table, td, th {
+        Border : 1px solid black ;
         }
+
+        table {
+        Border-collapse : collapse ;
+        Width : 95% ;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        }
+
+        th {
+        Height : 50px ;
+        } */
       </style>
 </head>
 <body>
@@ -27,21 +46,92 @@
 
     
     <body>
-      <h2>Ajouter des lignes</h2>
-      <form id="myForm">
-        <label for="designation">Désignation :</label>
-        <input type="text" id="designation">
-        <label for="quantite">Quantité :</label>
-        <input type="number" id="quantite">
-        <label for="prixUnitaire">Prix Unitaire :</label>
-        <input type="number" id="prixUnitaire">
-        <label for="montant">Montant :</label>
-        <input type="number" id="montant">
-        <button type="button" onclick="addRow()">Ajouter</button>
+
+        <!-- ::::::::FORMULAIRE::::::::::: -->
+  <div class="wrapper">
+
+    <div class="inner">
+
+      <div class="image-holder">
+        <img src="image-services/logo1.png" alt="img">
+      </div>
+
+      <form action="">
+
+        <h3>Devis Plomberie</h3>
+
+        <div class="form-group">
+          <input type="text" placeholder="Nom destinateur" class="form-control" id="destinateur">
+          <input type="text" placeholder="Object" class="form-control" id="objet">
+        </div>
+
+        <div class="form-group">
+          <input type="text" placeholder="N°: facture" class="form-control" id="numfacture">
+          <input type="text" placeholder="Main Œuvres" class="form-control" id="oeuvres">
+          <input type="text" placeholder="N°:" class="form-control" id="idt" style="display: none;">
+        </div>
+
+
+        <div class="form-wrapper">
+          <input type="text" maxlength="20" placeholder="Désignation" class="form-control" id="designation">
+        </div>
+
+        <div class="form-wrapper">
+          <input type="text" min="1" placeholder="Quantité" class="form-control" id="quantite" >
+        </div>
+
+
+        <div class="form-wrapper">
+          <input type="text" placeholder="Prix Unitaire" class="form-control" id="prixUnitaire" >
+        </div>
+
+        <div class="form-wrapper">
+          <input type="text" placeholder="Montant" class="form-control" id="montant">
+        </div>
+
+
+        <!-- Button Ajouter:::::::::::::: -->
+      <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" onclick="addRow()">
+        AJOUTER 
+        <span class="fas fa-chevron-right"></span>
+      </a>
+     
+        
       </form>
+
+    </div>
+  </div>
+
     
       <div class="telepdf" id="capture">
-        <table id="t1">
+
+        
+         <table id="t1" >
+
+            <div class="traitcontainer">
+
+                <div class="entetepdf">
+              
+                  <div class="gauche">
+                    <img src="image-services/logo.png" alt="img">
+                  </div>
+              
+                  <div class="milieu">
+                    <h3>IKA PLOMBIER SARL</h3>
+                    <h4>RCC : MA BKO.2016.B9400, NIF / 086139811A</h4>
+                    <p> Halles de Bamako, Bloc Adrar des Ifogas, Magasin 481-482</p>
+                    <p> <em style="font-weight: bold;">Email:</em> bbarou19860@gmail.com <em style="font-weight: bold;">Tel:</em> 74 24 00 74</p>
+                  </div>
+              
+                  <div class="droite">
+                    <img src="image-services/logo.png" alt="img">
+                  </div>
+              
+                </div>
+                <hr style="border: 1px solid #3f0dca; margin-top: 1.5%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+              
+              
+               </div> 
             <thead>
               <tr>
                 <th>Désignation</th>
@@ -53,8 +143,11 @@
             <tbody>
             </tbody>
           </table>
-        
-          <table id="t2" style="display: none;">
+
+
+        <!-- :::::::::::::::TABLEAU 2 -->
+          <table id="t2" style="display: none; margin-top: 1%;">
+
             <thead>
               <tr>
                 <th>Désignation</th>
@@ -67,6 +160,7 @@
             </tbody>
           </table>
       </div>
+      
 
       <!-- :::::::::::TELECHARGEMENT:::::::::::::: -->
       <button type="button" onclick="downloadPDF()">Télécharger</button>
@@ -81,7 +175,7 @@
           var prixUnitaire = document.getElementById("prixUnitaire").value;
           var montant = document.getElementById("montant").value;
     
-          if (rowCount < 2) {
+          if (rowCount < 20) {
             var table = document.getElementById("t1");
             var newRow = table.insertRow(-1);
             var cell1 = newRow.insertCell(0);
@@ -96,7 +190,7 @@
     
             rowCount++;
     
-            if (rowCount === 2) {
+            if (rowCount === 20) {
               document.getElementById("t2").style.display = "table";
             }
           } else {
@@ -147,13 +241,43 @@
   }
 //   Tél PDF
 function downloadPDF() {
-    var element = document.getElementById("capture");
-    html2canvas(element).then(function(canvas) {
-    var pdf = new jsPDF();
-    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+  var element = document.getElementById("capture");
+  html2canvas(element, {
+    scale: 2,
+    scrollX: 0,
+    scrollY: 0,
+    windowWidth: document.documentElement.offsetWidth,
+    windowHeight: document.documentElement.offsetHeight,
+    useCORS: true
+  }).then(function(canvas) {
+    var imgData = canvas.toDataURL("image/png", 1.0);
+    var pdf = new jsPDF("p", "mm", "a4");
+    var width = pdf.internal.pageSize.getWidth();
+    var height = pdf.internal.pageSize.getHeight();
+
+    var table1 = document.getElementById("t1");
+    var table2 = document.getElementById("t2");
+
+    if (table1.rows.length > 20) {
+      // Première page avec les premières 20 lignes de la table t1
+      pdf.addImage(imgData, "PNG", 0, 0, width, height);
+      pdf.addPage();
+
+      // Deuxième page avec les lignes restantes de la table t1 et la table t2
+      var imgData2 = canvas.toDataURL("image/png", 1.0);
+      pdf.addImage(imgData2, "PNG", 0, 0, width, height);
+
+      // Supprimez la première ligne de la table t2 car elle a déjà été ajoutée dans la première page
+      table2.deleteRow(0);
+    } else {
+      pdf.addImage(imgData, "PNG", 0, 0, width, height);
+    }
+
     pdf.save("plombier.pdf");
   });
 }
+
+
 
 
     </script>    
