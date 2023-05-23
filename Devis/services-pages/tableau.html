@@ -160,7 +160,7 @@
             </tbody>
           </table>
       </div>
-      
+
 
       <!-- :::::::::::TELECHARGEMENT:::::::::::::: -->
       <button type="button" onclick="downloadPDF()">Télécharger</button>
@@ -234,8 +234,8 @@
 
       var doc = new jsPDF();
       doc.setFont('Arial');
-      doc.getFontSize(11);
-      doc.addImage(img,'PNG',7,13,195,105);
+    //   doc.getFontSize(11);
+    //   doc.addImage(img,'PNG',7,13,195,105);
       doc.save("plomberie");
     });
   }
