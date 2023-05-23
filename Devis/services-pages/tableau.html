@@ -15,16 +15,16 @@
 
 
     <style>
-        /* table {
+        table {
           margin-bottom: 20px;
           width: 96%;
           margin-left: 2%;
           margin-right: 2%;
         }
         th, td {
-          padding: 5px 10px;
+          padding: 10px 10px;
           border: 1px solid black;
-        } */
+        }
         /* table, td, th {
         Border : 1px solid black ;
         }
@@ -77,12 +77,12 @@
         </div>
 
         <div class="form-wrapper">
-          <input type="text" min="1" placeholder="Quantité" class="form-control" id="quantite" >
+          <input type="text" min="1" placeholder="Quantité" class="form-control" id="quantite" onchange="calculateMontant()">
         </div>
 
 
         <div class="form-wrapper">
-          <input type="text" placeholder="Prix Unitaire" class="form-control" id="prixUnitaire" >
+          <input type="text" placeholder="Prix Unitaire" class="form-control" id="prixUnitaire" onchange="calculateMontant()">
         </div>
 
         <div class="form-wrapper">
@@ -91,49 +91,58 @@
 
 
         <!-- Button Ajouter:::::::::::::: -->
-      <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" onclick="addRow()">
+      <!-- <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" onclick="addRow()">
+        AJOUTER 
+        <span class="fas fa-chevron-right"></span>
+      </a> -->
+     
+       <!-- Button Ajouter:::::::::::::: -->
+       <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="addRow()">
         AJOUTER 
         <span class="fas fa-chevron-right"></span>
       </a>
-     
         
       </form>
 
     </div>
   </div>
 
-    
-      <div class="telepdf" id="capture">
+            <!-- :::::::::::::::TABLEAU 2::::::::::::::: -->
+
+      <div class="telepdf" id="capture" style="padding-bottom: 3%;">
 
         
          <table id="t1" >
 
             <div class="traitcontainer">
 
-                <div class="entetepdf">
-              
-                  <div class="gauche">
-                    <img src="image-services/logo.png" alt="img">
-                  </div>
-              
-                  <div class="milieu">
-                    <h3>IKA PLOMBIER SARL</h3>
-                    <h4>RCC : MA BKO.2016.B9400, NIF / 086139811A</h4>
-                    <p> Halles de Bamako, Bloc Adrar des Ifogas, Magasin 481-482</p>
-                    <p> <em style="font-weight: bold;">Email:</em> bbarou19860@gmail.com <em style="font-weight: bold;">Tel:</em> 74 24 00 74</p>
-                  </div>
-              
-                  <div class="droite">
-                    <img src="image-services/logo.png" alt="img">
-                  </div>
-              
-                </div>
-                <hr style="border: 1px solid #3f0dca; margin-top: 1.5%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
-              
-              
-               </div> 
+  <div class="entetepdf">
+
+    <div class="gauche">
+      <img src="image-services/logo.png" alt="img">
+    </div>
+
+    <div class="milieu">
+      <h3>IKA PLOMBIER SARL</h3>
+      <h4>RCC : MA BKO.2016.B9400, NIF / 086139811A</h4>
+      <p> Halles de Bamako, Bloc Adrar des Ifogas, Magasin 481-482</p>
+      <p> <em style="font-weight: bold;">Email:</em> bbarou19860@gmail.com <em style="font-weight: bold;">Tel:</em> 74 24 00 74</p>
+    </div>
+
+    <div class="droite">
+      <img src="image-services/logo.png" alt="img">
+    </div>
+
+  </div>
+  <hr style="border: 1px solid #3f0dca; margin-top: 1.5%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+
+
+ </div>
+
+         <!-- :::::::::::::::TABLEAU 1::::::::::::::: -->
             <thead>
               <tr>
+                <th>N° </th>
                 <th>Désignation</th>
                 <th>Quantité</th>
                 <th>Prix Unitaire</th>
@@ -145,11 +154,12 @@
           </table>
 
 
-        <!-- :::::::::::::::TABLEAU 2 -->
+        <!-- :::::::::::::::TABLEAU 2::::::::::::::: -->
           <table id="t2" style="display: none; margin-top: 1%;">
 
             <thead>
               <tr>
+                <th>N° </th>
                 <th>Désignation</th>
                 <th>Quantité</th>
                 <th>Prix Unitaire</th>
@@ -159,57 +169,122 @@
             <tbody>
             </tbody>
           </table>
+
+          <!-- :::::::::Pied de page:::::::::::::: -->
+
+          <div class="montantHT"  style="">
+            <h2 >Montant HT : <span></span> fcfa</h2>
+          </div>
+
+          <div class="montantTTC" style="">
+            <h2 >TVA 18% : <span></span> fcfa</h2>
+          </div>
+
+          <div class="MainOeuvre" style="">
+            <h2 >MainOeuvre : <span> </span> fcfa</h2>
+          </div>
+          
+          <div class="montantTTC" style="">
+            <h2 >Montant TTC : <span></span> fcfa</h2>
+          </div>
+
+          
+          <div class="gerantdestinat">
+            <div class="gauchedest">Pour accord</div>
+            <div class="droitegerant">Le Gérant <p></p></div>
+          </div>
+
       </div>
 
 
       <!-- :::::::::::TELECHARGEMENT:::::::::::::: -->
       <button type="button" onclick="downloadPDF()">Télécharger</button>
 
+
+
+
+
+
+
+
+
+
+
+
     
       <script>
         var rowCount = 0;
-    
-        function addRow() {
-          var designation = document.getElementById("designation").value;
-          var quantite = document.getElementById("quantite").value;
-          var prixUnitaire = document.getElementById("prixUnitaire").value;
-          var montant = document.getElementById("montant").value;
-    
-          if (rowCount < 20) {
-            var table = document.getElementById("t1");
-            var newRow = table.insertRow(-1);
-            var cell1 = newRow.insertCell(0);
-            var cell2 = newRow.insertCell(1);
-            var cell3 = newRow.insertCell(2);
-            var cell4 = newRow.insertCell(3);
-    
-            cell1.innerHTML = designation;
-            cell2.innerHTML = quantite;
-            cell3.innerHTML = prixUnitaire;
-            cell4.innerHTML = montant;
-    
-            rowCount++;
-    
-            if (rowCount === 20) {
-              document.getElementById("t2").style.display = "table";
-            }
-          } else {
-            var table = document.getElementById("t2");
-            var newRow = table.insertRow(-1);
-            var cell1 = newRow.insertCell(0);
-            var cell2 = newRow.insertCell(1);
-            var cell3 = newRow.insertCell(2);
-            var cell4 = newRow.insertCell(3);
-    
-            cell1.innerHTML = designation;
-            cell2.innerHTML = quantite;
-            cell3.innerHTML = prixUnitaire;
-            cell4.innerHTML = montant;
-          }
-    
-          clearFields();
-        }
-    
+
+
+        var rowNumber = 1; // Variable pour suivre le numéro de ligne
+
+function addRow() {
+  var designation = document.getElementById("designation").value;
+  var quantite = document.getElementById("quantite").value;
+  var prixUnitaire = document.getElementById("prixUnitaire").value;
+  var montant = document.getElementById("montant").value;
+
+  var idt = rowNumber; // Utilise le numéro de ligne comme ID "idt"
+
+  if (rowCount < 20) {
+    var table = document.getElementById("t1");
+    var newRow = table.insertRow(-1);
+    var cell1 = newRow.insertCell(0);
+    var cell2 = newRow.insertCell(1);
+    var cell3 = newRow.insertCell(2);
+    var cell4 = newRow.insertCell(3);
+    var cell5 = newRow.insertCell(4);
+
+    cell1.innerHTML = idt;
+    cell2.innerHTML = designation;
+    cell3.innerHTML = quantite;
+    cell4.innerHTML = prixUnitaire;
+    cell5.innerHTML = montant;
+
+    rowCount++;
+
+    if (rowCount === 20) {
+      document.getElementById("t2").style.display = "table";
+    }
+  } else {
+    var table = document.getElementById("t2");
+    var newRow = table.insertRow(-1);
+    var cell1 = newRow.insertCell(0);
+    var cell2 = newRow.insertCell(1);
+    var cell3 = newRow.insertCell(2);
+    var cell4 = newRow.insertCell(3);
+    var cell5 = newRow.insertCell(4);
+
+    cell1.innerHTML = idt;
+    cell2.innerHTML = designation;
+    cell3.innerHTML = quantite;
+    cell4.innerHTML = prixUnitaire;
+    cell5.innerHTML = montant;
+  }
+
+  rowNumber++; // Incrémente le numéro de ligne
+
+
+  clearFields();
+
+} 
+
+// :::::::::::CALCULER LA SOMME:::::::::::::::
+  // Calcul Prix Unitaire * Quantité
+  function calculateMontant() {
+    var quantite = document.getElementById("quantite").value;
+    var prixUnitaire = document.getElementById("prixUnitaire").value;
+    var montant = quantite * prixUnitaire;
+    document.getElementById("montant").value = montant;
+}
+  // Calculer le montant HT
+
+
+
+ 
+
+
+        // ::::::::::Vider les champs::::::::
         function clearFields() {
       document.getElementById("designation").value = "";
       document.getElementById("quantite").value = "";
