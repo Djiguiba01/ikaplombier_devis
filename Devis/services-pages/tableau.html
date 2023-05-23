@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- ::::PDF::::::::: -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+
+  
+    <style>
+        table {
+          margin-bottom: 20px;
+        }
+        th, td {
+          padding: 5px 10px;
+          border: 1px solid black;
+        }
+      </style>
+</head>
+<body>
+
+
+    
+    <body>
+      <h2>Ajouter des lignes</h2>
+      <form id="myForm">
+        <label for="designation">Désignation :</label>
+        <input type="text" id="designation">
+        <label for="quantite">Quantité :</label>
+        <input type="number" id="quantite">
+        <label for="prixUnitaire">Prix Unitaire :</label>
+        <input type="number" id="prixUnitaire">
+        <label for="montant">Montant :</label>
+        <input type="number" id="montant">
+        <button type="button" onclick="addRow()">Ajouter</button>
+      </form>
+    
+      <div class="telepdf">
+        <table id="t1">
+            <thead>
+              <tr>
+                <th>Désignation</th>
+                <th>Quantité</th>
+                <th>Prix Unitaire</th>
+                <th>Montant</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        
+          <table id="t2" style="display: none;">
+            <thead>
+              <tr>
+                <th>Désignation</th>
+                <th>Quantité</th>
+                <th>Prix Unitaire</th>
+                <th>Montant</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+      </div>
+
+      <!-- :::::::::::TELECHARGEMENT:::::::::::::: -->
+      <button type="button" onclick="downloadContent()">Télécharger</button>
+
+    
+      <script>
+        var rowCount = 0;
+    
+        function addRow() {
+          var designation = document.getElementById("designation").value;
+          var quantite = document.getElementById("quantite").value;
+          var prixUnitaire = document.getElementById("prixUnitaire").value;
+          var montant = document.getElementById("montant").value;
+    
+          if (rowCount < 2) {
+            var table = document.getElementById("t1");
+            var newRow = table.insertRow(-1);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+    
+            cell1.innerHTML = designation;
+            cell2.innerHTML = quantite;
+            cell3.innerHTML = prixUnitaire;
+            cell4.innerHTML = montant;
+    
+            rowCount++;
+    
+            if (rowCount === 2) {
+              document.getElementById("t2").style.display = "table";
+            }
+          } else {
+            var table = document.getElementById("t2");
+            var newRow = table.insertRow(-1);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+    
+            cell1.innerHTML = designation;
+            cell2.innerHTML = quantite;
+            cell3.innerHTML = prixUnitaire;
+            cell4.innerHTML = montant;
+          }
+    
+          clearFields();
+        }
+    
+        function clearFields() {
+      document.getElementById("designation").value = "";
+      document.getElementById("quantite").value = "";
+      document.getElementById("prixUnitaire").value = "";
+      document.getElementById("montant").value = "";
+    }
+
+    // :::::::PDF TELECHARGEMENT/////////
+    function downloadContent() {
+  const element = document.querySelector('.telepdf');
+
+  html2pdf()
+    .set({ filename: 'document.pdf', html2canvas: { scale: 4 }, jsPDF: { format: 'a4' } })
+    .from(element)
+    .save();
+}
+
+
+    </script>    
+    
+</body>
+</html>
