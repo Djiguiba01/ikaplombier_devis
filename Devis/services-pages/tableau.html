@@ -107,7 +107,7 @@
     </div>
   </div>
 
-            <!-- :::::::::::::::TABLEAU 2::::::::::::::: -->
+            <!-- :::::::::::::::TABLEAUX::::::::::::::: -->
 
       <div class="telepdf" id="capture" style="padding-bottom: 3%;">
 
@@ -135,6 +135,13 @@
 
   </div>
   <hr style="border: 1px solid #3f0dca; margin-top: 1.5%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+
+  <!-- ::::::::::FACTURE::::::::::: -->
+  <div class="numdoitobjet" style="margin-left: 10%; margin-right: 10%;">
+    <h2 class="numfact">FACTURE PRO-FORMAT N° <span></span></h2>
+    <div class="doit">DOIT : <span></span></div>
+    <div class="objet">OBJET : <span></span></div>
+  </div>
 
 
  </div>
@@ -213,9 +220,9 @@
 
     
       <script>
+
+
         var rowCount = 0;
-
-
         var rowNumber = 1; // Variable pour suivre le numéro de ligne
 
 function addRow() {
@@ -291,6 +298,61 @@ function addRow() {
       document.getElementById("prixUnitaire").value = "";
       document.getElementById("montant").value = "";
     }
+
+    // Fonction Récupérer Automatique input Destinateur::::::::::::::::::::::
+    function updateDoit() {
+    var destinateur = document.getElementById("destinateur").value;
+    var doitElement = document.querySelector(".doit span");
+    doitElement.textContent = destinateur;
+  }
+  // Appeler la fonction lorsqu'il y a un changement dans l'input "destinateur"
+  document.getElementById("destinateur").addEventListener("input", updateDoit);
+
+// Fonction Récupérer Automatique input Object::::::::::::::::::::::
+function updateObjet() {
+  var objet = document.getElementById("objet").value;
+  var objetSpan = document.querySelector(".objet span");
+  objetSpan.textContent = objet;
+}
+// Appel de la fonction lorsqu'il y a un changement dans l'input
+document.getElementById("objet").addEventListener("input", updateObjet);
+
+
+     // Fonction Récupérer Automatique input Facture::::::::::::::::::::::
+     function afficherNumFacture() {
+      var numFactureInput = document.getElementById("numfacture");
+      var numFactureSpan = document.querySelector(".numfact span");
+      numFactureSpan.textContent = numFactureInput.value;
+    }
+    // Appel de la fonction lorsqu'un changement est détecté dans l'input
+    document.getElementById("numfacture").addEventListener("input", afficherNumFacture);
+
+     // Fonction Récupérer Automatique input MainOeuvre::::::::::::::::::::::
+    function displayMainOeuvre() {
+    var mainOeuvreInput = document.getElementById("oeuvres");
+    var mainOeuvreValue = mainOeuvreInput.value;
+    var mainOeuvreSpan = document.querySelector(".MainOeuvre span");
+
+    mainOeuvreSpan.textContent = mainOeuvreValue;
+  }
+// Appeler la fonction lorsqu'un changement est détecté dans l'élément input
+document.getElementById("oeuvres").addEventListener("input", displayMainOeuvre);
+
+
+// Fonction qui prend automatiquement la date du jour:::::::::::::::::::::
+function ajouterDateDuJour() {
+  var dateDuJour = new Date();
+  var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  var dateFormatee = dateDuJour.toLocaleDateString('fr-FR', options);
+  var paragraphe = document.querySelector('.droitegerant > p');
+  paragraphe.textContent = dateFormatee;
+}
+ajouterDateDuJour();
+     
+
+
+
+
 
     // :::::::PDF TELECHARGEMENT/////////
     // Transformation en image
