@@ -208,7 +208,15 @@ select option[value=""][disabled]{
     margin-left: 60%;
     font-size: 10px;
 }
-.montantTTC{
+.tva {
+    margin-left: 60%;
+    font-size: 10px;
+}
+.montantTTC {
+    margin-left: 60%;
+    font-size: 10px;
+}
+.montantHT{
     margin-left: 60%;
     font-size: 10px;
 }
@@ -278,6 +286,12 @@ select option[value=""][disabled]{
     .montantTTC{
         margin-left: 45%;
 }
+.tva {
+    margin-left: 45%;
+}
+.montantHT{
+    margin-left: 45%;
+}
 /* ::::::::::numfact::::::::: */
 .numfact{
     font-size: 1rem;
@@ -314,6 +328,12 @@ select option[value=""][disabled]{
     margin-left: 38%;
 }
 .montantTTC{
+    margin-left: 38%;
+}
+.tva {
+    margin-left: 38%;
+}
+.montantHT{
     margin-left: 38%;
 }
 }

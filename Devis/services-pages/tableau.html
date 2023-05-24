@@ -185,12 +185,12 @@
             <h2 >Montant HT : <span></span> fcfa</h2>
           </div>
 
-          <div class="montantTTC" style="">
+          <div class="tva" style="">
             <h2 >TVA 18% : <span></span> fcfa</h2>
           </div>
 
           <div class="MainOeuvre" style="">
-            <h2 >MainOeuvre : <span> </span> fcfa</h2>
+            <h2 >Main D'œuvres : <span> </span> fcfa</h2>
           </div>
           
           <div class="montantTTC" style="">
@@ -208,9 +208,9 @@
 
       <!-- :::::::::::BUTTON TELECHARGEMENT:::::::::::::: -->
       <!-- <button type="button" onclick="downloadPDF()">Télécharger</button> -->
-       <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" onclick="downloadPDF()">
+       <a href="#Devis" class="btn" id="telecharger" style="text-decoration: none;" onclick="downloadPDF()">
         Télécharger PDF
-        <span class="fas fa-chevron-right"></span>
+        <!-- <span class="fas fa-chevron-right"></span> -->
       </a>
 
 
@@ -323,9 +323,6 @@ calculateTotal();
 
 
 
- 
-
-
         // ::::::::::Vider les champs::::::::
         function clearFields() {
       document.getElementById("designation").value = "";
@@ -385,7 +382,41 @@ function ajouterDateDuJour() {
 ajouterDateDuJour();
      
 
+// FAIRE DISPARAITRE TOUT LE CONTENU DU (class="telepdf" et class="telecharger"):::::::::::::::: :::::::::::::::::::::::::::::
+function verifierEvenements() {
+  var inputs = document.getElementsByTagName("input");
+  var telechargerElement = document.getElementById("telecharger");
+  var telepdfElements = document.getElementsByClassName("telepdf");
 
+  // Vérifier si au moins un input a une valeur
+  var evenementDetecte = false;
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].value.trim() !== "") {
+      evenementDetecte = true;
+      break;
+    }
+  }
+
+  // Modifier la visibilité des éléments en fonction des événements détectés
+  if (evenementDetecte) {
+    telechargerElement.style.display = "block";
+    for (var j = 0; j < telepdfElements.length; j++) {
+      telepdfElements[j].style.display = "block";
+    }
+  } else {
+    telechargerElement.style.display = "none";
+    for (var k = 0; k < telepdfElements.length; k++) {
+      telepdfElements[k].style.display = "none";
+    }
+  }
+}
+// Appeler la fonction pour vérifier les événements à chaque modification d'un input
+var inputs = document.getElementsByTagName("input");
+for (var i = 0; i < inputs.length; i++) {
+  inputs[i].addEventListener("input", verifierEvenements);
+}
+// Appeler la fonction une première fois pour initialiser la visibilité des éléments
+verifierEvenements();
 
 
 
