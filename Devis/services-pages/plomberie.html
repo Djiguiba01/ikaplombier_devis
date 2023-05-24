@@ -75,26 +75,26 @@
 
         <div class="form-group">
           <input type="text" placeholder="N°: facture" class="form-control" id="numfacture">
-          <input type="text" placeholder="Main Œuvres" class="form-control" id="oeuvres">
+          <input type="number" min="1" placeholder="Main Œuvres" class="form-control" id="oeuvres">
           <input type="text" placeholder="N°:" class="form-control" id="idt" style="display: none;">
         </div>
 
 
         <div class="form-wrapper">
-          <input type="text" maxlength="20" placeholder="Désignation" class="form-control" id="designation">
+          <input type="text" maxlength="60" placeholder="Désignation" class="form-control" id="designation">
         </div>
 
         <div class="form-wrapper">
-          <input type="text" min="1" placeholder="Quantité" class="form-control" id="quantite" onchange="calculateMontant()">
+          <input type="number" min="1" placeholder="Quantité" class="form-control" id="quantite" onchange="calculateMontant()">
         </div>
 
 
         <div class="form-wrapper">
-          <input type="text" placeholder="Prix Unitaire" class="form-control" id="prixUnitaire" onchange="calculateMontant()">
+          <input type="number" min="1" placeholder="Prix Unitaire" class="form-control" id="prixUnitaire" onchange="calculateMontant()">
         </div>
 
-        <div class="form-wrapper">
-          <input type="text" placeholder="Montant" class="form-control" id="montant">
+        <div class="form-wrapper" style="display: none;">
+          <input type="number" placeholder="Montant" class="form-control" id="montant">
         </div>
 
 
