@@ -286,6 +286,9 @@ calculateTotal();
 // Appelle la fonction Montant TVA
 calculerTVA();
 
+calculerSomme();
+
+
 
 } 
 
@@ -356,6 +359,19 @@ function calculerTVA() {
   var tvaElement = document.querySelector(".tva h2 span");
   tvaElement.textContent = tva.toFixed(2) + " fcfa"; // Affiche la TVA avec 2 décimales
 }
+
+// ::::::::TTT
+function calculerSomme() {
+  var montantHT = parseFloat(document.querySelector(".montantHT h2 span").textContent);
+  var mainOeuvre = parseFloat(document.querySelector(".MainOeuvre h2 span").textContent);
+  var tva = parseFloat(document.querySelector(".tva h2 span").textContent);
+
+  var montantTTC = montantHT + mainOeuvre + tva;
+
+  var montantTTCElement = document.querySelector(".montantTTC h2 span");
+  montantTTCElement.textContent = montantTTC + " fcfa";
+}
+
 
 
 
