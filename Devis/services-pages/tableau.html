@@ -274,6 +274,10 @@ function addRow() {
 
   clearFields();
 
+  
+// Appelle la fonction pour calculer le total au chargement de la page
+calculateTotal();
+
 } 
 
 // :::::::::::CALCULER LA SOMME:::::::::::::::
@@ -285,6 +289,32 @@ function addRow() {
     document.getElementById("montant").value = montant;
 }
   // Calculer le montant HT
+  function calculateTotal() {
+  var table = document.getElementById("t1"); // Obtient la référence de la table
+  var rows = table.getElementsByTagName("tr"); // Obtient toutes les lignes du tableau
+  var total = 0;
+
+  // Parcours chaque ligne du tableau à l'exception de l'en-tête
+  for (var i = 1; i < rows.length; i++) {
+    var row = rows[i];
+    var cells = row.getElementsByTagName("td"); // Obtient les cellules de la ligne
+
+    // Vérifie si la ligne a les cellules nécessaires
+    if (cells.length >= 5) {
+      var montant = parseFloat(cells[4].innerHTML); // Récupère le montant de la cellule correspondante
+
+      // Vérifie si le montant est un nombre valide
+      if (!isNaN(montant)) {
+        total += montant; // Ajoute le montant au total
+      }
+    }
+  }
+
+  // Affiche le total dans la classe "montantHT"
+  var montantHT = document.querySelector(".montantHT h2 span");
+  montantHT.textContent = Math.floor(total) + " fcfa"; // Affiche le total sans décimales
+}
+
 
 
 
@@ -376,7 +406,7 @@ ajouterDateDuJour();
       doc.save("plomberie");
     });
   }
-//   Tél PDF
+//   Téléchargement PDF
 function downloadPDF() {
   var element = document.getElementById("capture");
   html2canvas(element, {
