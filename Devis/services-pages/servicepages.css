@@ -279,6 +279,14 @@ button{
         font-size: 20px;
     }
 
+    /* Pop::::::: */
+   .popbutton{
+    display: flex;
+    justify-content: space-between;
+    margin-left: -2%;
+    margin-top: 8%;
+   }
+
 }
 @media (max-width:515px){
     .btn{
@@ -305,6 +313,20 @@ button{
     font-size: 15px;
 }
 
+  /* Pop::::::: */
+  .popbutton{
+    margin-left: -10%;
+    margin-top: 8%;
+   }
+
+}
+
+@media (max-width:480px){
+      /* Pop::::::: */
+  .popbutton{
+    /* margin-left: -10%; */
+    margin-top: 17%;
+   }
 }
 
 @media (max-width:380px){
@@ -340,6 +362,15 @@ button{
 .montantHT{
     margin-left: 38%;
 }
+
+/* Pop:::::::: */
+/* #editBtn, #deleteBtn {
+    margin: 35px;
+    margin-top: 30%;
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+  } */
 }
 
 
@@ -398,3 +429,25 @@ Height : 50px ;
 .page2 {
     page-break-before: always;
 }
+
+#popup {
+    position: fixed;
+    top: 150px;
+    margin-left: 5%;
+    /* left: 0; */
+    width: 90%;
+    height: 45%;
+    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #editBtn, #deleteBtn {
+    margin: 18%;
+    margin-top: 12%;
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+  }

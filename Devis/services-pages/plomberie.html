@@ -47,6 +47,7 @@
         th {
         Height : 50px ;
         } */
+      
       </style>
 </head>
 <body>
@@ -111,9 +112,13 @@
       </a>
         
       </form>
+      
 
     </div>
+
+    
   </div>
+
 
             <!-- :::::::::::::::TABLEAUX::::::::::::::: -->
 
@@ -185,6 +190,14 @@
             </tbody>
           </table>
 
+          <!-- :::::::::::::: -->
+          <div id="popup" style="display: none;">
+            <div class="popbutton">
+              <button id="deleteBtn">Supprimer</button>
+            <button id="editBtn">Modifier</button>
+            </div>
+        </div>
+
           <!-- :::::::::Pied de page:::::::::::::: -->
 
           <div class="montantHT"  style="">
@@ -219,7 +232,53 @@
         <span class="fas fa-chevron-right"></span>
       </a> -->
 
+<!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<script>
+  var table = document.getElementById("t1");
+  var rows = table.getElementsByTagName("tr");
+  var popup = document.getElementById("popup");
 
+  // Ajoute un gestionnaire d'événements de clic à chaque ligne du tableau
+  for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      row.addEventListener("click", function() {
+          // Affiche la fenêtre contextuelle au-dessus de la ligne cliquée
+          popup.style.display = "block";
+          popup.style.top = (this.offsetTop + this.offsetHeight) + "px";
+          popup.style.left = this.offsetLeft + "px";
+      });
+  }
+
+  // Gestionnaire d'événements pour le bouton "Supprimer"
+  document.getElementById("deleteBtn").addEventListener("click", function() {
+      // Supprime la ligne du tableau
+      table.deleteRow(getSelectedRowIndex());
+      hidePopup();
+  });
+
+  // Gestionnaire d'événements pour le bouton "Modifier"
+  document.getElementById("editBtn").addEventListener("click", function() {
+      var rowIndex = getSelectedRowIndex();
+      var row = table.rows[rowIndex];
+      var cells = row.cells;
+      // TODO: Ajoutez le code pour effectuer les modifications souhaitées
+      hidePopup();
+  });
+
+  // Récupère l'indice de ligne sélectionnée
+  function getSelectedRowIndex() {
+      var selectedRow = Array.from(rows).findIndex(function(row) {
+          return row.classList.contains("selected");
+      });
+      return selectedRow;
+  }
+
+  // Masque la fenêtre contextuelle
+  function hidePopup() {
+      popup.style.display = "none";
+  }
+</script>
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 
 
 
