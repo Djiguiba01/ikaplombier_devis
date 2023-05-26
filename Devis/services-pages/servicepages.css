@@ -280,12 +280,9 @@ button{
     }
 
     /* Pop::::::: */
-   .popbutton{
-    display: flex;
-    justify-content: space-between;
-    margin-left: -2%;
-    margin-top: 8%;
-   }
+    #popup {
+        height: 30%;
+    }
 
 }
 @media (max-width:515px){
@@ -312,21 +309,24 @@ button{
 .gerantdestinat .gauchedest, .droitegerant{
     font-size: 15px;
 }
+/* ::::::POPUP::::::::: */
+#editBtn, #deleteBtn {
+    margin-top: 19%;
+}
 
-  /* Pop::::::: */
-  .popbutton{
-    margin-left: -10%;
-    margin-top: 8%;
-   }
 
 }
 
 @media (max-width:480px){
       /* Pop::::::: */
-  .popbutton{
-    /* margin-left: -10%; */
-    margin-top: 17%;
-   }
+
+      #editBtn, #deleteBtn {
+        margin-top: 26%;
+        padding: 17px;
+        width: 28%;
+        margin-left: 7%;
+    }
+
 }
 
 @media (max-width:380px){
@@ -364,13 +364,13 @@ button{
 }
 
 /* Pop:::::::: */
-/* #editBtn, #deleteBtn {
+#editBtn, #deleteBtn {
     margin: 35px;
-    margin-top: 30%;
+    margin-top: 10%;
     padding: 10px;
     box-shadow: var(--box-shadow);
     border-radius: 5px;
-  } */
+  }
 }
 
 
@@ -429,14 +429,12 @@ Height : 50px ;
 .page2 {
     page-break-before: always;
 }
-
-#popup {
+ #popup {
     position: fixed;
     top: 150px;
     margin-left: 5%;
-    /* left: 0; */
     width: 90%;
-    height: 45%;
+    height: 55%;
     border-radius: 1rem;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
@@ -444,10 +442,21 @@ Height : 50px ;
     align-items: center;
   }
 
+  
   #editBtn, #deleteBtn {
-    margin: 18%;
-    margin-top: 12%;
-    padding: 10px;
+    margin: 14%;
+    margin-top: 6%;
+    padding: 17px;
+    width: 20%;
     box-shadow: var(--box-shadow);
     border-radius: 5px;
-  }
+}
+#cancelBtn {
+    margin-top: -3%;
+    padding: 10px;
+    margin-left: 39%;
+    width: 21%;
+    height: 55px;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+}
