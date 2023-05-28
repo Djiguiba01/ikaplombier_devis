@@ -63,7 +63,26 @@
 
       <div class="image-holder">
         <img src="image-services/logo1.png" alt="img">
+        <!-- ::::::::::: -->
+        <div class="form-group">
+          <p style="margin-left: 2%; font-weight: bold; font-size: 17px;">Modication :</p>
+          <input type="number" placeholder="Numéro à modifier" class="form-control" id="idmodif" style="margin-left: 15%;" onchange="displayRow()">
+        </div>
+
+         <!-- :::::::::POPUP::::::::::: -->
+         <div id="popup" style="display: none;">
+          <div class="popbutton">
+            <button id="deleteBtn">Supprimer</button>
+           <button id="editBtn">Modifier</button>
+           <!-- <button id="cancelBtn">Annuler</button> -->
+          </div>
+          <div class="rienpop">
+            <p>Ce numéro n'exisy</p>
+          </div>
       </div>
+
+      </div>
+    
 
       <form action="">
 
@@ -190,14 +209,6 @@
             </tbody>
           </table>
 
-          <!-- :::::::::POPUP::::::::::: -->
-          <div id="popup" style="display: none;">
-            <div class="popbutton">
-              <button id="deleteBtn">Supprimer</button>
-             <button id="editBtn">Modifier</button>
-             <button id="cancelBtn">Annuler</button>
-            </div>
-        </div>
 
           <!-- :::::::::Pied de page:::::::::::::: -->
 
@@ -235,56 +246,23 @@
 
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <script>
-  var table = document.getElementById("t1");
-  var rows = table.getElementsByTagName("tr");
-  var popup = document.getElementById("popup");
+  function displayRow() {
+  var idmodif = document.getElementById("idmodif").value; // Récupère la valeur du champ idmodif
+  var row = document.getElementById("idt" + idmodif); // Récupère la ligne correspondante à l'id sélectionné
 
-  // Ajoute un gestionnaire d'événements de clic à chaque ligne du tableau
-  for (var i = 0; i < rows.length; i++) {
-    var row = rows[i];
-    row.addEventListener("click", function () {
-      // Affiche la fenêtre contextuelle au-dessus de la ligne cliquée
-      popup.style.display = "block";
-      popup.style.top = this.offsetTop + this.offsetHeight + "px";
-      popup.style.left = this.offsetLeft + "px";
-    });
+  if (row) {
+    // Vérifie si la ligne existe
+    document.getElementById("popup").style.display = "block"; // Affiche l'élément avec l'id "popup"
+
+    // Affiche les contenus des champs dans id="idmodif"
+    document.getElementById("designation").value = row.cells[1].innerHTML;
+    document.getElementById("quantite").value = row.cells[2].innerHTML;
+    document.getElementById("prixUnitaire").value = row.cells[3].innerHTML;
+    document.getElementById("montant").value = row.cells[4].innerHTML;
   }
+}
 
-  // Gestionnaire d'événements pour le bouton "Supprimer"
-  document.getElementById("deleteBtn").addEventListener("click", function () {
-    // Supprime la ligne du tableau
-    table.deleteRow(getSelectedRowIndex());
-    hidePopup();
-  });
-
-  // Gestionnaire d'événements pour le bouton "Modifier"
-  document.getElementById("editBtn").addEventListener("click", function () {
-    var rowIndex = getSelectedRowIndex();
-    var row = table.rows[rowIndex];
-    var cells = row.cells;
-    // TODO: Ajoutez le code pour effectuer les modifications souhaitées
-    hidePopup();
-  });
-
-  // Gestionnaire d'événements pour le bouton "Annuler"
-  document.getElementById("cancelBtn").addEventListener("click", function () {
-    hidePopup();
-  });
-
-  // Récupère l'indice de ligne sélectionnée
-  function getSelectedRowIndex() {
-    var selectedRow = Array.from(rows).findIndex(function (row) {
-      return row.classList.contains("selected");
-    });
-    return selectedRow;
-  }
-
-  // Masque la fenêtre contextuelle
-  function hidePopup() {
-    popup.style.display = "none";
-  }
 </script>
-
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 
 <script src="servicepages.js"></script>   
