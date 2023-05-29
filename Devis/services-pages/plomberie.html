@@ -16,11 +16,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 
-    <!-- Lien  https://html2canvas.hertzen.com/ -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script> -->
-
 
     <style>
         table {
@@ -66,7 +61,7 @@
          <!-- ::::::::::: -->
          <div class="form-group">
           <p style="margin-left: 2%; font-weight: bold; font-size: 17px;">Modication :</p>
-          <input type="number" min="1" placeholder="Numéro à modifier" class="form-control" id="idmodif" style="margin-left: 15%;" onchange="afficherContenu()">
+          <input type="number" min="1" placeholder="Numéro à modifier" class="form-control" id="idmodif" style="margin-left: 15%;" >
         </div>
 
          <!-- :::::::::POPUP::::::::::: -->
@@ -284,12 +279,19 @@ function modifierLigne() {
     var designationCell = row.getElementsByTagName("td")[1]; // Récupère la cellule contenant la désignation
     var quantiteCell = row.getElementsByTagName("td")[2]; // Récupère la cellule contenant la quantité
     var prixUnitaireCell = row.getElementsByTagName("td")[3]; // Récupère la cellule contenant le prix unitaire
+    var montantCell = row.getElementsByTagName("td")[4]; // Récupère la cellule contenant le montant
 
     if (idModif === idtCell.innerHTML) {
       // Met à jour les valeurs des cellules avec les nouvelles valeurs
       designationCell.innerHTML = designation;
       quantiteCell.innerHTML = quantite;
       prixUnitaireCell.innerHTML = prixUnitaire;
+
+      // Recalculer le montant
+      var montant = parseFloat(quantite) * parseFloat(prixUnitaire);
+      montantCell.innerHTML = montant;
+      montantCell.setAttribute("id", "montant");
+
       break; // Sort de la boucle une fois la ligne modifiée
     }
   }
@@ -307,6 +309,9 @@ function modifierLigne() {
 
   calculerSomme();
 }
+
+
+// :::::::::
 
 
 
