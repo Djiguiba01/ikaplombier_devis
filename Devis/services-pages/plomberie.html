@@ -73,8 +73,7 @@
          <div id="popup" style="display: none;">
           <div class="popbutton">
             <button id="deleteBtn">Supprimer</button>
-           <button id="editBtn">Modifier</button>
-           <!-- <button id="cancelBtn">Annuler</button> -->
+            <button id="editBtn">Modifier</button>
           </div>
       </div>
       <div class="rienpop" style="display: none;">
@@ -124,10 +123,15 @@
       </a> -->
      
        <!-- Button Ajouter:::::::::::::: -->
-       <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="addRow()">
+       <!-- <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="addRow()">
+        AJOUTER 
+        <span class="fas fa-chevron-right"></span>
+      </a> -->
+      <a href="#Devis" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="addRow()">
         AJOUTER 
         <span class="fas fa-chevron-right"></span>
       </a>
+      
 
 
         
@@ -214,7 +218,8 @@
           <div id="popup" style="display: none;">
             <div class="popbutton">
               <button id="deleteBtn">Supprimer</button>
-             <button id="editBtn">Modifier</button>
+              <button id="editBtn" onclick="remplirChamps()">Modifier</button>
+
              <button id="cancelBtn">Annuler</button>
             </div>
         </div>
@@ -255,9 +260,6 @@
 
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <script>
- 
-
-
 
 
 </script>

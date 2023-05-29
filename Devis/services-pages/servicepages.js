@@ -7,8 +7,14 @@ function addRow() {
 var designation = document.getElementById("designation").value;
 var quantite = document.getElementById("quantite").value;
 var prixUnitaire = document.getElementById("prixUnitaire").value;
-var montant = document.getElementById("montant").value;
 
+ // Vérifier si les champs sont vides
+ if (designation === "" || quantite === "" || prixUnitaire === "") {
+    alert("Veuillez remplir tous les champs avant d'ajouter une ligne.");
+    return;
+  }
+
+var montant = document.getElementById("montant").value;
 var idt = rowNumber; // Utilise le numéro de ligne comme ID "idt"
 
 if (rowCount < 20) {
@@ -28,9 +34,14 @@ cell5.innerHTML = montant;
 
 rowCount++;
 
+
 if (rowCount === 20) {
-document.getElementById("t2").style.display = "table";
-}
+    document.getElementById("t2").style.display = "table";
+    rowNumber++; // Incrémente le numéro de ligne
+  }
+
+  rowNumber++;
+
 } else {
 var table = document.getElementById("t2");
 var newRow = table.insertRow(-1);
@@ -47,11 +58,14 @@ cell4.innerHTML = prixUnitaire;
 cell5.innerHTML = montant;
 }
 
-rowNumber++; // Incrémente le numéro de ligne
 
 // Appelle la fonction Vider les champs
 clearFields();
 
+ // Réinitialiser les champs
+//  document.getElementById("designation").value = "";
+//  document.getElementById("quantite").value = "";
+//  document.getElementById("prixUnitaire").value = "";
 
 // Appelle la fonction Montant HT
 calculateTotal();
@@ -351,6 +365,9 @@ verifierEvenements();
   }
 
 
+
+
+  
 
 // :::::::PDF TELECHARGEMENT/////////
 // Transformation en image

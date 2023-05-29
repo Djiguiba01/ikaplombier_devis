@@ -317,17 +317,7 @@ button{
 
 }
 
-@media (max-width:480px){
-      /* Pop::::::: */
 
-      #editBtn, #deleteBtn {
-        margin-top: 26%;
-        padding: 17px;
-        width: 28%;
-        margin-left: 7%;
-    }
-
-}
 
 @media (max-width:380px){
     /* ::::::::::numfact::::::::: */
@@ -363,14 +353,6 @@ button{
     margin-left: 38%;
 }
 
-/* Pop:::::::: */
-#editBtn, #deleteBtn {
-    margin: 35px;
-    margin-top: 10%;
-    padding: 10px;
-    box-shadow: var(--box-shadow);
-    border-radius: 5px;
-  }
 }
 
 
