@@ -246,6 +246,113 @@ verifierEvenements();
 
 
 
+
+
+
+
+
+ // :::::::::::AFFICHER TOUT LE CONTENU D'UNE LIGNE CHOISI(DELETE/UPDATE):::::::::::::
+ function surveillerEvenement() {
+    var champModif = document.getElementById("idmodif");
+    champModif.addEventListener("input", function() {
+      var numSaisi = parseInt(champModif.value);
+      var tableau = document.getElementById("t1");
+      var lignes = tableau.getElementsByTagName("tr");
+      var popup = document.getElementById("popup");
+      var rienPop = document.querySelector(".rienpop");
+      var inputs = document.querySelectorAll("#designation, #quantite, #prixUnitaire, #montant");
+  
+      // Réinitialiser les valeurs des champs
+      inputs.forEach(function(input) {
+        input.value = "";
+      });
+  
+      // Parcourir les lignes du tableau
+      for (var i = 1; i < lignes.length; i++) {
+        var ligne = lignes[i];
+        var cellules = ligne.getElementsByTagName("td");
+        var idCellule = parseInt(cellules[0].innerHTML);
+  
+        // Vérifier si le numéro saisi se trouve dans la colonne correspondante
+        if (idCellule === numSaisi) {
+          // Afficher la popup
+          popup.style.display = "block";
+          rienPop.style.display = "none";
+  
+          // Afficher les valeurs dans les champs respectifs
+          inputs[0].value = cellules[1].innerHTML;
+          inputs[1].value = cellules[2].innerHTML;
+          inputs[2].value = cellules[3].innerHTML;
+          inputs[3].value = cellules[4].innerHTML;
+  
+          // Sortir de la boucle après avoir trouvé la correspondance
+          return;
+        }
+      }
+  
+      // Si aucun numéro correspondant n'est trouvé, afficher le message d'erreur
+      popup.style.display = "none";
+      rienPop.style.display = "block";
+    });
+  }
+  surveillerEvenement();
+  
+  // ::::::::::::::::::::::SUPPRESSION LIGNE PAR LIGNE:::::::::::::::
+  function supprimerLigne() {
+    // Récupérer le numéro de la ligne à supprimer
+    var idToDelete = document.getElementById("idmodif").value;
+  
+    // Récupérer le tableau
+    var table = document.getElementById("t1");
+  
+    // Récupérer toutes les lignes du tableau
+    var rows = table.getElementsByTagName("tr");
+  
+    // Parcourir les lignes du tableau à partir de la deuxième ligne (index 1)
+    for (var i = 1; i < rows.length; i++) {
+      // Récupérer le numéro de la ligne courante
+      var rowId = rows[i].getElementsByTagName("td")[0].innerHTML;
+  
+      // Vérifier si le numéro correspond au numéro à supprimer
+      if (rowId === idToDelete) {
+        // Supprimer la ligne
+        table.deleteRow(i);
+  
+        // Vider les champs designation, prixUnitaire et quantite
+        document.getElementById("designation").value = "";
+        document.getElementById("prixUnitaire").value = "";
+        document.getElementById("quantite").value = "";
+  
+        break; // Sortir de la boucle une fois la ligne supprimée
+      }
+    }
+  
+    // Appeler la fonction pour réorganiser les IDs après la suppression
+    reorganizeIDs();
+  }
+  // Récupérer le bouton de suppression
+  var deleteBtn = document.getElementById("deleteBtn");
+  // Ajouter un gestionnaire d'événements au bouton de suppression
+  deleteBtn.addEventListener("click", supprimerLigne);
+  
+  
+  // :::::::: REORGANISATION DU NUMERO DES LIGNES APRES SUPPRESSION::::::::::
+  function reorganizeIDs() {
+    var table = document.getElementById("t1");
+    var rows = table.getElementsByTagName("tr");
+  
+    // Parcourir toutes les lignes du tableau à partir de la deuxième ligne (index 1)
+    for (var i = 1; i < rows.length; i++) {
+      var row = rows[i];
+      var idCell = row.cells[0];
+  
+      // Mettre à jour l'ID "idt" de chaque ligne
+      idCell.textContent = i;
+    }
+  }
+
+
+
 // :::::::PDF TELECHARGEMENT/////////
 // Transformation en image
 window.html2canvas = html2canvas;
