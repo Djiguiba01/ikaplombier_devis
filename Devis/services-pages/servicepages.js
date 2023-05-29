@@ -2,6 +2,7 @@
 var rowCount = 0;
 var rowNumber = 1; // Variable pour suivre le numéro de ligne
 
+// :::::::TABLEAU:::::::::::::::
 function addRow() {
 var designation = document.getElementById("designation").value;
 var quantite = document.getElementById("quantite").value;
@@ -132,7 +133,7 @@ var tvaElement = document.querySelector(".tva h2 span");
 tvaElement.textContent = tva.toFixed(2) + " fcfa"; // Affiche la TVA avec 2 décimales
 }
 
-// ::::::::TTT
+// ::::::::MONTANT TTC:::::::::::::::::::
 function calculerSomme() {
 var montantHT = parseFloat(document.querySelector(".montantHT h2 span").textContent);
 var mainOeuvre = parseFloat(document.querySelector(".MainOeuvre h2 span").textContent);
@@ -143,8 +144,6 @@ var montantTTC = montantHT + mainOeuvre + tva;
 var montantTTCElement = document.querySelector(".montantTTC h2 span");
 montantTTCElement.textContent = montantTTC + " fcfa";
 }
-
-
 
 
 
