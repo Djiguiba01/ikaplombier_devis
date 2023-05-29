@@ -73,7 +73,7 @@
          <div id="popup" style="display: none;">
           <div class="popbutton">
             <button id="deleteBtn">Supprimer</button>
-            <button id="editBtn">Modifier</button>
+            <button id="editBtn" onclick="modifierLigne()">Modifier</button>
           </div>
       </div>
       <div class="rienpop" style="display: none;">
@@ -260,6 +260,54 @@
 
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <script>
+
+// ::::::::::::APPORTER LA MODIFICATION PAR LIGNE::::::::::::
+function modifierLigne() {
+  var idModif = document.getElementById("idmodif").value;
+  var designation = document.getElementById("designation").value;
+  var quantite = document.getElementById("quantite").value;
+  var prixUnitaire = document.getElementById("prixUnitaire").value;
+
+  // Vérifier si les champs sont vides
+  if (designation === "" || quantite === "" || prixUnitaire === "") {
+    alert("Veuillez remplir tous les champs avant de modifier une ligne.");
+    return;
+  }
+
+  var table = document.getElementById("t1"); // Obtient la référence de la table
+  var rows = table.getElementsByTagName("tr"); // Obtient toutes les lignes du tableau
+
+  // Parcours chaque ligne du tableau à l'exception de l'en-tête
+  for (var i = 1; i < rows.length; i++) {
+    var row = rows[i];
+    var idtCell = row.getElementsByTagName("td")[0]; // Récupère la cellule contenant l'ID
+    var designationCell = row.getElementsByTagName("td")[1]; // Récupère la cellule contenant la désignation
+    var quantiteCell = row.getElementsByTagName("td")[2]; // Récupère la cellule contenant la quantité
+    var prixUnitaireCell = row.getElementsByTagName("td")[3]; // Récupère la cellule contenant le prix unitaire
+
+    if (idModif === idtCell.innerHTML) {
+      // Met à jour les valeurs des cellules avec les nouvelles valeurs
+      designationCell.innerHTML = designation;
+      quantiteCell.innerHTML = quantite;
+      prixUnitaireCell.innerHTML = prixUnitaire;
+      break; // Sort de la boucle une fois la ligne modifiée
+    }
+  }
+
+  // Réinitialise les champs
+  document.getElementById("designation").value = "";
+  document.getElementById("quantite").value = "";
+  document.getElementById("prixUnitaire").value = "";
+
+  // Appelle la fonction Montant HT
+  calculateTotal();
+
+  // Appelle la fonction Montant TVA
+  calculerTVA();
+
+  calculerSomme();
+}
+
 
 
 </script>
