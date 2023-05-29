@@ -13,7 +13,6 @@ var idt = rowNumber; // Utilise le numéro de ligne comme ID "idt"
 if (rowCount < 20) {
 var table = document.getElementById("t1");
 var newRow = table.insertRow(-1);
-newRow.id = "idt" + idt; // Ajoute l'ID à la nouvelle ligne
 var cell1 = newRow.insertCell(0);
 var cell2 = newRow.insertCell(1);
 var cell3 = newRow.insertCell(2);

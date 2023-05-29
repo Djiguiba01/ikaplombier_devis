@@ -47,7 +47,7 @@
         th {
         Height : 50px ;
         } */
-      
+
       </style>
 </head>
 <body>
@@ -63,10 +63,10 @@
 
       <div class="image-holder">
         <img src="image-services/logo1.png" alt="img">
-        <!-- ::::::::::: -->
-        <div class="form-group">
+         <!-- ::::::::::: -->
+         <div class="form-group">
           <p style="margin-left: 2%; font-weight: bold; font-size: 17px;">Modication :</p>
-          <input type="number" placeholder="Numéro à modifier" class="form-control" id="idmodif" style="margin-left: 15%;" onchange="displayRow()">
+          <input type="number" min="1" placeholder="Numéro à modifier" class="form-control" id="idmodif" style="margin-left: 15%;" onchange="afficherContenu()">
         </div>
 
          <!-- :::::::::POPUP::::::::::: -->
@@ -76,13 +76,12 @@
            <button id="editBtn">Modifier</button>
            <!-- <button id="cancelBtn">Annuler</button> -->
           </div>
-          <div class="rienpop">
-            <p>Ce numéro n'exisy</p>
-          </div>
       </div>
-
+      <div class="rienpop" style="display: none;">
+        Le numéro saisi n'existe pas dans le tableau.
       </div>
-    
+        
+      </div>
 
       <form action="">
 
@@ -101,7 +100,7 @@
 
 
         <div class="form-wrapper">
-          <input type="text" maxlength="60" placeholder="Désignation" class="form-control" id="designation">
+          <input type="text" maxlength="60" placeholder="Désignation" class="form-control" id="designation" >
         </div>
 
         <div class="form-wrapper">
@@ -209,22 +208,30 @@
             </tbody>
           </table>
 
+          <!-- :::::::::POPUP::::::::::: -->
+          <div id="popup" style="display: none;">
+            <div class="popbutton">
+              <button id="deleteBtn">Supprimer</button>
+             <button id="editBtn">Modifier</button>
+             <button id="cancelBtn">Annuler</button>
+            </div>
+        </div>
 
           <!-- :::::::::Pied de page:::::::::::::: -->
 
-          <div class="montantHT"  style="">
+          <div class="montantHT" >
             <h2 >Montant HT : <span></span></h2>
           </div>
 
-          <div class="MainOeuvre" style="">
+          <div class="MainOeuvre" >
             <h2 >Main D'œuvres : <span> </span> fcfa</h2>
           </div>
 
-          <div class="tva" style="">
+          <div class="tva" >
             <h2 >TVA 18% : <span></span></h2>
           </div>
           
-          <div class="montantTTC" style="">
+          <div class="montantTTC" >
             <h2 >Montant TTC : <span></span></h2>
           </div>
 
@@ -246,23 +253,54 @@
 
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <script>
-  function displayRow() {
-  var idmodif = document.getElementById("idmodif").value; // Récupère la valeur du champ idmodif
-  var row = document.getElementById("idt" + idmodif); // Récupère la ligne correspondante à l'id sélectionné
+  function surveillerEvenement() {
+  var champModif = document.getElementById("idmodif");
+  champModif.addEventListener("input", function() {
+    var numSaisi = parseInt(champModif.value);
+    var tableau = document.getElementById("t1");
+    var lignes = tableau.getElementsByTagName("tr");
+    var popup = document.getElementById("popup");
+    var rienPop = document.querySelector(".rienpop");
+    var inputs = document.querySelectorAll("#designation, #quantite, #prixUnitaire, #montant");
 
-  if (row) {
-    // Vérifie si la ligne existe
-    document.getElementById("popup").style.display = "block"; // Affiche l'élément avec l'id "popup"
+    // Réinitialiser les valeurs des champs
+    inputs.forEach(function(input) {
+      input.value = "";
+    });
 
-    // Affiche les contenus des champs dans id="idmodif"
-    document.getElementById("designation").value = row.cells[1].innerHTML;
-    document.getElementById("quantite").value = row.cells[2].innerHTML;
-    document.getElementById("prixUnitaire").value = row.cells[3].innerHTML;
-    document.getElementById("montant").value = row.cells[4].innerHTML;
-  }
+    // Parcourir les lignes du tableau
+    for (var i = 1; i < lignes.length; i++) {
+      var ligne = lignes[i];
+      var cellules = ligne.getElementsByTagName("td");
+      var idCellule = parseInt(cellules[0].innerHTML);
+
+      // Vérifier si le numéro saisi se trouve dans la colonne correspondante
+      if (idCellule === numSaisi) {
+        // Afficher la popup
+        popup.style.display = "block";
+        rienPop.style.display = "none";
+
+        // Afficher les valeurs dans les champs respectifs
+        inputs[0].value = cellules[1].innerHTML;
+        inputs[1].value = cellules[2].innerHTML;
+        inputs[2].value = cellules[3].innerHTML;
+        inputs[3].value = cellules[4].innerHTML;
+
+        // Sortir de la boucle après avoir trouvé la correspondance
+        return;
+      }
+    }
+
+    // Si aucun numéro correspondant n'est trouvé, afficher le message d'erreur
+    popup.style.display = "none";
+    rienPop.style.display = "block";
+  });
 }
+surveillerEvenement();
+
 
 </script>
+
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 
 <script src="servicepages.js"></script>   
