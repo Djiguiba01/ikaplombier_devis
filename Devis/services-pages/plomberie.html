@@ -128,6 +128,8 @@
         AJOUTER 
         <span class="fas fa-chevron-right"></span>
       </a>
+
+
         
       </form>
       
@@ -297,6 +299,46 @@
   });
 }
 surveillerEvenement();
+
+// :::::::::::::SUPPRESSION:::::::::::::::
+
+function supprimerLigne() {
+  // Récupérer le numéro de la ligne à supprimer
+  var idToDelete = document.getElementById("idmodif").value;
+
+  // Récupérer le tableau
+  var table = document.getElementById("t1");
+
+  // Récupérer toutes les lignes du tableau
+  var rows = table.getElementsByTagName("tr");
+
+  // Parcourir les lignes du tableau à partir de la deuxième ligne (index 1)
+  for (var i = 1; i < rows.length; i++) {
+    // Récupérer le numéro de la ligne courante
+    var rowId = rows[i].getElementsByTagName("td")[0].innerHTML;
+
+    // Vérifier si le numéro correspond au numéro à supprimer
+    if (rowId === idToDelete) {
+      // Supprimer la ligne
+      table.deleteRow(i);
+
+      // Vider les champs designation, prixUnitaire et quantite
+      document.getElementById("designation").value = "";
+      document.getElementById("prixUnitaire").value = "";
+      document.getElementById("quantite").value = "";
+
+      break; // Sortir de la boucle une fois la ligne supprimée
+    }
+  }
+}
+
+// Récupérer le bouton de suppression
+var deleteBtn = document.getElementById("deleteBtn");
+
+// Ajouter un gestionnaire d'événements au bouton de suppression
+deleteBtn.addEventListener("click", supprimerLigne);
+
+
 
 
 </script>
