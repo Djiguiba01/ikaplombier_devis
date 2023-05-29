@@ -64,13 +64,7 @@
           <input type="number" min="1" placeholder="Numéro à modifier" class="form-control" id="idmodif" style="margin-left: 15%;" >
         </div>
 
-         <!-- :::::::::POPUP::::::::::: -->
-         <div id="popup" style="display: none;">
-          <div class="popbutton">
-            <button id="deleteBtn">Supprimer</button>
-            <button id="editBtn" onclick="modifierLigne()">Modifier</button>
-          </div>
-      </div>
+        
       <div class="rienpop" style="display: none;">
         Le numéro saisi n'existe pas dans le tableau.
       </div>
@@ -126,10 +120,6 @@
         AJOUTER 
         <span class="fas fa-chevron-right"></span>
       </a>
-      
-
-
-        
       </form>
       
 
@@ -138,7 +128,13 @@
     
   </div>
 
-
+ <!-- :::::::::POPUP::::::::::: -->
+ <div id="popup" style="display: none;">
+  <div class="popbutton">
+    <button id="deleteBtn">Supprimer</button>
+    <button id="editBtn" onclick="modifierLigne()">Modifier</button>
+  </div>
+</div>
             <!-- :::::::::::::::TABLEAUX::::::::::::::: -->
 
       <div class="telepdf" id="capture" style="padding-bottom: 3%;">
@@ -210,14 +206,13 @@
           </table>
 
           <!-- :::::::::POPUP::::::::::: -->
-          <div id="popup" style="display: none;">
+          <!-- <div id="popup" style="display: none;">
             <div class="popbutton">
               <button id="deleteBtn">Supprimer</button>
               <button id="editBtn" onclick="remplirChamps()">Modifier</button>
-
              <button id="cancelBtn">Annuler</button>
             </div>
-        </div>
+        </div> -->
 
           <!-- :::::::::Pied de page:::::::::::::: -->
 
@@ -312,6 +307,7 @@ function modifierLigne() {
 
 
 // :::::::::
+
 
 
 
