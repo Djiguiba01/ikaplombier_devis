@@ -121,6 +121,11 @@ button{
     font-weight: bold;
     font-size: 15px;
     color: var(--green);
+
+ 
+        /* margin-left: 62px; */
+        padding-top: 11px;
+        border-top: 2px solid;
 }
 #telecharger:hover{
     background: var(--green);
@@ -314,10 +319,6 @@ button{
 .gerantdestinat .gauchedest, .droitegerant{
     font-size: 15px;
 }
-/* ::::::POPUP::::::::: */
-/* #editBtn, #deleteBtn {
-    margin-top: 19%;
-} */
 
 
 }
@@ -325,12 +326,25 @@ button{
     .btn{
         width: 50%;
     }
-    .btn span {
+    /* .btn span {
         margin-left: 1px;
         margin-bottom: 6px;
         font-size: 5px;
         padding-top: 18px;
-    }
+    } */
+    /* :::::::::: */
+.btn span{
+    display: none;
+}
+.btn {
+    width: 54%;
+    margin-left: 62px;
+    padding-top: 11px;
+    border-top: 2px solid;
+    font-size: 30px;
+    position: relative;
+    font-weight: bold;
+}
 }
 
 
@@ -370,8 +384,13 @@ button{
 
 }
 
-
-
+@media (max-width: 460px){
+.btn {
+    width: 56%;
+    margin-left: 60px;
+    font-size: 25px;
+}
+}
 
 
 /* Tableau:::: */
