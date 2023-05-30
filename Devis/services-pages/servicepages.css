@@ -147,6 +147,7 @@ button{
     text-decoration: none; 
     margin-left: 35%;
     width: 65%;
+    padding-bottom: 8px;
 }
 .btn span{
     padding: .7rem 1rem;
