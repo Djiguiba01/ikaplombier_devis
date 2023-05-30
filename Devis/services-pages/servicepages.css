@@ -289,10 +289,7 @@ button{
         font-size: 20px;
     }
 
-    /* Pop::::::: */
-    /* #popup {
-        height: 30%;
-    } */
+
 
 }
 @media (max-width:515px){
@@ -346,7 +343,15 @@ button{
     font-weight: bold;
 }
 }
-
+@media (max-width:350px){
+     #deleteBtn {
+        /* font-size: 20px; */
+        margin: 7%;
+        padding: 5px;
+        width: 45%;
+    }
+ 
+}
 
 @media (max-width:380px){
     /* ::::::::::numfact::::::::: */
@@ -457,16 +462,28 @@ Height : 50px ;
     align-items: center;
   } */
 
-  
-  /* #editBtn, #deleteBtn {
-    margin: 14%;
-    margin-top: 6%;
-    padding: 17px;
-    width: 20%;
+  #popup{
+    justify-content: center;
+  }
+  #editBtn, #deleteBtn {
+    font-weight: bold;
+    margin: 12%;
+    margin-top: -2%;
+    padding: 13px;
+    width: 25%;
     box-shadow: var(--box-shadow);
-    border-radius: 5px;
+    border-radius: 8px;
+    cursor: pointer;
 }
-#cancelBtn {
+ #deleteBtn:hover {
+    color: #fff;
+    background-color: #3f0dca;
+}
+#editBtn:hover {
+    color: #fff;
+    background-color: #3f0dca;
+}
+ /*#cancelBtn {
     margin-top: -3%;
     padding: 10px;
     margin-left: 39%;
@@ -475,3 +492,5 @@ Height : 50px ;
     box-shadow: var(--box-shadow);
     border-radius: 5px;
 } */
+    /* ::::::::Pop Suppression Modification::::::: */
+   

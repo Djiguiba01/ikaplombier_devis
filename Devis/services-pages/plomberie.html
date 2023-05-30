@@ -111,11 +111,6 @@
         <span class="fas fa-chevron-right"></span>
       </a> -->
      
-       <!-- Button Ajouter:::::::::::::: -->
-       <!-- <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="addRow()">
-        AJOUTER 
-        <span class="fas fa-chevron-right"></span>
-      </a> -->
       <a href="#Devis" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="addRow()">
         AJOUTER 
         <span class="fas fa-chevron-right"></span>
@@ -130,10 +125,8 @@
 
  <!-- :::::::::POPUP::::::::::: -->
  <div id="popup" style="display: none;">
-  <div class="popbutton">
     <button id="deleteBtn">Supprimer</button>
     <button id="editBtn" onclick="modifierLigne()">Modifier</button>
-  </div>
 </div>
             <!-- :::::::::::::::TABLEAUX::::::::::::::: -->
 
@@ -307,7 +300,6 @@ function modifierLigne() {
 }
 
 
-// :::::::::
 // Fonction pour rendre la classe "btn" visible par défaut et la faire disparaître lorsque l'événement se produit dans l'élément avec l'id "idmodif"
 function toggleBtnVisibility() {
   var btn = document.getElementsByClassName("btn")[0]; // Obtient la référence de l'élément avec la classe "btn"
@@ -327,7 +319,6 @@ function toggleBtnVisibility() {
     }
   });
 }
-
 // Appelle la fonction pour activer le comportement souhaité
 toggleBtnVisibility();
 
