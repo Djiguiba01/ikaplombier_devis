@@ -139,9 +139,9 @@ button{
     cursor: pointer;
     font-size: 1.5rem;
     background: #fff;
-
     text-decoration: none; 
     margin-left: 35%;
+    width: 65%;
 }
 .btn span{
     padding: .7rem 1rem;
@@ -175,7 +175,9 @@ button{
         width: 100%;
         padding: 5px 0 30px;
     }
-  
+    .btn{
+        width: 45%;
+    }
 }
 
 /* :::::::::::::::CSS AFFICHAGE DU FORMULAIRE:::::::::::::::::: */
