@@ -237,6 +237,9 @@ button{
     .telepdf .entetepdf .milieu h3 {
         font-size: 36px;
     }
+    .btn{
+        font-size: 1.3rem;
+    }
 }
 @media (max-width:768px){
     .telepdf .entetepdf .milieu h3 {
@@ -418,7 +421,6 @@ Height : 50px ;
     font-weight: bold;
     font-size: 18px;
 }
-
 
 .page2 {
     page-break-before: always;
