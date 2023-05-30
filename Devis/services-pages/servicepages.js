@@ -76,7 +76,6 @@ calculerTVA();
 calculerSomme();
 
 
-
 } 
 
 // :::::::::::CALCULER LA SOMME:::::::::::::::

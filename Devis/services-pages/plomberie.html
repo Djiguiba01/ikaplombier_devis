@@ -308,6 +308,30 @@ function modifierLigne() {
 
 
 // :::::::::
+// Fonction pour rendre la classe "btn" visible par défaut et la faire disparaître lorsque l'événement se produit dans l'élément avec l'id "idmodif"
+function toggleBtnVisibility() {
+  var btn = document.getElementsByClassName("btn")[0]; // Obtient la référence de l'élément avec la classe "btn"
+
+  // Rend la classe "btn" visible par défaut
+  btn.style.display = "block";
+
+  // Ajoute un écouteur d'événement pour détecter les changements dans l'élément avec l'id "idmodif"
+  document.getElementById("idmodif").addEventListener("input", function() {
+    // Vérifie si l'élément avec l'id "idmodif" est vide
+    if (this.value.trim() === "") {
+      // Fait apparaître la classe "btn" lorsque l'élément avec l'id "idmodif" est vide
+      btn.style.display = "block";
+    } else {
+      // Fait disparaître la classe "btn" lorsque l'événement se produit dans l'élément avec l'id "idmodif"
+      btn.style.display = "none";
+    }
+  });
+}
+
+// Appelle la fonction pour activer le comportement souhaité
+toggleBtnVisibility();
+
+
 
 
 
