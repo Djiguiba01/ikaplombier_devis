@@ -116,38 +116,37 @@ function calculateTotal() {
 
 // ::::::::::::::::TVA::::::::::::::
 function calculerTVA() {
-var table = document.getElementById("t1"); // Obtient la référence de la table
-var rows = table.getElementsByTagName("tr"); // Obtient toutes les lignes du tableau
-var total = 0;
+  var table = document.getElementById("t1"); // Obtient la référence de la table
+  var rows = table.getElementsByTagName("tr"); // Obtient toutes les lignes du tableau
+  var total = 0;
 
-// Parcours chaque ligne du tableau à l'exception de l'en-tête
-for (var i = 1; i < rows.length; i++) {
-var row = rows[i];
-var cells = row.getElementsByTagName("td"); // Obtient les cellules de la ligne
+  // Parcours chaque ligne du tableau à l'exception de l'en-tête
+  for (var i = 1; i < rows.length; i++) {
+      var row = rows[i];
+      var cells = row.getElementsByTagName("td"); // Obtient les cellules de la ligne
 
-// Vérifie si la ligne a les cellules nécessaires
-if (cells.length >= 5) {
-var quantite = parseFloat(cells[2].innerHTML); // Récupère la quantité de la cellule correspondante
-var prixUnitaire = parseFloat(cells[3].innerHTML); // Récupère le prix unitaire de la cellule correspondante
-var montant = quantite * prixUnitaire; // Calcul le montant de la ligne
+      // Vérifie si la ligne a les cellules nécessaires
+      if (cells.length >= 5) {
+          var quantite = parseFloat(cells[2].innerHTML); // Récupère la quantité de la cellule correspondante
+          var prixUnitaire = parseFloat(cells[3].innerHTML); // Récupère le prix unitaire de la cellule correspondante
+          var montant = quantite * prixUnitaire; // Calcul le montant de la ligne
 
-// Vérifie si le montant est un nombre valide
-if (!isNaN(montant)) {
-total += montant; // Ajoute le montant au total
-}
-}
-}
+          // Vérifie si le montant est un nombre valide
+          if (!isNaN(montant)) {
+              total += montant; // Ajoute le montant au total
+          }
+      }
+  }
+  var oeuvres = parseFloat(document.getElementById("oeuvres").value); // Récupère la valeur de "oeuvres"
+  var totalAvecOeuvres = total + oeuvres; // Ajoute la valeur de "oeuvres" au total
 
-var oeuvres = parseFloat(document.getElementById("oeuvres").value); // Récupère la valeur de "oeuvres"
-var totalAvecOeuvres = total + oeuvres; // Ajoute la valeur de "oeuvres" au total
+  var tva = totalAvecOeuvres * 0.18; // Calcul la TVA (18% du total avec "oeuvres")
 
-var tva = totalAvecOeuvres * 0.18; // Calcul la TVA (18% du total avec "oeuvres")
+  // Affiche le résultat dans la classe "tva"
+  var tvaElement = document.querySelector(".tva");
+  tvaElement.textContent = tva.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " fcfa";
+  }
 
-// Affiche le résultat dans la classe "tva"
-var tvaElement = document.querySelector(".tva");
-tvaElement.textContent = tva.toFixed(2) + " fcfa"; // Affiche la TVA avec 2 décimales
-
-}
 
 // ::::::::MONTANT TTC:::::::::::::::::::
 function calculerSomme() {
@@ -158,7 +157,7 @@ function calculerSomme() {
   var montantTTC = montantHT + mainOeuvre + tva;
 
   var montantTTCElement = document.querySelector(".montantTTC");
-  montantTTCElement.textContent = montantTTC + " fcfa";
+  montantTTCElement.textContent = montantTTC.toLocaleString("fr-FR") + " fcfa";
 }
 
 
