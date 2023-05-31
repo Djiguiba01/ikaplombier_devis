@@ -109,7 +109,8 @@ function calculateTotal() {
   }
   // Affiche le total dans l'élément avec l'id "montantHT"
   var montantHT = document.getElementById("montantHT");
-  montantHT.textContent = Math.floor(total) + " fcfa"; // Affiche le total sans décimales
+  // Affiche le total sans décimales
+  montantHT.textContent = montantHT.textContent = Math.floor(total).toLocaleString("fr-FR") + " fcfa";
 }
 
 
