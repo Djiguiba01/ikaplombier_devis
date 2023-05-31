@@ -13,9 +13,13 @@ var prixUnitaire = document.getElementById("prixUnitaire").value;
     alert("Veuillez remplir tous les champs avant d'ajouter une ligne.");
     return;
   }
+  
+ // Ajouter un espacement à chaque trois chiffres à partir de l'arrière
+ quantite = quantite.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+ prixUnitaire = prixUnitaire.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
-var montant = document.getElementById("montant").value;
-var idt = rowNumber; // Utilise le numéro de ligne comme ID "idt"
+ var montant = document.getElementById("montant").value;
+ var idt = rowNumber; // Utilise le numéro de ligne comme ID "idt"
 
 if (rowCount < 20) {
 var table = document.getElementById("t1");
@@ -221,9 +225,13 @@ function displayMainOeuvre() {
   var mainOeuvreInput = document.getElementById("oeuvres");
   var mainOeuvreValue = mainOeuvreInput.value;
   var mainOeuvreCell = document.querySelector(".MainOeuvre");
-
-  mainOeuvreCell.textContent = mainOeuvreValue + " fcfa";
+  // Convertir la valeur en nombre
+  var mainOeuvreNumber = parseInt(mainOeuvreValue);
+  // Formater le nombre avec un espacement tous les trois chiffres à partir de l'arrière
+  var formattedValue = mainOeuvreNumber.toLocaleString();
+  mainOeuvreCell.textContent = formattedValue + " fcfa";
 }
+
 // Appeler la fonction lorsqu'un changement est détecté dans l'élément input
 document.getElementById("oeuvres").addEventListener("input", displayMainOeuvre);
 
@@ -527,5 +535,4 @@ pdf.addImage(imgData, "PNG", 0, 0, width, height);
 pdf.save("plombier.pdf");
 });
 }
-
 
