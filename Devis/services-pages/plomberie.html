@@ -28,21 +28,12 @@
           padding: 10px 10px;
           border: 1px solid black;
         }
-        /* table, td, th {
-        Border : 1px solid black ;
+
+        /* ::::::::::: */
+        #montdescrip{
+          font-weight: bold;
+          font-size: 13px;
         }
-
-        table {
-        Border-collapse : collapse ;
-        Width : 95% ;
-        margin-left: 2.5%;
-        margin-right: 2.5%;
-        }
-
-        th {
-        Height : 50px ;
-        } */
-
       </style>
 </head>
 <body>
@@ -104,12 +95,6 @@
           <input type="number" placeholder="Montant" class="form-control" id="montant">
         </div>
 
-
-        <!-- Button Ajouter:::::::::::::: -->
-      <!-- <a href="#Devis/plomberiefact.html" class="btn" style="text-decoration: none;" onclick="addRow()">
-        AJOUTER 
-        <span class="fas fa-chevron-right"></span>
-      </a> -->
      
       <a href="#Devis" class="btn" style="text-decoration: none;" value="Add" type="button" onclick="addRow()">
         AJOUTER 
@@ -182,7 +167,7 @@
           </table>
 
 
-        <!-- :::::::::::::::TABLEAU 2::::::::::::::: -->
+        <!-- :::::::::::::::TABLEAU 2:::::::::::::::: -->
           <table id="t2" style="display: none; margin-top: 1%;">
 
             <thead>
@@ -198,56 +183,41 @@
             </tbody>
           </table>
 
-          <!-- :::::::::POPUP::::::::::: -->
-          <!-- <div id="popup" style="display: none;">
-            <div class="popbutton">
-              <button id="deleteBtn">Supprimer</button>
-              <button id="editBtn" onclick="remplirChamps()">Modifier</button>
-             <button id="cancelBtn">Annuler</button>
-            </div>
-        </div> -->
-
-        <!-- ///////////////////////////// -->
-  <table>
-    <!-- <thead>
-      <tr>
-        <th>N° </th>
-        <th>Désignation</th>
-      </tr>
-    </thead> -->
+  <!-- ::::::::::::::::::::TABLEAU SOMME CALCUL::::::::::::::::::::::: -->
+  <table >
     <tbody>
       <tr>
-        <td>Montant HT </td>
-        <td id="montant">Produit A</td>
+        <td id="montdescrip">Montant HT </td>
+        <td id="montantHT" style="font-weight: bold; font-size: 14px;"></td>
       </tr>
 
       <tr>
-        <td>Main D'œuvres </td>
-        <td>Produit A</td>
+        <td id="montdescrip">Main D'œuvres </td>
+        <td class="MainOeuvre" style="font-weight: bold; font-size: 14px;"></td>
       </tr>
 
       <tr>
-        <td>TVA 18% </td>
-        <td>Produit A</td>
+        <td id="montdescrip">TVA 18% </td>
+        <td class="tva" style="font-weight: bold; font-size: 14px;"></td>
       </tr>
 
-      <tr>
+      <tr id="montdescrip">
         <td>Montant TTC </td>
-        <td>Produit A</td>
+        <td class="montantTTC" style="font-weight: bold; font-size: 14px;"></td>
       </tr>
      
     </tbody>
   </table>
   
-  <!-- ////////////////////////////// -->
+  <!-- ::::::::::::::::::::FIN SOMME CALCUL::::::::::::::::::::::: -->
 
-          <!-- :::::::::Pied de page:::::::::::::: -->
+          <!-- ::::::::::::::::::::::Pied de page:::::::::::::::::::::: -->
 
-          <div class="montantHT" >
+          <!-- <div class="montantHT" >
             <h2 >Montant HT : <span></span></h2>
           </div>
 
-          <div class="MainOeuvre" >
+          <div  >
             <h2 >Main D'œuvres : <span> </span> fcfa</h2>
           </div>
 
@@ -257,111 +227,24 @@
           
           <div class="montantTTC" >
             <h2 >Montant TTC : <span></span></h2>
-          </div>
+          </div> -->
 
           
           <div class="gerantdestinat">
             <div class="gauchedest">Pour accord</div>
             <div class="droitegerant">Le Gérant <p></p></div>
           </div>
+          <!-- ::::::::::::::::::::::Fin Pied de page:::::::::::::::::::::: -->
+
 
       </div>
 
 
       <!-- :::::::::::BUTTON TELECHARGEMENT:::::::::::::: -->
       <button type="button" id="telecharger" onclick="downloadPDF()">Télécharger PDF</button>
-       <!-- <a href="#Devis" class="btn" id="telecharger" style="text-decoration: none;" onclick="downloadPDF()">
-        Télécharger
-        <span class="fas fa-chevron-right"></span>
-      </a> -->
+
 
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
-<script>
-
-// ::::::::::::APPORTER LA MODIFICATION PAR LIGNE::::::::::::
-function modifierLigne() {
-  var idModif = document.getElementById("idmodif").value;
-  var designation = document.getElementById("designation").value;
-  var quantite = document.getElementById("quantite").value;
-  var prixUnitaire = document.getElementById("prixUnitaire").value;
-
-  // Vérifier si les champs sont vides
-  if (designation === "" || quantite === "" || prixUnitaire === "") {
-    alert("Veuillez remplir tous les champs avant de modifier une ligne.");
-    return;
-  }
-
-  var table = document.getElementById("t1"); // Obtient la référence de la table
-  var rows = table.getElementsByTagName("tr"); // Obtient toutes les lignes du tableau
-
-  // Parcours chaque ligne du tableau à l'exception de l'en-tête
-  for (var i = 1; i < rows.length; i++) {
-    var row = rows[i];
-    var idtCell = row.getElementsByTagName("td")[0]; // Récupère la cellule contenant l'ID
-    var designationCell = row.getElementsByTagName("td")[1]; // Récupère la cellule contenant la désignation
-    var quantiteCell = row.getElementsByTagName("td")[2]; // Récupère la cellule contenant la quantité
-    var prixUnitaireCell = row.getElementsByTagName("td")[3]; // Récupère la cellule contenant le prix unitaire
-    var montantCell = row.getElementsByTagName("td")[4]; // Récupère la cellule contenant le montant
-
-    if (idModif === idtCell.innerHTML) {
-      // Met à jour les valeurs des cellules avec les nouvelles valeurs
-      designationCell.innerHTML = designation;
-      quantiteCell.innerHTML = quantite;
-      prixUnitaireCell.innerHTML = prixUnitaire;
-
-      // Recalculer le montant
-      var montant = parseFloat(quantite) * parseFloat(prixUnitaire);
-      montantCell.innerHTML = montant;
-      montantCell.setAttribute("id", "montant");
-
-      break; // Sort de la boucle une fois la ligne modifiée
-    }
-  }
-
-  // Réinitialise les champs
-  document.getElementById("designation").value = "";
-  document.getElementById("idmodif").value = "";
-  document.getElementById("quantite").value = "";
-  document.getElementById("prixUnitaire").value = "";
-
-  // Appelle la fonction Montant HT
-  calculateTotal();
-
-  // Appelle la fonction Montant TVA
-  calculerTVA();
-
-  calculerSomme();
-}
-
-
-// Fonction pour rendre la classe "btn" visible par défaut et la faire disparaître lorsque l'événement se produit dans l'élément avec l'id "idmodif"
-function toggleBtnVisibility() {
-  var btn = document.getElementsByClassName("btn")[0]; // Obtient la référence de l'élément avec la classe "btn"
-
-  // Rend la classe "btn" visible par défaut
-  btn.style.display = "block";
-
-  // Ajoute un écouteur d'événement pour détecter les changements dans l'élément avec l'id "idmodif"
-  document.getElementById("idmodif").addEventListener("input", function() {
-    // Vérifie si l'élément avec l'id "idmodif" est vide
-    if (this.value.trim() === "") {
-      // Fait apparaître la classe "btn" lorsque l'élément avec l'id "idmodif" est vide
-      btn.style.display = "block";
-    } else {
-      // Fait disparaître la classe "btn" lorsque l'événement se produit dans l'élément avec l'id "idmodif"
-      btn.style.display = "none";
-    }
-  });
-}
-// Appelle la fonction pour activer le comportement souhaité
-toggleBtnVisibility();
-
-
-
-
-
-
-</script>
 
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 

@@ -88,29 +88,30 @@ document.getElementById("montant").value = montant;
 }
 // Calculer le montant HT
 function calculateTotal() {
-var table = document.getElementById("t1"); // Obtient la référence de la table
-var rows = table.getElementsByTagName("tr"); // Obtient toutes les lignes du tableau
-var total = 0;
+  var table = document.getElementById("t1"); // Obtient la référence de la table
+  var rows = table.getElementsByTagName("tr"); // Obtient toutes les lignes du tableau
+  var total = 0;
 
-// Parcours chaque ligne du tableau à l'exception de l'en-tête
-for (var i = 1; i < rows.length; i++) {
-var row = rows[i];
-var cells = row.getElementsByTagName("td"); // Obtient les cellules de la ligne
+  // Parcours chaque ligne du tableau à l'exception de l'en-tête
+  for (var i = 1; i < rows.length; i++) {
+    var row = rows[i];
+    var cells = row.getElementsByTagName("td"); // Obtient les cellules de la ligne
 
-// Vérifie si la ligne a les cellules nécessaires
-if (cells.length >= 5) {
-var montant = parseFloat(cells[4].innerHTML); // Récupère le montant de la cellule correspondante
+    // Vérifie si la ligne a les cellules nécessaires
+    if (cells.length >= 5) {
+      var montant = parseFloat(cells[4].innerHTML); // Récupère le montant de la cellule correspondante
 
-// Vérifie si le montant est un nombre valide
-if (!isNaN(montant)) {
-total += montant; // Ajoute le montant au total
+      // Vérifie si le montant est un nombre valide
+      if (!isNaN(montant)) {
+        total += montant; // Ajoute le montant au total
+      }
+    }
+  }
+  // Affiche le total dans l'élément avec l'id "montantHT"
+  var montantHT = document.getElementById("montantHT");
+  montantHT.textContent = Math.floor(total) + " fcfa"; // Affiche le total sans décimales
 }
-}
-}
-// Affiche le total dans la classe "montantHT"
-var montantHT = document.querySelector(".montantHT h2 span");
-montantHT.textContent = Math.floor(total) + " fcfa"; // Affiche le total sans décimales
-}
+
 
 // ::::::::::::::::TVA::::::::::::::
 function calculerTVA() {
@@ -142,21 +143,23 @@ var totalAvecOeuvres = total + oeuvres; // Ajoute la valeur de "oeuvres" au tota
 var tva = totalAvecOeuvres * 0.18; // Calcul la TVA (18% du total avec "oeuvres")
 
 // Affiche le résultat dans la classe "tva"
-var tvaElement = document.querySelector(".tva h2 span");
+var tvaElement = document.querySelector(".tva");
 tvaElement.textContent = tva.toFixed(2) + " fcfa"; // Affiche la TVA avec 2 décimales
+
 }
 
 // ::::::::MONTANT TTC:::::::::::::::::::
 function calculerSomme() {
-var montantHT = parseFloat(document.querySelector(".montantHT h2 span").textContent);
-var mainOeuvre = parseFloat(document.querySelector(".MainOeuvre h2 span").textContent);
-var tva = parseFloat(document.querySelector(".tva h2 span").textContent);
+  var montantHT = parseFloat(document.getElementById("montantHT").textContent);
+  var mainOeuvre = parseFloat(document.querySelector(".MainOeuvre").textContent);
+  var tva = parseFloat(document.querySelector(".tva").textContent);
 
-var montantTTC = montantHT + mainOeuvre + tva;
+  var montantTTC = montantHT + mainOeuvre + tva;
 
-var montantTTCElement = document.querySelector(".montantTTC h2 span");
-montantTTCElement.textContent = montantTTC + " fcfa";
+  var montantTTCElement = document.querySelector(".montantTTC");
+  montantTTCElement.textContent = montantTTC + " fcfa";
 }
+
 
 
 
@@ -199,11 +202,11 @@ document.getElementById("numfacture").addEventListener("input", afficherNumFactu
 
 // Fonction Récupérer Automatique input MainOeuvre::::::::::::::::::::::
 function displayMainOeuvre() {
-var mainOeuvreInput = document.getElementById("oeuvres");
-var mainOeuvreValue = mainOeuvreInput.value;
-var mainOeuvreSpan = document.querySelector(".MainOeuvre span");
+  var mainOeuvreInput = document.getElementById("oeuvres");
+  var mainOeuvreValue = mainOeuvreInput.value;
+  var mainOeuvreCell = document.querySelector(".MainOeuvre");
 
-mainOeuvreSpan.textContent = mainOeuvreValue;
+  mainOeuvreCell.textContent = mainOeuvreValue + " fcfa";
 }
 // Appeler la fonction lorsqu'un changement est détecté dans l'élément input
 document.getElementById("oeuvres").addEventListener("input", displayMainOeuvre);
@@ -362,6 +365,86 @@ verifierEvenements();
       idCell.textContent = i;
     }
   }
+
+  
+// ::::::::::::APPORTER LA MODIFICATION PAR LIGNE::::::::::::::::::::::::
+function modifierLigne() {
+  var idModif = document.getElementById("idmodif").value;
+  var designation = document.getElementById("designation").value;
+  var quantite = document.getElementById("quantite").value;
+  var prixUnitaire = document.getElementById("prixUnitaire").value;
+
+  // Vérifier si les champs sont vides
+  if (designation === "" || quantite === "" || prixUnitaire === "") {
+    alert("Veuillez remplir tous les champs avant de modifier une ligne.");
+    return;
+  }
+
+  var table = document.getElementById("t1"); // Obtient la référence de la table
+  var rows = table.getElementsByTagName("tr"); // Obtient toutes les lignes du tableau
+
+  // Parcours chaque ligne du tableau à l'exception de l'en-tête
+  for (var i = 1; i < rows.length; i++) {
+    var row = rows[i];
+    var idtCell = row.getElementsByTagName("td")[0]; // Récupère la cellule contenant l'ID
+    var designationCell = row.getElementsByTagName("td")[1]; // Récupère la cellule contenant la désignation
+    var quantiteCell = row.getElementsByTagName("td")[2]; // Récupère la cellule contenant la quantité
+    var prixUnitaireCell = row.getElementsByTagName("td")[3]; // Récupère la cellule contenant le prix unitaire
+    var montantCell = row.getElementsByTagName("td")[4]; // Récupère la cellule contenant le montant
+
+    if (idModif === idtCell.innerHTML) {
+      // Met à jour les valeurs des cellules avec les nouvelles valeurs
+      designationCell.innerHTML = designation;
+      quantiteCell.innerHTML = quantite;
+      prixUnitaireCell.innerHTML = prixUnitaire;
+
+      // Recalculer le montant
+      var montant = parseFloat(quantite) * parseFloat(prixUnitaire);
+      montantCell.innerHTML = montant;
+      montantCell.setAttribute("id", "montant");
+
+      break; // Sort de la boucle une fois la ligne modifiée
+    }
+  }
+
+  // Réinitialise les champs
+  document.getElementById("designation").value = "";
+  document.getElementById("idmodif").value = "";
+  document.getElementById("quantite").value = "";
+  document.getElementById("prixUnitaire").value = "";
+
+  // Appelle la fonction Montant HT
+  calculateTotal();
+
+  // Appelle la fonction Montant TVA
+  calculerTVA();
+
+  calculerSomme();
+}
+
+
+// Fonction pour rendre la classe "btn" visible par défaut et la faire disparaître lorsque l'événement se produit dans l'élément avec l'id "idmodif"
+function toggleBtnVisibility() {
+  var btn = document.getElementsByClassName("btn")[0]; // Obtient la référence de l'élément avec la classe "btn"
+
+  // Rend la classe "btn" visible par défaut
+  btn.style.display = "block";
+
+  // Ajoute un écouteur d'événement pour détecter les changements dans l'élément avec l'id "idmodif"
+  document.getElementById("idmodif").addEventListener("input", function() {
+    // Vérifie si l'élément avec l'id "idmodif" est vide
+    if (this.value.trim() === "") {
+      // Fait apparaître la classe "btn" lorsque l'élément avec l'id "idmodif" est vide
+      btn.style.display = "block";
+    } else {
+      // Fait disparaître la classe "btn" lorsque l'événement se produit dans l'élément avec l'id "idmodif"
+      btn.style.display = "none";
+    }
+  });
+}
+// Appelle la fonction pour activer le comportement souhaité
+toggleBtnVisibility();
+
 
 
 

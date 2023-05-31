@@ -450,18 +450,6 @@ Height : 50px ;
 .page2 {
     page-break-before: always;
 }
- /* #popup {
-    position: fixed;
-    top: 150px;
-    margin-left: 5%;
-    width: 90%;
-    height: 55%;
-    border-radius: 1rem;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
 
   #popup{
     justify-content: center;
@@ -484,14 +472,6 @@ Height : 50px ;
     color: #fff;
     background-color: #3f0dca;
 }
- /*#cancelBtn {
-    margin-top: -3%;
-    padding: 10px;
-    margin-left: 39%;
-    width: 21%;
-    height: 55px;
-    box-shadow: var(--box-shadow);
-    border-radius: 5px;
-} */
+
     /* ::::::::Pop Suppression Modification::::::: */
    
