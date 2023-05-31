@@ -13,13 +13,15 @@ var prixUnitaire = document.getElementById("prixUnitaire").value;
     alert("Veuillez remplir tous les champs avant d'ajouter une ligne.");
     return;
   }
-  
+
  // Ajouter un espacement à chaque trois chiffres à partir de l'arrière
  quantite = quantite.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
  prixUnitaire = prixUnitaire.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
  var montant = document.getElementById("montant").value;
  var idt = rowNumber; // Utilise le numéro de ligne comme ID "idt"
+
+
 
 if (rowCount < 20) {
 var table = document.getElementById("t1");
@@ -80,6 +82,8 @@ calculerTVA();
 // Appeler la fonction pour effectuer le calcul
 calculerMontantTTC();
 } 
+// ::::Espacement dans la colonne montant
+
 
 
 
