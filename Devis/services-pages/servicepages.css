@@ -127,6 +127,10 @@ button{
         padding-top: 11px;
         border-top: 2px solid;
 }
+.telepdf{
+    margin-left: 4%;
+    margin-right: 4%;
+}
 #telecharger:hover{
     background: var(--green);
     color: #fff;
