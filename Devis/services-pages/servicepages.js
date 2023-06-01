@@ -85,6 +85,8 @@ calculerMontantTTC();
 
 // Appeler la fonction pour effectuer le calcul au chargement de la page
 calculerSommeTTC();
+
+
 } 
 // ::::Espacement dans la colonne montant
 
