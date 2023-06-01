@@ -320,6 +320,14 @@ button{
 
 
 }
+
+@media (max-width:300px){
+    .resultat{
+        width: 96%;
+    }
+}
+
+
 @media (max-width:460px){
     .btn{
         width: 50%;
