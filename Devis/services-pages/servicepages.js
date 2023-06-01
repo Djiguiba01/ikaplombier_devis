@@ -81,6 +81,10 @@ calculerTVA();
 
 // Appeler la fonction pour effectuer le calcul
 calculerMontantTTC();
+
+
+// Appeler la fonction pour effectuer le calcul au chargement de la page
+calculerSommeTTC();
 } 
 // ::::Espacement dans la colonne montant
 
@@ -166,16 +170,52 @@ function calculerTVA() {
 
 // ::::::::MONTANT TTC:::::::::::::::::::
 function calculerMontantTTC() {
-  var montantHT = parseFloat(document.querySelector('.montantHT').textContent);
-  var mainOeuvre = parseFloat(document.querySelector('.MainOeuvre').textContent);
-  var tva = parseFloat(document.querySelector('.tva').textContent);
+  var montantHT = 0;
+  var mainOeuvre = 0;
+  var tva = 0;
 
+  // Calculer la somme du montant HT
+  var montantHTElements = document.getElementsByClassName("montantHT");
+  for (var i = 0; i < montantHTElements.length; i++) {
+    var montant = parseFloat(montantHTElements[i].textContent.replace(/[^0-9.-]+/g,""));
+    if (!isNaN(montant)) {
+      montantHT += montant;
+    }
+  }
+
+  // Calculer la somme de la main d'œuvre
+  var mainOeuvreElements = document.getElementsByClassName("MainOeuvre");
+  for (var i = 0; i < mainOeuvreElements.length; i++) {
+    var montant = parseFloat(mainOeuvreElements[i].textContent.replace(/[^0-9.-]+/g,""));
+    if (!isNaN(montant)) {
+      mainOeuvre += montant;
+    }
+  }
+
+  // Calculer la somme de la TVA
+  var tvaElements = document.getElementsByClassName("tva");
+  for (var i = 0; i < tvaElements.length; i++) {
+    var montant = parseFloat(tvaElements[i].textContent.replace(/[^0-9.-]+/g,""));
+    if (!isNaN(montant)) {
+      tva += montant;
+    }
+  }
+
+  // Calculer le montant TTC
   var montantTTC = montantHT + mainOeuvre + tva;
 
-  var montantTTCFormatte = montantTTC.toLocaleString();
-
-  document.querySelector('.montantTTC').textContent = montantTTCFormatte + " fcfa";
+  // Afficher le résultat dans la colonne "montantTTC"
+  var montantTTCElement = document.getElementsByClassName("montantTTC")[0];
+  montantTTCElement.textContent = montantTTC.toLocaleString("fr-FR") + " fcfa";
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -447,8 +487,10 @@ function modifierLigne() {
   // Appelle la fonction Montant TVA
   calculerTVA();
 
-  // Appeler la fonction pour effectuer le calcul
+// Appeler la fonction pour effectuer le calcul
 calculerMontantTTC();
+
+
 }
 
 
