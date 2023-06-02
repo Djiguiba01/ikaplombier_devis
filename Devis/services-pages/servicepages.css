@@ -46,7 +46,6 @@ img{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -11%;
 }
  .inner{
     padding: 20px;
@@ -295,6 +294,9 @@ button{
 
 }
 @media (max-width:515px){
+    .wrapper{
+        margin-top: -11%;
+    }
     .btn{
         margin-left: 14%;
     }
