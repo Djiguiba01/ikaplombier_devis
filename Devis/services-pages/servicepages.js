@@ -21,9 +21,7 @@ var prixUnitaire = document.getElementById("prixUnitaire").value;
  var montant = document.getElementById("montant").value;
  var idt = rowNumber; // Utilise le numéro de ligne comme ID "idt"
 
-
-
-if (rowCount < 20) {
+if (rowCount < 13) {
 var table = document.getElementById("t1");
 var newRow = table.insertRow(-1);
 var cell1 = newRow.insertCell(0);
@@ -41,7 +39,7 @@ cell5.innerHTML = montant;
 rowCount++;
 
 
-if (rowCount === 20) {
+if (rowCount === 13) {
     document.getElementById("t2").style.display = "table";
     rowNumber++; // Incrémente le numéro de ligne
   }
@@ -94,7 +92,7 @@ calculerSommeTTC();
 
 
 // :::::::::::CALCULER LA SOMME:::::::::::::::
-// Calcul Prix Unitaire * Quantité
+// Calcul Par ligne Prix Unitaire * Quantité
 function calculateMontant() {
 var quantite = document.getElementById("quantite").value;
 var prixUnitaire = document.getElementById("prixUnitaire").value;
@@ -216,20 +214,6 @@ function calculerMontantTTC() {
 
 
 
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
 // ::::::::::Vider les champs::::::::
 function clearFields() {
 document.getElementById("designation").value = "";
@@ -277,7 +261,6 @@ function displayMainOeuvre() {
   var formattedValue = mainOeuvreNumber.toLocaleString();
   mainOeuvreCell.textContent = formattedValue + " fcfa";
 }
-
 // Appeler la fonction lorsqu'un changement est détecté dans l'élément input
 document.getElementById("oeuvres").addEventListener("input", displayMainOeuvre);
 
@@ -565,8 +548,8 @@ var height = pdf.internal.pageSize.getHeight();
 var table1 = document.getElementById("t1");
 var table2 = document.getElementById("t2");
 
-if (table1.rows.length > 20) {
-// Première page avec les premières 20 lignes de la table t1
+if (table1.rows.length > 13) {
+// Première page avec les premières 13 lignes de la table t1
 pdf.addImage(imgData, "PNG", 0, 0, width, height);
 pdf.addPage();
 
