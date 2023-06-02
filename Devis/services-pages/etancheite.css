@@ -205,7 +205,7 @@ html{
 /* ::::::::::Responsivité:::::::::::::: */
 @media (max-width:850px){
     .btn {
-        width: 39%;
+        width: 30%;
     }
 }
 @media (max-width:650px){
