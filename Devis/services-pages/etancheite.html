@@ -14,10 +14,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
- <script >
- </script>
-
-
   
 </head>
 <body>
@@ -37,8 +33,8 @@
         <h3>Devis Etancheité</h3>
 
         <div class="form-group">
-          <input type="text" placeholder="Votre nom" class="form-control" id="destinateur">
-          <input type="text" placeholder="Votre prenom" class="form-control" id="objet">
+          <input type="text" placeholder="Votre nom" class="form-control" id="nom">
+          <input type="text" placeholder="Votre prenom" class="form-control" id="prenom">
         </div>
 
         <!-- <div class="form-group">
@@ -49,25 +45,26 @@
 
 
         <div class="form-wrapper">
-          <input type="number" maxlength="20" placeholder="Numéro" class="form-control" id="Designation">
+          <input type="number" maxlength="8" placeholder="Numéro" class="form-control" id="numero">
         </div>
 
         <div class="form-wrapper">
-          <input type="text" min="1" placeholder="Ville/Quartier" class="form-control" id="quantite" onchange="calculateMontant()">
+          <input type="text" min="1" placeholder="Ville/Quartier" class="form-control" id="ville" >
         </div>
 
         <div class="form-wrapper">
-          <input type="text" placeholder="Surface" class="form-control" id="prixUnitaire" onchange="calculateMontant()">
+          <input type="text" placeholder="Surface" class="form-control" id="prixUnitaire">
         </div>
 
         <div class="form-wrapper">
-          <select name=""  id="" class="">
+          <select name="" id="selectProduit">
             <option value="" disabled selected>Type Produit</option>
-            <option value="homme"  >Goudron Toillettes</option>
-            <option value="femme"  >Etancheité sur mur</option>
-            <option value="femme"  >Passalite Toît</option>
+            <option value="Goudron Toillettes">Goudron Toillettes</option>
+            <option value="Etancheité sur mur">Etancheité sur mur</option>
+            <option value="Passalite Toît">Passalite Toît</option>
           </select>
         </div>
+        
 
 
         
@@ -90,7 +87,7 @@
   </div>
 
   <!-- :::::::::::::AFFICHAGE DU FORMULAIRE::::::::::::: -->
-  <section id="sectioncorps">
+  <section id="sectioncorps" style="display: none;">
 
     <div class="header">
         <h3>Etancheité</h3>
@@ -109,18 +106,18 @@
 
         <div class="container2">
             <h4>Envoyé à</h4>
-            <p>Nom</p>
-            <p>Prenom</p>
+            <p class="affichenom"></p>
+            <p class="afficheprenom"></p>
         </div>
 
         <div class="container3">
-            <h4>Ville/Quartier</h4>
-            <p>Sabalibougou</p>
+            <h4 >Ville/Quartier</h4>
+            <p class="afficheville"></p>
         </div>
 
         <div class="container3">
           <h4>Numéro</h4>
-          <p>(+223)74 24 00 74</p>
+          <p class="affichenum"></p>
       </div>
 
     </div>
@@ -129,9 +126,6 @@
     <table class="table">
         <thead>
             <tr>
-             <!-- <th>Nom</th>
-             <th>Prénom</th> 
-             <th>Ville/Quartier</th>-->
              <th>Surface</th>
              <th>Type Produit</th>
              <th>Montant</th>
@@ -139,11 +133,8 @@
         </thead>
         <tbody>
               <tr>
-                    <!-- <td data-label="Nom">Plomberie</td>
-                    <td data-label="Prénom">ee</td> 
-                    <td data-label="Ville/Quartier">1</td>-->
-                    <td data-label="Surface">2</td>
-                    <td data-label="Type Produit">2</td>
+                   <td data-label="Surface">2</td>
+                    <td data-label="Type Produit">zzzzzzz</td>
                     <td data-label="Montant">33333333</td>
               </tr>
     
@@ -183,7 +174,7 @@
 </section>
 
 <!-- :::::::::::BUTTON TELECHARGEMENT:::::::::::::: -->
-<button type="button" id="telecharger" onclick="downloadPDF()">Télécharger PDF</button>
+<button type="button" id="telecharger" style="display: none;" >Télécharger PDF</button>
 
 <!-- <div class="buttonPDF">
 <a href="#cc" class="btn" style="text-decoration: none;" >
@@ -199,8 +190,93 @@ Générer PDF
 
 
 
-	</script>
-<!-- <button onclick="makePDF()"> MakePDF</button> -->
+<!-- :::::::::::::::::::::::::::::::::::::: -->
+<script>
+  // ::::::FONCTION QUI AFFICHE TOUT LE CONTENU S'IL Y'A UN EVENNEMENT DANS 1 DES INPUTS::::::::
+  function afficherContenu() {
+  var sectioncorps = document.getElementById('sectioncorps');
+  var telecharger = document.getElementById('telecharger');
+
+  // Événement pour les éléments d'entrée
+  var inputs = document.querySelectorAll('input');
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('input', function() {
+      sectioncorps.style.display = 'block';
+      telecharger.style.display = 'block';
+    });
+  }
+}
+afficherContenu();
+
+// nom
+function afficherNom() {
+  var nomInput = document.getElementById('nom');
+  var afficheNom = document.querySelector('.affichenom');
+
+  nomInput.addEventListener('input', function() {
+    var nom = nomInput.value;
+    afficheNom.textContent = nom;
+  });
+}
+afficherNom();
+
+// per
+function afficherPrenom() {
+  var prenomInput = document.getElementById('prenom');
+  var affichePrenom = document.querySelector('.afficheprenom');
+
+  prenomInput.addEventListener('input', function() {
+    var prenom = prenomInput.value;
+    affichePrenom.textContent = prenom;
+  });
+}
+afficherPrenom();
+
+// :::::
+function afficherNumero() {
+  var numeroInput = document.getElementById('numero');
+  var afficheNumero = document.querySelector('.affichenum');
+
+  // Événement pour récupérer la saisie
+  numeroInput.addEventListener('input', function() {
+    var numero = numeroInput.value;
+    afficheNumero.textContent = numero;
+  });
+}
+afficherNumero();
+
+
+// :::::::::
+function afficherVille() {
+  var villeInput = document.getElementById('ville');
+  var afficheVille = document.querySelector('.afficheville');
+
+  // Événement pour l'élément de saisie
+  villeInput.addEventListener('input', function() {
+    afficheVille.innerHTML = '<p>' + villeInput.value + '</p>';
+  });
+}
+afficherVille();
+
+// ::::::::::
+function afficherSelection() {
+  var selectElement = document.getElementById('selectProduit');
+  var typeProduitCell = document.querySelector('td[data-label="Type Produit"]');
+
+  // Événement pour récupérer la sélection
+  selectElement.addEventListener('change', function() {
+    var selectedOption = selectElement.options[selectElement.selectedIndex];
+    var selectedValue = selectedOption.value;
+    typeProduitCell.textContent = selectedValue;
+  });
+}
+afficherSelection();
+
+
+
+
+</script>
+
  
 </body>
 </html>
