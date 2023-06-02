@@ -46,6 +46,7 @@ img{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: -11%;
 }
  .inner{
     padding: 20px;
@@ -481,5 +482,5 @@ Height : 50px ;
     background-color: #3f0dca;
 }
 
-    /* ::::::::Pop Suppression Modification::::::: */
+    /* ::::::::Pop Suppression Modification::::::::::: */
    
