@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+  /* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,500&display=swap'); */
+
+:root{
+    --orange:#FF5F49;
+    --green:#3f0dca;
+    --black:#444;
+    --light-color: #777;
+    --box-shadow: .5rem .5rem 0 rgba(22, 160, 133, .2);
+    --text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
+    --border:.2rem solid var(--green);
+}
+
+*{
+    font-family: 'Popins', sans-serif;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    outline: none; 
+    border: none;
+    transition: all .2s ease-out;
+    text-decoration: none;
+}
+
+html{
+    font-size: 62.5;
+    overflow: scroll;
+    /* scroll-behavior: smooth; */
+    /* scroll-padding-top: 7rem; */
+}
+
+
+
+/* :::::::::Format PDF Affichage:::::::::::::: */
+/* Facture Plomberie:::::::::::::::::: */
+/* Header 1::::: */
+#sectioncorps{
+    margin-left: 2%;
+    margin-right: 2%;
+    background: #fff;
+    border-radius: .5rem;
+    /* box-shadow: var(--box-shadow); */
+    /* border: var(--border); */
+    border: 1px solid #444;
+    margin-top: 4%;
+    padding: 2rem;
+}
+#sectioncorps .header{
+    display: flex;
+    justify-content: space-between;
+
+}
+#sectioncorps .header h3{
+    font-size: 2.0rem;
+    padding-top: 1.5%;
+}
+#sectioncorps .header img{
+    width: 7.5%;
+}
+
+/* Header 2:::::::*/
+.header2{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3%;
+}
+.header2 h4{
+    color: var(--green);
+}
+.header2 p{
+    margin-top: 10%;
+    color: var(--black);
+}
+
+
+
+/* tableau:::::::::: */
+.table{
+	width: 100%;
+	border-collapse: collapse;
+    margin-top: 5%;
+}
+
+.table td,.table th{
+  padding:12px 15px;
+  border:1px solid #ddd;
+  text-align: center;
+  font-size:16px;
+}
+
+.table th{
+	background: var(--green);
+	color:#ffffff;
+}
+
+.table tbody tr:nth-child(even){
+	background-color: #f5f5f5;
+}
+
+/*responsive tableau*/
+
+@media(max-width: 991px){
+	.table thead{
+		display: none;
+	}
+
+	.table, .table tbody, .table tr, .table td{
+		display: block;
+		width: 100%;
+	}
+	.table tr{
+		margin-bottom:15px;
+	}
+	.table td{
+		text-align: right;
+		padding-left: 50%;
+		text-align: right;
+		position: relative;
+	}
+	.table td::before{
+		content: attr(data-label);
+		position: absolute;
+		left:0;
+		width: 50%;
+		padding-left:15px;
+		font-size:15px;
+		font-weight: bold;
+		text-align: left;
+	}
+}
+
+
+/*::::::::::Montant::::::::: */
+.montant{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4%;
+    margin-left: 60%;
+    margin-right: 4%;
+}
+
+#design{
+    font-weight: bold;
+}
+.montant, .montant p{
+    line-height: 1.9;
+}
+
+/* ::::::::::::Condition:::::::::::::: */
+.condition h5{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.condition .modalite .tranche{
+    font-weight: bold;
+}
+.condition .modalite {
+    line-height: 1.5;
+}
+
+
+/* ::::::::::::::Button::::::::::::: */
+.buttonPDF{
+    display: flex;
+    justify-content: space-between;
+}
+.btn{
+    display: inline-block;
+    margin: 4%;
+    padding: .7rem;
+    padding-left: 1rem;
+    border: #fff;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    color: var(--green);
+    cursor: pointer;
+    font-size: 1.3rem;
+    background: #fff;
+}
+.btn span{
+    padding: .7rem 1rem;
+    border-radius: .5rem;
+    background: var(--green);
+    counter-reset: #fff;
+    margin-left: .5rem;
+}
+.btn:hover{
+    background: var(--green);
+    color: #FFF;
+}
+.btn:hover span{
+    color: var(--green);
+    background: #FFF;
+    margin-left: 1rem;
+}
+
+
+
+
+
+/* ::::::::::Responsivité:::::::::::::: */
+@media (max-width:650px){
+
+    /*::::Header 1:::::: */
+    #sectioncorps .header img{
+        width: 12%;
+    }
+    /* ::::::Montant::::::::::: */
+    .montant .containermontant1{
+        margin-left: -6rem;
+    }
+
+    /* :::::::::Button::::::::: */
+    .btn{
+        font-size: 1rem;
+    }
+}
+
+
+@media (max-width:550px){
+    
+      /*::::Header 1:::::: */
+      #sectioncorps .header img{
+        width: 16%;
+    }
+
+    .header2{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* crée 2 colonnes de largeur égale */
+        grid-gap: 15px; /* définit l'espace entre les boîtes */
+        padding-top: 1rem;
+    }
+
+    /* ::::::::::::Condition:::::::::::::: */
+    .condition h5{
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+    .condition .modalite .tranche{
+        font-size: 0.9rem;
+    }
+    /* :::::::::button:::::::: */
+    .btn span{
+        display: none;
+    }
+}
+
+@media (max-width:300px){
+    /*::::Header 1:::::: */
+    #sectioncorps .header img{
+      width: 23%;
+  }
+
+  /* ::::::::::::Condition:::::::::::::: */
+  .condition h5{
+      font-weight: bold;
+      font-size: 1.1rem;
+  }
+  #sectioncorps .header h3{
+    font-size: 1.7rem;
+    padding-top: 1.5%;
+}
+
+}
