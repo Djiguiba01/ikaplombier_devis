@@ -344,6 +344,44 @@ function calculerMontant() {
 calculerMontant();
 
 
+// :::::::::::::
+function verifierChampsObligatoires() {
+  var longueurInput = document.getElementById('longueur');
+  var largeurInput = document.getElementById('largeur');
+  var selectProduit = document.getElementById('selectProduit');
+
+  function afficherMessage(id) {
+    var message = "";
+    switch (id) {
+      case "longueur":
+        message = "Veuillez saisir la longueur du toît.";
+        break;
+      case "largeur":
+        message = "Veuillez saisir la largeur du toît.";
+        break;
+      case "selectProduit":
+        message = "Veuillez sélectionner un type de produit.";
+        break;
+    }
+    alert(message);
+  }
+
+  function verifierChampRempli(input, id) {
+    if (input.value === "") {
+      afficherMessage(id);
+    }
+  }
+
+  document.querySelector('.btn').addEventListener('click', function() {
+    verifierChampRempli(longueurInput, 'longueur');
+    verifierChampRempli(largeurInput, 'largeur');
+    verifierChampRempli(selectProduit, 'selectProduit');
+  });
+}
+
+verifierChampsObligatoires();
+
+
 
 </script>
 
