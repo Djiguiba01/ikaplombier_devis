@@ -200,7 +200,7 @@ Générer PDF
 }
 afficherContenu();
 
-// nom
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NOM SAISI:::::::::::::
 function afficherNom() {
   var nomInput = document.getElementById('nom');
   var afficheNom = document.querySelector('.affichenom');
@@ -212,7 +212,7 @@ function afficherNom() {
 }
 afficherNom();
 
-// per
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT PRENOM SAISI:::::::::::::
 function afficherPrenom() {
   var prenomInput = document.getElementById('prenom');
   var affichePrenom = document.querySelector('.afficheprenom');
@@ -224,7 +224,7 @@ function afficherPrenom() {
 }
 afficherPrenom();
 
-// :::::
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NUMERO SAISI:::::::::::::
 function afficherNumero() {
   var numeroInput = document.getElementById('numero');
   var afficheNumero = document.querySelector('.affichenum');
@@ -238,7 +238,7 @@ function afficherNumero() {
 afficherNumero();
 
 
-// :::::::::
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT VILLE SAISI:::::::::::::
 function afficherVille() {
   var villeInput = document.getElementById('ville');
   var afficheVille = document.querySelector('.afficheville');
@@ -250,7 +250,7 @@ function afficherVille() {
 }
 afficherVille();
 
-// ::::Longueur:::::::::
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT LONGUEUR SAISI:::::::::::::
 function recupererLongueur() {
   var longueurInput = document.getElementById('longueur');
   var longueurCell = document.querySelector('td[data-label="Longueur"]');
@@ -263,7 +263,7 @@ function recupererLongueur() {
 }
 recupererLongueur();
 
-// ::::::Largeur:::::::
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT LARGEUR SAISI:::::::::::::
 function afficherLargeur() {
   var largeurInput = document.getElementById('largeur');
   var largeurCell = document.querySelector('td[data-label="Largeur"]');
@@ -278,7 +278,7 @@ afficherLargeur();
 
 
 
-// ::::::::::
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT SELECT CHOISI:::::::::::::
 function afficherSelection() {
   var selectElement = document.getElementById('selectProduit');
   var typeProduitCell = document.querySelector('td[data-label="Type Produit"]');
@@ -293,7 +293,7 @@ function afficherSelection() {
 afficherSelection();
 
 
-// ::::::::Surface::::::
+// :::::: FONCTION QUI CALCUL LA SURFACE (LONGUEUR*LARGEUR):::::::::::::
 function calculerSurface() {
   var longueurInput = document.getElementById('longueur');
   var largeurInput = document.getElementById('largeur');
@@ -311,7 +311,7 @@ function calculerSurface() {
 }
 calculerSurface();
 
-// :::::::::::MONTANT:::::::
+// :::::: FONCTION QUI CALCUL (LONGUEUR+LARGEUR)*PRIX UNITAIRE:::::::::::::
 function calculerMontant() {
   var surfaceCell = document.querySelector('td[data-label="Surface"]');
   var montantCell = document.querySelector('td[data-label="Montant"]');
@@ -323,11 +323,10 @@ function calculerMontant() {
     montantCell.textContent = montant.toLocaleString('fr-FR') + ' Fcfa';
   });
 }
-
 calculerMontant();
 
 
-// :::::::::::::
+// ::::::::::::: RENDRE LES CHAMPS OBLIGATOIRE:::::::::::::::::::
 function verifierChampsObligatoires() {
   var longueurInput = document.getElementById('longueur');
   var largeurInput = document.getElementById('largeur');
