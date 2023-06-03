@@ -78,6 +78,7 @@ html{
 	width: 100%;
 	border-collapse: collapse;
     margin-top: 5%;
+    margin-left: 0.5%;
 }
 
 .table td,.table th{
@@ -131,6 +132,9 @@ html{
     table {
         Width: 95%;
         margin-left: 0;
+    }
+    .table {
+        margin-top: 7%;
     }
 
 .table td::before {
