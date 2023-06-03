@@ -358,9 +358,18 @@ function verifierChampsObligatoires() {
     verifierChampRempli(longueurInput, 'longueur');
     verifierChampRempli(largeurInput, 'largeur');
     verifierChampRempli(selectProduit, 'selectProduit');
+
+    // Vider les champs si la condition est remplie
+    if (longueurInput.value !== "" && largeurInput.value !== "" && selectProduit.value !== "") {
+      document.getElementById('ville').value = "";
+      document.getElementById('longueur').value = "";
+      document.getElementById('largeur').value = "";
+    }
   });
 }
 verifierChampsObligatoires();
+
+// ::::::
 
 
 
