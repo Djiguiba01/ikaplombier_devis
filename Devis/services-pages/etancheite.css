@@ -127,7 +127,19 @@ html{
 		text-align: left;
 	}
 }
+@media(max-width: 390px){
+    table {
+        Width: 95%;
+        margin-left: 0;
+    }
 
+.table td::before {
+    left: -11px;
+}
+.table td {
+    padding-left: 43%;
+}
+}
 
 /*::::::::::Montant::::::::: */
 .montant{
