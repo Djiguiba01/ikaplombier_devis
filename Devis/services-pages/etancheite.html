@@ -52,9 +52,14 @@
           <input type="text" min="1" placeholder="Ville/Quartier" class="form-control" id="ville" >
         </div>
 
-        <div class="form-wrapper">
-          <input type="text" placeholder="Surface" class="form-control" id="prixUnitaire">
+        <div class="form-group">
+          <input type="number" placeholder="Longueur du toît" class="form-control" id="longueur">
+          <input type="number" placeholder="Largeur du toît" class="form-control" id="largeur">
         </div>
+
+        <!-- <div class="form-wrapper">
+          <input type="text" placeholder="Surface" class="form-control" id="surface">
+        </div> -->
 
         <div class="form-wrapper">
           <select name="" id="selectProduit">
@@ -126,6 +131,8 @@
     <table class="table">
         <thead>
             <tr>
+             <th>Longueur</th>
+             <th>Largeur</th>
              <th>Surface</th>
              <th>Type Produit</th>
              <th>Montant</th>
@@ -133,9 +140,11 @@
         </thead>
         <tbody>
               <tr>
-                   <td data-label="Surface">Entrez surface</td>
-                    <td data-label="Type Produit"></td>
-                    <td data-label="Montant">33333333</td>
+                   <td data-label="Longueur">?</td>
+                   <td data-label="Largeur">?</td>
+                   <td data-label="Surface">?</td>
+                    <td data-label="Type Produit">?</td>
+                    <td data-label="Montant">?</td>
               </tr>
     
         </tbody>
@@ -258,6 +267,34 @@ function afficherVille() {
 }
 afficherVille();
 
+// ::::Longueur:::::::::
+function recupererLongueur() {
+  var longueurInput = document.getElementById('longueur');
+  var longueurCell = document.querySelector('td[data-label="Longueur"]');
+
+  // Événement pour récupérer la saisie
+  longueurInput.addEventListener('input', function() {
+    var longueur = longueurInput.value;
+    longueurCell.textContent = longueur + ' m';
+  });
+}
+recupererLongueur();
+
+// ::::::Largeur:::::::
+function afficherLargeur() {
+  var largeurInput = document.getElementById('largeur');
+  var largeurCell = document.querySelector('td[data-label="Largeur"]');
+
+  // Événement pour récupérer la saisie
+  largeurInput.addEventListener('input', function() {
+    var largeur = largeurInput.value;
+    largeurCell.textContent = largeur + ' m';
+  });
+}
+afficherLargeur();
+
+
+
 // ::::::::::
 function afficherSelection() {
   var selectElement = document.getElementById('selectProduit');
@@ -272,6 +309,39 @@ function afficherSelection() {
 }
 afficherSelection();
 
+
+// ::::::::Surface::::::
+function calculerSurface() {
+  var longueurInput = document.getElementById('longueur');
+  var largeurInput = document.getElementById('largeur');
+  var surfaceCell = document.querySelector('td[data-label="Surface"]');
+
+  longueurInput.addEventListener('input', updateSurface);
+  largeurInput.addEventListener('input', updateSurface);
+
+  function updateSurface() {
+    var longueur = longueurInput.value;
+    var largeur = largeurInput.value;
+    var surface = longueur * largeur;
+    surfaceCell.textContent = surface + ' m²';
+  }
+}
+calculerSurface();
+
+// :::::::::::MONTANT:::::::
+function calculerMontant() {
+  var surfaceCell = document.querySelector('td[data-label="Surface"]');
+  var montantCell = document.querySelector('td[data-label="Montant"]');
+  var btnElement = document.querySelector('.btn');
+
+  btnElement.addEventListener('click', function() {
+    var surface = parseFloat(surfaceCell.textContent);
+    var montant = surface * 11500;
+    montantCell.textContent = montant.toLocaleString('fr-FR') + ' Fcfa';
+  });
+}
+
+calculerMontant();
 
 
 
