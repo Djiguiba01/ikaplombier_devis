@@ -35,7 +35,7 @@
         <img src="image-services/logo1.png" alt="img">
       </div>
 
-      <form action="">
+      <form action="" >
 
         <h3>Devis Etancheité</h3>
 
@@ -53,24 +53,28 @@
           <input type="text" min="1" placeholder="Ville/Quartier" class="form-control" id="ville" >
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <input type="number" placeholder="Longueur du toît" class="form-control" id="longueur">
           <input type="number" placeholder="Largeur du toît" class="form-control" id="largeur">
+        </div> -->
+
+        <div class="form-group">
+          <input type="number" placeholder="Surface du toît" class="form-control" id="surface">
+
+            <select name="" id="selectProduit">
+              <option value="" disabled selected>Type Produit</option>
+              <option value="Goudron Toillettes">Goudron Toillettes</option>
+              <option value="Etancheité sur mur">Etancheité sur mur</option>
+              <option value="Passalite Toît">Passalite Toît</option>
+            </select>
         </div>
 
 
-        <div class="form-wrapper">
-          <select name="" id="selectProduit">
-            <option value="" disabled selected>Type Produit</option>
-            <option value="Goudron Toillettes">Goudron Toillettes</option>
-            <option value="Etancheité sur mur">Etancheité sur mur</option>
-            <option value="Passalite Toît">Passalite Toît</option>
-          </select>
-        </div>
+       
 
 
         <!-- Button Ajouter:::::::::::::: -->
-      <a href="#Devis" id="septcent" class="btn" style="text-decoration: none; " onclick="afficherContenu()">
+      <a href="#Devis" id="septcent" class="btn" style="text-decoration: none;" onclick="verifierChamps()"; onclick="calculerMontant()">
         AJOUTER 
         <span class="fas fa-chevron-right"></span>
       </a>
@@ -122,8 +126,8 @@
     <table class="table">
         <thead>
             <tr>
-             <th>Longueur</th>
-             <th>Largeur</th>
+             <!-- <th>Longueur</th>
+             <th>Largeur</th> -->
              <th>Surface</th>
              <th>Type Produit</th>
              <th>Montant</th>
@@ -131,11 +135,11 @@
         </thead>
         <tbody>
               <tr>
-                   <td data-label="Longueur">?</td>
-                   <td data-label="Largeur">?</td>
+                   <!-- <td data-label="Longueur">?</td>
+                   <td data-label="Largeur">?</td> -->
                    <td data-label="Surface">?</td>
-                    <td data-label="Type Produit">?</td>
-                    <td data-label="Montant">?</td>
+                   <td data-label="Type Produit">?</td>
+                   <td data-label="Montant">?</td>
               </tr>
     
         </tbody>
@@ -260,30 +264,45 @@ function afficherVille() {
 afficherVille();
 
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT LONGUEUR SAISI:::::::::::::
-function recupererLongueur() {
-  var longueurInput = document.getElementById('longueur');
-  var longueurCell = document.querySelector('td[data-label="Longueur"]');
+// function recupererLongueur() {
+//   var longueurInput = document.getElementById('longueur');
+//   var longueurCell = document.querySelector('td[data-label="Longueur"]');
 
-  // Événement pour récupérer la saisie
-  longueurInput.addEventListener('input', function() {
-    var longueur = longueurInput.value;
-    longueurCell.textContent = longueur + ' m';
-  });
-}
-recupererLongueur();
+//   // Événement pour récupérer la saisie
+//   longueurInput.addEventListener('input', function() {
+//     var longueur = longueurInput.value;
+//     longueurCell.textContent = longueur + ' m';
+//   });
+// }
+// recupererLongueur();
 
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT LARGEUR SAISI:::::::::::::
-function afficherLargeur() {
-  var largeurInput = document.getElementById('largeur');
-  var largeurCell = document.querySelector('td[data-label="Largeur"]');
+// function afficherLargeur() {
+//   var largeurInput = document.getElementById('largeur');
+//   var largeurCell = document.querySelector('td[data-label="Largeur"]');
 
-  // Événement pour récupérer la saisie
-  largeurInput.addEventListener('input', function() {
-    var largeur = largeurInput.value;
-    largeurCell.textContent = largeur + ' m';
+//   // Événement pour récupérer la saisie
+//   largeurInput.addEventListener('input', function() {
+//     var largeur = largeurInput.value;
+//     largeurCell.textContent = largeur + ' m';
+//   });
+// }
+// afficherLargeur();
+
+
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT LA SURFACE SAISI:::::::::::::
+function afficherSurface() {
+  var surfaceElement = document.getElementById('surface');
+  var surfaceCell = document.querySelector('td[data-label="Surface"]');
+
+  surfaceElement.addEventListener('input', function() {
+    var surface = surfaceElement.value;
+    surfaceCell.textContent = surface  + ' m²';
   });
 }
-afficherLargeur();
+
+afficherSurface();
+
 
 
 
@@ -303,24 +322,47 @@ afficherSelection();
 
 
 // :::::: FONCTION QUI CALCUL LA SURFACE (LONGUEUR*LARGEUR):::::::::::::
-function calculerSurface() {
-  var longueurInput = document.getElementById('longueur');
-  var largeurInput = document.getElementById('largeur');
-  var surfaceCell = document.querySelector('td[data-label="Surface"]');
+// function calculerSurface() {
+//   var longueurInput = document.getElementById('longueur');
+//   var largeurInput = document.getElementById('largeur');
+//   var surfaceCell = document.querySelector('td[data-label="Surface"]');
 
-  longueurInput.addEventListener('input', updateSurface);
-  largeurInput.addEventListener('input', updateSurface);
+//   longueurInput.addEventListener('input', updateSurface);
+//   largeurInput.addEventListener('input', updateSurface);
 
-  function updateSurface() {
-    var longueur = longueurInput.value;
-    var largeur = largeurInput.value;
-    var surface = longueur * largeur;
-    surfaceCell.textContent = surface + ' m²';
+//   function updateSurface() {
+//     var longueur = longueurInput.value;
+//     var largeur = largeurInput.value;
+//     var surface = longueur * largeur;
+//     surfaceCell.textContent = surface + ' m²';
+//   }
+// }
+// calculerSurface();
+
+// ::::::::::::: RENDRE LES CHAMPS OBLIGATOIRE:::::::::::::::::::
+function verifierChamps() {
+  var surfaceInput = document.getElementById('surface');
+  var selectProduit = document.getElementById('selectProduit');
+
+  var message = '';
+
+  // Vérifier le champ "surface"
+  if (surfaceInput.value === '') {
+    message += 'Le champ "Surface" est obligatoire. ';
+  }
+
+  // Vérifier le champ "selectProduit"
+  if (selectProduit.value === '') {
+    message += 'Le champ "Type Produit" est obligatoire. ';
+  }
+
+  // Afficher le message d'erreur ou vider les champs
+  if (message !== '') {
+    alert(message);
   }
 }
-calculerSurface();
 
-// :::::: FONCTION QUI CALCUL (LONGUEUR+LARGEUR)*PRIX UNITAIRE:::::::::::::
+// :::::: FONCTION QUI CALCUL (SURFACE * PRIX UNITAIRE(11500)):::::::::::::
 function calculerMontant() {
   var surfaceCell = document.querySelector('td[data-label="Surface"]');
   var montantCell = document.querySelector('td[data-label="Montant"]');
@@ -328,55 +370,26 @@ function calculerMontant() {
 
   btnElement.addEventListener('click', function() {
     var surface = parseFloat(surfaceCell.textContent);
-    var montant = surface * 11500;
-    montantCell.textContent = montant.toLocaleString('fr-FR') + ' Fcfa';
+    var selectProduit = document.getElementById('selectProduit').value;
+
+    if (surface && selectProduit) { // Vérifie si les éléments ne sont pas vides
+      var montant = surface * 11500;
+      montantCell.textContent = montant.toLocaleString('fr-FR') + ' Fcfa';
+
+      document.getElementById('surface').value = ''; // Vider le champ avec l'ID "surface"
+      document.getElementById('selectProduit').value = ''; // Vider le champ avec l'ID "selectProduit"
+
+    }
   });
 }
+
 calculerMontant();
 
 
-// ::::::::::::: RENDRE LES CHAMPS OBLIGATOIRE:::::::::::::::::::
-function verifierChampsObligatoires() {
-  var longueurInput = document.getElementById('longueur');
-  var largeurInput = document.getElementById('largeur');
-  var selectProduit = document.getElementById('selectProduit');
 
-  function afficherMessage(id) {
-    var message = "";
-    switch (id) {
-      case "longueur":
-        message = "Veuillez saisir la longueur du toît.";
-        break;
-      case "largeur":
-        message = "Veuillez saisir la largeur du toît.";
-        break;
-      case "selectProduit":
-        message = "Veuillez sélectionner un type de produit.";
-        break;
-    }
-    alert(message);
-  }
 
-  function verifierChampRempli(input, id) {
-    if (input.value === "") {
-      afficherMessage(id);
-    }
-  }
 
-  document.querySelector('.btn').addEventListener('click', function() {
-    verifierChampRempli(longueurInput, 'longueur');
-    verifierChampRempli(largeurInput, 'largeur');
-    verifierChampRempli(selectProduit, 'selectProduit');
 
-    // Vider les champs si la condition est remplie
-    if (longueurInput.value !== "" && largeurInput.value !== "" && selectProduit.value !== "") {
-      document.getElementById('ville').value = "";
-      document.getElementById('longueur').value = "";
-      document.getElementById('largeur').value = "";
-    }
-  });
-}
-verifierChampsObligatoires();
 
 // ::::::TELECHARGEMENT::::::::::::::::
 // :::::::PDF TELECHARGEMENT/////////
