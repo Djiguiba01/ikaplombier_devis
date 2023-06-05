@@ -5,23 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Etancheité</title>
+
   <!-- ::CSS::::::: -->
   <link rel="stylesheet" href="servicepages.css">
   <link rel="stylesheet" href="etancheite.css">
 
-
   <!-- ::::::cdn icon:::::::: -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-
 
    <!-- ::::PDF::::::::: -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 
-
-  
 </head>
 <body>
   
@@ -68,10 +63,6 @@
               <option value="Passalite Toît">Passalite Toît</option>
             </select>
         </div>
-
-
-       
-
 
         <!-- Button Ajouter:::::::::::::: -->
       <a href="#Devis" id="septcent" class="btn" style="text-decoration: none;" onclick="verifierChamps()"; onclick="calculerMontant()">
@@ -181,22 +172,13 @@
 <!-- :::::::::::BUTTON TELECHARGEMENT:::::::::::::: -->
 <button type="button" id="telecharger" style="display: none;" >Télécharger PDF</button>
 
-<!-- <div class="buttonPDF">
-<a href="#cc" class="btn" style="text-decoration: none;" >
-    Télécharger PDF 
-   <span class="fas fa-chevron-right"></span>
-</a>
-<a href="#cc" class="btn" style="text-decoration: none;" >
-Générer PDF 
-<span class="fas fa-chevron-right"></span>
-</a>
-</div> -->
 
 
 
 
-<!-- :::::::::::::::::::::::::::::::::::::: -->
+<!-- ::::::::::::::::::::SCRIPT:::::::::::::::::: -->
 <script>
+
   // ::::::FONCTION QUI AFFICHE TOUT LE CONTENU S'IL Y'A UN EVENNEMENT DANS 1 DES INPUTS::::::::
   function afficherContenu() {
   var sectioncorps = document.getElementById('sectioncorps');
@@ -213,6 +195,7 @@ Générer PDF
 }
 afficherContenu();
 
+
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NOM SAISI:::::::::::::
 function afficherNom() {
   var nomInput = document.getElementById('nom');
@@ -225,6 +208,7 @@ function afficherNom() {
 }
 afficherNom();
 
+
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT PRENOM SAISI:::::::::::::
 function afficherPrenom() {
   var prenomInput = document.getElementById('prenom');
@@ -236,6 +220,7 @@ function afficherPrenom() {
   });
 }
 afficherPrenom();
+
 
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NUMERO SAISI:::::::::::::
 function afficherNumero() {
@@ -262,6 +247,7 @@ function afficherVille() {
   });
 }
 afficherVille();
+
 
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT LONGUEUR SAISI:::::::::::::
 // function recupererLongueur() {
@@ -305,7 +291,6 @@ afficherSurface();
 
 
 
-
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT SELECT CHOISI:::::::::::::
 function afficherSelection() {
   var selectElement = document.getElementById('selectProduit');
@@ -339,6 +324,7 @@ afficherSelection();
 // }
 // calculerSurface();
 
+
 // ::::::::::::: RENDRE LES CHAMPS OBLIGATOIRE:::::::::::::::::::
 function verifierChamps() {
   var surfaceInput = document.getElementById('surface');
@@ -362,6 +348,7 @@ function verifierChamps() {
   }
 }
 
+
 // :::::: FONCTION QUI CALCUL (SURFACE * PRIX UNITAIRE(11500)):::::::::::::
 function calculerMontant() {
   var surfaceCell = document.querySelector('td[data-label="Surface"]');
@@ -376,19 +363,14 @@ function calculerMontant() {
       var montant = surface * 11500;
       montantCell.textContent = montant.toLocaleString('fr-FR') + ' Fcfa';
 
+      // :::::::::::
       document.getElementById('surface').value = ''; // Vider le champ avec l'ID "surface"
       document.getElementById('selectProduit').value = ''; // Vider le champ avec l'ID "selectProduit"
 
     }
   });
 }
-
 calculerMontant();
-
-
-
-
-
 
 
 // ::::::TELECHARGEMENT::::::::::::::::
@@ -433,11 +415,6 @@ function downloadPDF() {
 document.getElementById("telecharger").addEventListener("click", function () {
   downloadPDF();
 });
-
-
-
-
-
 
 
 </script>
