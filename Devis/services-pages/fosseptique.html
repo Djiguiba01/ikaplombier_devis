@@ -8,7 +8,7 @@
 
     <!-- ::CSS::::::: -->
   <link rel="stylesheet" href="servicepages.css">
-
+  <link rel="stylesheet" href="etancheite.css">
 
   <!-- ::::::cdn icon:::::::: -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -45,26 +45,29 @@
         </div>
 
         <div class="form-wrapper">
-          <input type="text"  placeholder="?" class="form-control" id="?" >
+          <input type="number"  placeholder="Votre numéro" class="form-control" id="numero" >
         </div>
 
         <div class="form-group">
-          <input type="text" placeholder="?" class="form-control" id="">
+            <select name="" id="selectfosse" style="width: 47%;">
+                <option value="" disabled selected>Type Fosse Septique</option>
+                <option value="Biofil">Biofil</option>
 
-            <select name="" id="selectProduit">
-              <option value="" disabled selected>Type ?</option>
-              <option value="?">?</option>
-              <option value="?">?</option>
-              <option value="?">?</option>
+              </select>
+
+            <select name="" id="selectzone" style="width: 47%; margin-left: 6%;">
+              <option value="" disabled selected>Zones</option>
+              <option value="Zone Standart">Standart</option>
+              <option value="Zone à Gravier">Gravier</option>
+              <option value="Zone Rocheuse">Rocheuse</option>
             </select>
         </div>
 
 
-       
-
+    
 
         <!-- Button Ajouter:::::::::::::: -->
-      <a href="#Devis" id="septcent" class="btn" style="text-decoration: none;" onclick="verifierChamps()"; onclick="calculerMontant()">
+      <a href="#Devis" id="septcent" class="btn" style="text-decoration: none;">
         AJOUTER 
         <span class="fas fa-chevron-right"></span>
       </a>
@@ -74,6 +77,223 @@
 
     </div>
   </div>
+
+
+    <!-- :::::::::::::AFFICHAGE DU FORMULAIRE::::::::::::: -->
+    <div class="telechargerpdf">
+        <section id="sectioncorps" style="display: none; margin-bottom: 4%;">
+      
+          <div class="header">
+              <h3>Fosse Septique</h3>
+              <img src="image-services/logo.png" alt="sss">
+          </div>
+      
+          <hr style="border: 1px solid #3f0dca; margin-top: 3%; margin-bottom: 3%;">
+      
+          <div class="header2">
+      
+              <div class="container1">
+                  <h4>Ika Plombier</h4>
+                  <p>Mali</p>
+                  <p>Halles de Bamako </p>
+              </div>
+      
+              <div class="container2">
+                  <h4>Envoyé à</h4>
+                  <p class="affichenom">?</p>
+                  <p class="afficheprenom"></p>
+              </div>
+      
+              <div class="container3">
+                  <h4 >Ville/Quartier</h4>
+                  <p class="afficheville">?</p>
+              </div>
+      
+              <div class="container3">
+                <h4>Numéro</h4>
+                <p class="affichenum">?</p>
+            </div>
+      
+          </div>
+      
+          <!-- :::Tableau::::::::::::: -->
+          <table class="table">
+              <thead>
+                  <tr>
+                   <th>Type de fosse</th>
+                   <th>Zone</th>
+                   <th>Montant</th>
+                  </tr>
+              </thead>
+              <tbody>
+                    <tr>
+                         <td data-label="Type de fosse">?</td>
+                         <td data-label="Zone">?</td>
+                         <td data-label="Montant">?</td>
+                    </tr>
+          
+              </tbody>
+            </table>
     
+      
+            <hr style="border: 1px solid #3f0dca; margin-top: 10%; margin-bottom: 2%;">
+      
+            <div class="condition">
+              <h5>Conditions et paiement</h5>
+              <div class="modalite">
+                  <div class="tranche">Le payement est dû en 2 tranches</div>
+                  <div class="num">
+                      <p>Numéro : (+223) 74 24 00 74</p>
+                      
+                  </div>
+              </div>
+            </div>
+      
+      </section>
+      </div>
+      
+      <!-- :::::::::::BUTTON TELECHARGEMENT:::::::::::::: -->
+      <button type="button" id="telecharger" style="display: none;" >Télécharger PDF</button>
+      
+
+      <!-- :::::::::::::::SCRIPT:::::::::::::: -->
+      <script>
+          // ::::::FONCTION QUI AFFICHE TOUT LE CONTENU S'IL Y'A UN EVENNEMENT DANS 1 DES INPUTS::::::::
+  function afficherContenu() {
+  var sectioncorps = document.getElementById('sectioncorps');
+  var telecharger = document.getElementById('telecharger');
+
+  // Événement pour les éléments d'entrée
+  var inputs = document.querySelectorAll('input');
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('input', function() {
+      sectioncorps.style.display = 'block';
+      telecharger.style.display = 'block';
+    });
+  }
+}
+afficherContenu();
+
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NOM SAISI:::::::::::::
+function afficherNom() {
+  var nomInput = document.getElementById('nom');
+  var afficheNom = document.querySelector('.affichenom');
+
+  nomInput.addEventListener('input', function() {
+    var nom = nomInput.value;
+    afficheNom.textContent = nom;
+  });
+}
+afficherNom();
+
+
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT PRENOM SAISI:::::::::::::
+function afficherPrenom() {
+  var prenomInput = document.getElementById('prenom');
+  var affichePrenom = document.querySelector('.afficheprenom');
+
+  prenomInput.addEventListener('input', function() {
+    var prenom = prenomInput.value;
+    affichePrenom.textContent = prenom;
+  });
+}
+afficherPrenom();
+
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT VILLE SAISI:::::::::::::
+function afficherVille() {
+  var villeInput = document.getElementById('ville');
+  var afficheVille = document.querySelector('.afficheville');
+
+  // Événement pour l'élément de saisie
+  villeInput.addEventListener('input', function() {
+    afficheVille.innerHTML = '<p>' + villeInput.value + '</p>';
+  });
+}
+afficherVille();
+
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NUMERO SAISI:::::::::::::
+function afficherNumero() {
+  var numeroInput = document.getElementById('numero');
+  var afficheNumero = document.querySelector('.affichenum');
+
+  // Événement pour récupérer la saisie
+  numeroInput.addEventListener('input', function() {
+    var numero = numeroInput.value;
+    afficheNumero.textContent = numero;
+  });
+}
+afficherNumero();
+
+// Fonction pour récupérer la valeur de "selectfosse" et l'afficher dans le tableau
+function afficherTypeFosse() {
+  var selectFosse = document.getElementById('selectfosse');
+  var typeFosse = document.querySelector('td[data-label="Type de fosse"]');
+
+  // Événement pour récupérer la valeur sélectionnée
+  selectFosse.addEventListener('change', function() {
+    typeFosse.textContent = selectFosse.value;
+  });
+}
+afficherTypeFosse();
+
+// Fonction pour récupérer la valeur de "afficherZone" et l'afficher dans le tableau
+function afficherZone() {
+  var selectZone = document.getElementById('selectzone');
+  var zone = document.querySelector('td[data-label="Zone"]');
+
+  // Événement pour récupérer la valeur sélectionnée
+  selectZone.addEventListener('change', function() {
+    zone.textContent = selectZone.value;
+  });
+}
+
+afficherZone();
+
+
+
+// Fonction pour afficher les montants en fonction de la sélection de "selectzone"
+function afficherMontant() {
+  var selectFosse = document.getElementById('selectfosse');
+  var selectZone = document.getElementById('selectzone');
+  var montant = document.querySelector('td[data-label="Montant"]');
+  var boutonAjouter = document.getElementById('septcent');
+
+  // Événement pour récupérer la valeur sélectionnée lors du clic sur le bouton "AJOUTER"
+  boutonAjouter.addEventListener('click', function() {
+    var valeurFosse = selectFosse.value;
+    var valeurZone = selectZone.value;
+
+    if (valeurFosse === "" || valeurZone === "") {
+      montant.textContent = "";
+      if (valeurFosse === "") {
+        alert("Veuillez sélectionner le type de fosse.");
+      }
+      if (valeurZone === "") {
+        alert("Veuillez sélectionner la zone.");
+      }
+    } else {
+      switch (valeurZone) {
+        case "Zone Standart":
+          montant.textContent = "50 000" + ' fcfa';
+          break;
+        case "Zone à Gravier":
+          montant.textContent = "60 000" + ' fcfa';
+          break;
+        case "Zone Rocheuse":
+          montant.textContent = "750 000" + ' fcfa';
+          break;
+        default:
+          montant.textContent = "?";
+          break;
+      }
+    }
+  });
+}
+afficherMontant();
+
+
+
+
+      </script>    
 </body>
 </html>
