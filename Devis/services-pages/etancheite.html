@@ -82,8 +82,8 @@
   </div>
 
   <!-- :::::::::::::AFFICHAGE DU FORMULAIRE::::::::::::: -->
-  <div class="telechargerpdf" style="">
-  <section id="sectioncorps" style="display: none; margin-top: 5%; margin-bottom: 5%;">
+  <div class="telechargerpdf" style="border: 1px red solid;">
+  <section id="sectioncorps" style="display: none;">
 
     <div class="header">
         <h3>Etancheité</h3>
@@ -406,7 +406,11 @@ function downloadPDF() {
     scrollY: 0,
     windowWidth: document.documentElement.offsetWidth,
     windowHeight: document.documentElement.offsetHeight,
-    useCORS: true
+    useCORS: true,
+    padding: {
+      top: '3%',
+      bottom: '3%'
+    }
   }).then(function (canvas) {
     var imgData = canvas.toDataURL("image/png", 1.0);
     var pdf = new jsPDF("p", "mm", "a4");
