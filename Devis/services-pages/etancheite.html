@@ -379,23 +379,49 @@ function verifierChampsObligatoires() {
 verifierChampsObligatoires();
 
 // ::::::TELECHARGEMENT::::::::::::::::
-function telechargerContenu() {
-  var telechargerBtn = document.getElementById('telecharger');
-  var telechargerPdfDiv = document.querySelector('.telechargerpdf');
+// :::::::PDF TELECHARGEMENT/////////
+// Transformation en image
+window.html2canvas = html2canvas;
+window.jsPDF = window.jspdf.jsPDF;
 
-  telechargerBtn.addEventListener('click', function() {
-    var pdfElement = telechargerPdfDiv.cloneNode(true);
-    pdfElement.style.display = 'block';
-    
-    html2canvas(pdfElement).then(function(canvas) {
-      var pdf = new jsPDF('p', 'mm', 'a4');
-      var imgData = canvas.toDataURL('image/png');
-      pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
-      pdf.save('contenu.pdf');
-    });
+function makePDF() {
+  html2canvas(document.querySelector("#capture"), {
+    allowTaint: true,
+    useCORS: true,
+    scale: 1
+  }).then(canvas => {
+    var img = canvas.toDataURL("image/png");
+
+    var doc = new jsPDF();
+    doc.setFont('Arial');
+    doc.save("plomberie.pdf");
   });
 }
-telechargerContenu();
+
+function downloadPDF() {
+  var element = document.querySelector(".telechargerpdf");
+  html2canvas(element, {
+    scale: 2,
+    scrollX: 0,
+    scrollY: 0,
+    windowWidth: document.documentElement.offsetWidth,
+    windowHeight: document.documentElement.offsetHeight,
+    useCORS: true
+  }).then(function (canvas) {
+    var imgData = canvas.toDataURL("image/png", 1.0);
+    var pdf = new jsPDF("p", "mm", "a4");
+    var width = pdf.internal.pageSize.getWidth();
+    var height = pdf.internal.pageSize.getHeight();
+
+    pdf.addImage(imgData, "PNG", 0, 0, width, height);
+    pdf.save("plombier.pdf");
+  });
+}
+
+document.getElementById("telecharger").addEventListener("click", function () {
+  downloadPDF();
+});
+
 
 
 
