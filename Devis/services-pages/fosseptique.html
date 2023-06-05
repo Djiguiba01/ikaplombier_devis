@@ -286,6 +286,10 @@ function afficherMontant() {
           montant.textContent = "?";
           break;
       }
+
+      // Vider les champs après l'affichage du montant
+      selectFosse.value = "";
+      selectZone.value = "";
     }
   });
 }
