@@ -13,6 +13,10 @@
   <!-- ::::::cdn icon:::::::: -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+   <!-- ::::PDF::::::::: -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+
 
   
 </head>
@@ -75,7 +79,8 @@
   </div>
 
   <!-- :::::::::::::AFFICHAGE DU FORMULAIRE::::::::::::: -->
-  <section id="sectioncorps" style="display: none;">
+  <div class="telechargerpdf">
+  <section id="sectioncorps" style="display: none;" >
 
     <div class="header">
         <h3>Etancheité</h3>
@@ -164,6 +169,7 @@
       </div>
 
 </section>
+</div>
 
 <!-- :::::::::::BUTTON TELECHARGEMENT:::::::::::::: -->
 <button type="button" id="telecharger" style="display: none;" >Télécharger PDF</button>
@@ -369,7 +375,23 @@ function verifierChampsObligatoires() {
 }
 verifierChampsObligatoires();
 
-// ::::::
+// ::::::TELECHARGEMENT::::::::::::::::
+function telechargerContenu() {
+  var telechargerButton = document.getElementById('telecharger');
+  var telechargerPDF = document.getElementById('telechargerpdf');
+
+  telechargerButton.addEventListener('click', function() {
+    var doc = new jsPDF();
+    html2canvas(telechargerPDF).then(function(canvas) {
+      var imgData = canvas.toDataURL('image/jpeg', 1.0);
+      doc.addImage(imgData, 'JPEG', 10, 10);
+      doc.save('telechargement.pdf');
+    });
+  });
+}
+telechargerContenu();
+
+
 
 
 
