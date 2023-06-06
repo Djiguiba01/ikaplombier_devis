@@ -49,13 +49,14 @@
         </div>
 
         <div class="form-group">
-          <select name="" id="selectfosse" style="width: 47%;">
+          <select name="" id="selecttype" style="width: 47%;">
               <option value="" disabled selected>Type</option>
               <option value="Forage">Forage</option>
               <option value="Adduction d'éau">Adduction d'éau</option>
             </select>
 
-          <select name="" id="selectzone" style="width: 47%; margin-left: 6%;">
+            <!-- :::::::AFFICHE FORAGE::::::::::::: -->
+          <select name="" class="afficheforage" id="selectzone" style="width: 47%; margin-left: 6%; display: none;">
             <option value="" disabled selected>Zones</option>
             <option value="Standart">Sableuse</option>
             <option value="Rocheuse">Rocheuse</option>
@@ -64,16 +65,30 @@
           </select>
       </div>
 
-        <!-- <div class="form-group">
-          <input type="number" placeholder="Surface du toît" class="form-control" id="surface">
+          <!-- :::::::AFFICHE FORAGE::::::::::::: -->
+        <div class="form-group" class="afficheforage" style="display: none;">
+          <input type="number" min="1" placeholder="Combien de mètre" class="form-control" id="metre">
 
-            <select name="" id="selectProduit">
-              <option value="" disabled selected>Type Produit</option>
-              <option value="Goudron Toillettes">Goudron Toillettes</option>
-              <option value="Etancheité sur mur">Etancheité sur mur</option>
-              <option value="Passalite Toît">Passalite Toît</option>
-            </select>
-        </div> -->
+          <select name="" id="selectequipe" style="width: 47%;">
+            <option value="" disabled selected>Equipements</option>
+            <option value="Equipe">Equipé</option>
+            <option value="Nom Equipe">Non équipé</option>
+          </select>
+        </div>
+
+        <!-- :::::::AFFICHE ADDUCTIOND'EAU::::::::::::: -->
+         <div class="form-group" class="afficheadduction" style="display: none;">
+        <select name="" id="selecteq" style="width: 47%;">
+            <option value="" disabled selected>???Equipements</option>
+            <option value="Equipe">Equipé</option>
+            <option value="Nom Equipe">Non équipé</option>
+          </select>
+
+         <select name="" id="selectzone" style="width: 47%; margin-left: 6%;">
+          <option value="" disabled selected>???</option>
+          <option value="Standart">???</option>
+        </select> 
+    </div>
 
         <!-- Button Ajouter:::::::::::::: -->
       <a href="#Devis" id="septcent" class="btn" style="text-decoration: none;" onclick="verifierChamps()"; onclick="calculerMontant()">
@@ -256,6 +271,13 @@ afficherTypeFosse();
 
 
 // :::::::::::: AAAAAAAA :::::::::::::::::::::
+
+
+
+
+
+
+
 
 
 
