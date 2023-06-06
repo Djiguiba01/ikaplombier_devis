@@ -52,11 +52,11 @@
           <select name="" id="selecttype" style="width: 47%;">
               <option value="" disabled selected>Type</option>
               <option value="Forage">Forage</option>
-              <option value="Adduction d'éau">Adduction d'éau</option>
+              <option value="Adduction">Adduction d'éau</option>
             </select>
 
             <!-- :::::::AFFICHE FORAGE::::::::::::: -->
-          <select name="" class="afficheforage" id="selectzone" style="width: 47%; margin-left: 6%; display: none;">
+          <select name="" id="selectzone" style="width: 47%; margin-left: 6%; display: none;">
             <option value="" disabled selected>Zones</option>
             <option value="Standart">Sableuse</option>
             <option value="Rocheuse">Rocheuse</option>
@@ -66,32 +66,34 @@
       </div>
 
           <!-- :::::::AFFICHE FORAGE::::::::::::: -->
-        <div class="form-group" class="afficheforage" style="display: none;">
-          <input type="number" min="1" placeholder="Combien de mètre" class="form-control" id="metre">
+        <div class="form-group" >
+          <input type="number" min="1" placeholder="Combien de mètre" class="form-control" id="metre" style="display: none;">
 
-          <select name="" id="selectequipe" style="width: 47%;">
+          <select name="" id="selectequipe" style="width: 47%; display: none;">
             <option value="" disabled selected>Equipements</option>
             <option value="Equipe">Equipé</option>
             <option value="Nom Equipe">Non équipé</option>
           </select>
+          
         </div>
 
+        
+
         <!-- :::::::AFFICHE ADDUCTIOND'EAU::::::::::::: -->
-         <div class="form-group" class="afficheadduction" style="display: none;">
-        <select name="" id="selecteq" style="width: 47%;">
+         <div class="form-group" >
+        <select name="" id="selectadduct" style="width: 47%; display: none;">
             <option value="" disabled selected>???Equipements</option>
-            <option value="Equipe">Equipé</option>
-            <option value="Nom Equipe">Non équipé</option>
+            <option value="Equipesq">Equipé</option>
           </select>
 
-         <select name="" id="selectzone" style="width: 47%; margin-left: 6%;">
+         <!-- <select name="" id="selectzone" style="width: 47%; margin-left: 6%;">
           <option value="" disabled selected>???</option>
           <option value="Standart">???</option>
-        </select> 
+        </select>  -->
     </div>
 
         <!-- Button Ajouter:::::::::::::: -->
-      <a href="#Devis" id="septcent" class="btn" style="text-decoration: none;" onclick="verifierChamps()"; onclick="calculerMontant()">
+      <a href="#Devis" id="septcent" class="btn" style="text-decoration: none;" onclick="verifierChamps()">
         AJOUTER 
         <span class="fas fa-chevron-right"></span>
       </a>
@@ -270,7 +272,43 @@ function afficherTypeFosse() {
 afficherTypeFosse();
 
 
-// :::::::::::: AAAAAAAA :::::::::::::::::::::
+// :::::::::::: AFFICHER SI ON CHOISI SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
+function afficherContenu() {
+  // Les contenu qui être affiché
+  var selectType = document.getElementById('selecttype');
+  var selectZone = document.getElementById('selectzone');
+  var inputMetre = document.getElementById('metre');
+  var selectEquipe = document.getElementById('selectequipe');
+  var selectAdduct = document.getElementById('selectadduct');
+
+  selectType.addEventListener('change', function() {
+    
+    if (selectType.value === 'Forage') { // Pour affiché les champs de Forage
+      selectZone.style.display = 'block';
+      inputMetre.style.display = 'block';
+      selectEquipe.style.display = 'block';
+      selectAdduct.style.display = 'none';
+     
+    } else if (selectType.value === 'Adduction') { // Pour affiché les champs d'Adduction
+      selectZone.style.display = 'none';
+      inputMetre.style.display = 'none';
+      selectEquipe.style.display = 'none';
+      selectAdduct.style.display = 'block';
+      
+    } else { // Par défaut faire disparître
+      selectZone.style.display = 'none';
+      inputMetre.style.display = 'none';
+      selectEquipe.style.display = 'none';
+      selectAdduct.style.display = 'none';
+    }
+  });
+}
+afficherContenu(); // appel à la fonction
+
+
+
+
+
 
 
 
