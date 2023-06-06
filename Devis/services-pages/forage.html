@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forage Adduction d'eau</title>
+
+  <!-- ::CSS::::::: -->
+  <link rel="stylesheet" href="servicepages.css">
+  <link rel="stylesheet" href="fossetancheite.css">
+
+  <!-- ::::::cdn icon:::::::: -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   <!-- ::::PDF::::::::: -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+
+</head>
+<body>
+  
+
+  <!-- ::::::::FORMULAIRE::::::::::: -->
+  <div class="wrapper">
+
+    <div class="inner">
+
+      <div class="image-holder">
+        <img src="image-services/logo1.png" alt="img">
+      </div>
+
+      <form action="" >
+
+        <h3>Devis Forage adduction d'eau </h3>
+
+        <div class="form-group">
+          <input type="text" placeholder="Votre nom" class="form-control" id="nom">
+          <input type="text" placeholder="Votre prenom" class="form-control" id="prenom">
+        </div>
+
+
+        <div class="form-wrapper">
+          <input type="number" maxlength="8" placeholder="Numéro" class="form-control" id="numero">
+        </div>
+
+        <div class="form-wrapper">
+          <input type="text" min="1" placeholder="Ville/Quartier" class="form-control" id="ville" >
+        </div>
+
+        <!-- <div class="form-group">
+          <input type="number" placeholder="Longueur du toît" class="form-control" id="longueur">
+          <input type="number" placeholder="Largeur du toît" class="form-control" id="largeur">
+        </div> -->
+
+        <div class="form-group">
+          <input type="number" placeholder="Surface du toît" class="form-control" id="surface">
+
+            <select name="" id="selectProduit">
+              <option value="" disabled selected>Type Produit</option>
+              <option value="Goudron Toillettes">Goudron Toillettes</option>
+              <option value="Etancheité sur mur">Etancheité sur mur</option>
+              <option value="Passalite Toît">Passalite Toît</option>
+            </select>
+        </div>
+
+        <!-- Button Ajouter:::::::::::::: -->
+      <a href="#Devis" id="septcent" class="btn" style="text-decoration: none;" onclick="verifierChamps()"; onclick="calculerMontant()">
+        AJOUTER 
+        <span class="fas fa-chevron-right"></span>
+      </a>
+     
+        
+      </form>
+
+    </div>
+  </div>
+
+  <!-- :::::::::::::AFFICHAGE DU FORMULAIRE::::::::::::: -->
+  <div class="telechargerpdf">
+  <section id="sectioncorps" style="display: none; margin-bottom: 4%;">
+
+    <div class="header">
+        <h3>Devis Forage</h3>
+        <img src="image-services/logo.png" alt="sss">
+    </div>
+
+    <hr style="border: 1px solid #3f0dca; margin-top: 3%; margin-bottom: 3%;">
+
+    <div class="header2">
+
+        <div class="container1">
+            <h4>Ika Plombier</h4>
+            <p>Mali</p>
+            <p>Halles de Bamako </p>
+        </div>
+
+        <div class="container2">
+            <h4>Envoyé à</h4>
+            <p class="affichenom">?</p>
+            <p class="afficheprenom"></p>
+        </div>
+
+        <div class="container3">
+            <h4 >Ville/Quartier</h4>
+            <p class="afficheville">?</p>
+        </div>
+
+        <div class="container3">
+          <h4>Numéro</h4>
+          <p class="affichenum">?</p>
+      </div>
+
+    </div>
+
+    <!-- :::Tableau::::::::::::: -->
+    <table class="table">
+        <thead>
+            <tr>
+             <th>Surface</th>
+             <th>Type Produit</th>
+             <th>Montant</th>
+            </tr>
+        </thead>
+        <tbody>
+              <tr>
+                   <td data-label="aa?">?</td>
+                   <td data-label="bb?">?</td>
+                   <td data-label="cc?">?</td>
+              </tr>
+    
+        </tbody>
+      </table>
+
+
+      <hr style="border: 1px solid #3f0dca; margin-top: 10%; margin-bottom: 2%;">
+
+      <div class="condition">
+        <h5>Conditions et paiement</h5>
+        <div class="modalite">
+            <div class="tranche">Le payement est dû en 2 tranches</div>
+            <div class="num">
+                <p>Numéro : (+223) 74 24 00 74</p>
+                
+            </div>
+        </div>
+      </div>
+
+</section>
+</div>
+
+<!-- :::::::::::BUTTON TELECHARGEMENT:::::::::::::: -->
+<button type="button" id="telecharger" style="display: none;" >Télécharger PDF</button>
+
+
+
+
+
+<!-- ::::::::::::::::::::SCRIPT:::::::::::::::::: -->
+<script>
+
+  // ::::::FONCTION QUI AFFICHE TOUT LE CONTENU S'IL Y'A UN EVENNEMENT DANS 1 DES INPUTS::::::::
+  function afficherContenu() {
+  var sectioncorps = document.getElementById('sectioncorps');
+  var telecharger = document.getElementById('telecharger');
+
+  // Événement pour les éléments d'entrée
+  var inputs = document.querySelectorAll('input');
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('input', function() {
+      sectioncorps.style.display = 'block';
+      telecharger.style.display = 'block';
+    });
+  }
+}
+afficherContenu();
+
+
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NOM SAISI:::::::::::::
+function afficherNom() {
+  var nomInput = document.getElementById('nom');
+  var afficheNom = document.querySelector('.affichenom');
+
+  nomInput.addEventListener('input', function() {
+    var nom = nomInput.value;
+    afficheNom.textContent = nom;
+  });
+}
+afficherNom();
+
+
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT PRENOM SAISI:::::::::::::
+function afficherPrenom() {
+  var prenomInput = document.getElementById('prenom');
+  var affichePrenom = document.querySelector('.afficheprenom');
+
+  prenomInput.addEventListener('input', function() {
+    var prenom = prenomInput.value;
+    affichePrenom.textContent = prenom;
+  });
+}
+afficherPrenom();
+
+
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT VILLE SAISI:::::::::::::
+function afficherVille() {
+  var villeInput = document.getElementById('ville');
+  var afficheVille = document.querySelector('.afficheville');
+
+  // Événement pour l'élément de saisie
+  villeInput.addEventListener('input', function() {
+    afficheVille.innerHTML = '<p>' + villeInput.value + '</p>';
+  });
+}
+afficherVille();
+
+
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NUMERO SAISI:::::::::::::
+function afficherNumero() {
+  var numeroInput = document.getElementById('numero');
+  var afficheNumero = document.querySelector('.affichenum');
+
+  // Événement pour récupérer la saisie
+  numeroInput.addEventListener('input', function() {
+    var numero = numeroInput.value;
+    afficheNumero.textContent = numero;
+  });
+}
+afficherNumero();
+
+
+// Fonction pour récupérer la valeur de "selectfosse" et l'afficher dans le tableau
+function afficherTypeFosse() {
+  var selectFosse = document.getElementById('selectfosse');
+  var typeFosse = document.querySelector('td[data-label="Type de fosse"]');
+
+  // Événement pour récupérer la valeur sélectionnée
+  selectFosse.addEventListener('change', function() {
+    typeFosse.textContent = selectFosse.value;
+  });
+}
+afficherTypeFosse();
+
+
+// :::::::::::: AAAAAAAA :::::::::::::::::::::
+
+</script>
+
+
+ 
+</body>
+</html>
