@@ -389,7 +389,7 @@ function makePDF() {
 
     var doc = new jsPDF();
     doc.setFont('Arial');
-    doc.save("plomberie.pdf");
+    doc.save("etancheite.pdf");
   });
 }
 
@@ -409,7 +409,7 @@ function downloadPDF() {
     var height = pdf.internal.pageSize.getHeight();
 
     pdf.addImage(imgData, "PNG", 0, 0, width, height);
-    pdf.save("plombier.pdf");
+    pdf.save("etancheite.pdf");
   });
 }
 document.getElementById("telecharger").addEventListener("click", function () {
