@@ -408,7 +408,7 @@ function makePDF() {
 
     var doc = new jsPDF();
     doc.setFont('Arial');
-    doc.save("forage.pdf");
+    doc.save("forageadduct.pdf");
   });
 }
 
@@ -428,13 +428,12 @@ function downloadPDF() {
     var height = pdf.internal.pageSize.getHeight();
 
     pdf.addImage(imgData, "PNG", 0, 0, width, height);
-    pdf.save("forage.pdf");
+    pdf.save("forageadduct.pdf");
   });
 }
 document.getElementById("telecharger").addEventListener("click", function () {
   downloadPDF();
 });
-
 
 </script>
 
