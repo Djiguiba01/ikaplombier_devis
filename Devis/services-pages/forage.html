@@ -17,6 +17,38 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 
+   <style>
+    @media(max-width: 1800px){
+    .table thead{
+		display: none;
+	}
+
+	.table, .table tbody, .table tr, .table td{
+		display: block;
+		width: 100%;
+	}
+	.table tr{
+		margin-bottom:15px;
+	}
+	.table td{
+		text-align: right;
+		padding-left: 50%;
+		text-align: right;
+		position: relative;
+	}
+	.table td::before{
+		content: attr(data-label);
+		position: absolute;
+		left:0;
+		width: 50%;
+		padding-left:15px;
+		font-size:15px;
+		font-weight: bold;
+		text-align: left;
+	}
+}
+
+   </style>
 </head>
 <body>
   
@@ -145,30 +177,31 @@
 
     <!-- :::Tableau::::::::::::: -->
     <table class="table">
-        <thead>
-            <tr>
-             <th>Surface</th>
-             <th>Type Produit</th>
+
+              <!-- :::::::::FORAGE ENTETE::::::::: -->
+        <thead >
+            <tr >
+             <th>Zone</th>
+             <th>Mètre</th>
+             <th>Equipement</th>
              <th>Montant</th>
             </tr>
         </thead>
 
+
         <!-- :::::::::FORAGE::::::::: -->
         <tbody id="tableauforage" style="display: none;">
               <tr>
-                   <td data-label="Zone" id="zonetableau" >?</td>
-                   <td data-label="Mètre" id="metretablea" >?</td>
-                   <td data-label="Equipement" id="equipetableau">?</td>
-                   <td data-label="Montant" id="montanttableau" >?</td>
+                   <td data-label="Zone" id="zonetableau" >vvvvvv?</td>
+                   <td data-label="Mètre" id="metretablea" >vvvvvv?</td>
+                   <td data-label="Equipement" id="equipetableau">uuuuu?</td>
+                   <td data-label="Montant" id="montanttableau" >hhhhh?</td>
               </tr>
-    
         </tbody>
 
-        <!-- ::::ADDUCTION::::::: -->
+        <!-- ::::::::ADDUCTION::::::: -->
         <tbody id="tableauadduction" style="display: none;">
           <tr>
-                   <td data-label="cc?" id="equipetableau" >?</td>
-                   <td data-label="cc?" id="equipetableau" >?</td>
                    <td data-label="cc?" id="equipetableau" >?</td>
                    <td data-label="cc?" id="equipetableau" >?</td>
 
@@ -270,6 +303,7 @@ function afficherContenuSelectTable() {
   });
 }
 afficherContenuSelectTable();
+
 
 
 
