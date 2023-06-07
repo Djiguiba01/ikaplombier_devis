@@ -73,7 +73,7 @@
 
 
         <div class="form-wrapper">
-          <input type="number" maxlength="8" placeholder="Numéro" class="form-control" id="numero">
+          <input type="number" min="1" maxlength="8" placeholder="Numéro" class="form-control" id="numero">
         </div>
 
         <div class="form-wrapper">
@@ -192,10 +192,10 @@
         <!-- :::::::::FORAGE::::::::: -->
         <tbody id="tableauforage" style="display: none;">
               <tr>
-                   <td data-label="Zone" id="zonetableau" >vvvvvv?</td>
-                   <td data-label="Mètre" id="metretablea" >vvvvvv?</td>
-                   <td data-label="Equipement" id="equipetableau">uuuuu?</td>
-                   <td data-label="Montant" id="montanttableau" >hhhhh?</td>
+                   <td data-label="Zone"  >?</td>
+                   <td data-label="Mètre"  >vvvvvv?</td>
+                   <td data-label="Equipement" >uuuuu?</td>
+                   <td data-label="Montant"  >hhhhh?</td>
               </tr>
         </tbody>
 
@@ -375,6 +375,11 @@ function afficherTypeFosse() {
   });
 }
 afficherTypeFosse();
+
+
+// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT ZONE SELECT:::::::::::::
+
+
 
 
 
