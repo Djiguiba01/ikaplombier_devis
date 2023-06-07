@@ -154,21 +154,24 @@
         </thead>
 
         <!-- :::::::::FORAGE::::::::: -->
-        <tbody>
+        <tbody id="tableauforage" style="display: none;">
               <tr>
-                   <td data-label="aa?">?</td>
-                   <td data-label="bb?">?</td>
-                   <td data-label="cc?">?</td>
+                   <td data-label="Zone" id="zonetableau" >?</td>
+                   <td data-label="Mètre" id="metretablea" >?</td>
+                   <td data-label="Equipement" id="equipetableau">?</td>
+                   <td data-label="Montant" id="montanttableau" >?</td>
               </tr>
     
         </tbody>
 
         <!-- ::::ADDUCTION::::::: -->
-        <tbody>
+        <tbody id="tableauadduction" style="display: none;">
           <tr>
-               <td data-label="aa?">?</td>
-               <td data-label="bb?">?</td>
-               <td data-label="cc?">?</td>
+                   <td data-label="cc?" id="equipetableau" >?</td>
+                   <td data-label="cc?" id="equipetableau" >?</td>
+                   <td data-label="cc?" id="equipetableau" >?</td>
+                   <td data-label="cc?" id="equipetableau" >?</td>
+
           </tr>
 
     </tbody>
@@ -218,8 +221,7 @@
 afficherContenu();
 
 
-// :::::::::::: AFFICHER SI ON CHOISI SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
-// Fonction pour afficher les contenus en fonction de la sélection du select
+// :::::::DANS LA FORM AFFICHER LES CONTENUS EN FONCTIONDE LA SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
 function afficherContenuSelect() {
   var selectType = document.getElementById('selecttype');
   var selectZone = document.getElementById('selectzone');
@@ -248,7 +250,26 @@ function afficherContenuSelect() {
 }
 afficherContenuSelect();
 
+// :::::::DANS LE TABLEAU AFFICHER LES CONTENUS EN FONCTIONDE LA SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
+function afficherContenuSelectTable() {
+  var selectType = document.getElementById('selecttype');
+  var tableauforage = document.getElementById('tableauforage');
+  var tableauadduction = document.getElementById('tableauadduction');
 
+  selectType.addEventListener('change', function() {
+    if (selectType.value === 'Forage') {
+      tableauforage.style.display = 'block';
+      tableauadduction.style.display = 'none';
+    } else if (selectType.value === 'Adduction') {
+      tableauforage.style.display = 'none';
+      tableauadduction.style.display = 'block';
+    } else {
+      tableauforage.style.display = 'none';
+      tableauadduction.style.display = 'none';
+    }
+  });
+}
+afficherContenuSelectTable();
 
 
 
