@@ -152,6 +152,8 @@
              <th>Montant</th>
             </tr>
         </thead>
+
+        <!-- :::::::::FORAGE::::::::: -->
         <tbody>
               <tr>
                    <td data-label="aa?">?</td>
@@ -160,6 +162,16 @@
               </tr>
     
         </tbody>
+
+        <!-- ::::ADDUCTION::::::: -->
+        <tbody>
+          <tr>
+               <td data-label="aa?">?</td>
+               <td data-label="bb?">?</td>
+               <td data-label="cc?">?</td>
+          </tr>
+
+    </tbody>
       </table>
 
 
@@ -204,6 +216,44 @@
   }
 }
 afficherContenu();
+
+
+// :::::::::::: AFFICHER SI ON CHOISI SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
+// Fonction pour afficher les contenus en fonction de la sélection du select
+function afficherContenuSelect() {
+  var selectType = document.getElementById('selecttype');
+  var selectZone = document.getElementById('selectzone');
+  var inputMetre = document.getElementById('metre');
+  var selectEquipe = document.getElementById('selectequipe');
+  var selectAdduct = document.getElementById('selectadduct');
+
+  selectType.addEventListener('change', function() {
+    if (selectType.value === 'Forage') {
+      selectZone.style.display = 'block';
+      inputMetre.style.display = 'block';
+      selectEquipe.style.display = 'block';
+      selectAdduct.style.display = 'none';
+    } else if (selectType.value === 'Adduction') {
+      selectZone.style.display = 'none';
+      inputMetre.style.display = 'none';
+      selectEquipe.style.display = 'none';
+      selectAdduct.style.display = 'block';
+    } else {
+      selectZone.style.display = 'none';
+      inputMetre.style.display = 'none';
+      selectEquipe.style.display = 'none';
+      selectAdduct.style.display = 'none';
+    }
+  });
+}
+afficherContenuSelect();
+
+
+
+
+
+
+
 
 
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NOM SAISI:::::::::::::
@@ -271,39 +321,6 @@ function afficherTypeFosse() {
 }
 afficherTypeFosse();
 
-
-// :::::::::::: AFFICHER SI ON CHOISI SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
-function afficherContenu() {
-  // Les contenu qui être affiché
-  var selectType = document.getElementById('selecttype');
-  var selectZone = document.getElementById('selectzone');
-  var inputMetre = document.getElementById('metre');
-  var selectEquipe = document.getElementById('selectequipe');
-  var selectAdduct = document.getElementById('selectadduct');
-
-  selectType.addEventListener('change', function() {
-    
-    if (selectType.value === 'Forage') { // Pour affiché les champs de Forage
-      selectZone.style.display = 'block';
-      inputMetre.style.display = 'block';
-      selectEquipe.style.display = 'block';
-      selectAdduct.style.display = 'none';
-     
-    } else if (selectType.value === 'Adduction') { // Pour affiché les champs d'Adduction
-      selectZone.style.display = 'none';
-      inputMetre.style.display = 'none';
-      selectEquipe.style.display = 'none';
-      selectAdduct.style.display = 'block';
-      
-    } else { // Par défaut faire disparître
-      selectZone.style.display = 'none';
-      inputMetre.style.display = 'none';
-      selectEquipe.style.display = 'none';
-      selectAdduct.style.display = 'none';
-    }
-  });
-}
-afficherContenu(); // appel à la fonction
 
 
 
