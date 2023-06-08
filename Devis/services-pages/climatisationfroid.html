@@ -202,7 +202,8 @@
               <tr>
                    <td data-label="Service"  >Climatisation</td>
                    <td data-label="Problème"  >?</td>
-                   <td data-label="Montant"  >15 000 fcfa</td>
+                   <td data-label="Nombre"  >?</td>
+                   <td data-label="Montant"  >?</td>
               </tr>
         </tbody>
 
@@ -211,7 +212,8 @@
             <tr>
                  <td data-label="Service"  >Climatisation</td>
                  <td data-label="Problème"  >?</td>
-                 <td data-label="Montant"  >25 000 fcfa</td>
+                 <td data-label="Nombre"  >?</td>
+                 <td data-label="Montant"  >?</td>
             </tr>
       </tbody>
 
@@ -430,6 +432,7 @@ selectprobleme.addEventListener('change', function() {
     tdinstall.textContent = selectprobleme.value;
 });
 
+
 // <!-- :::::::::PROBLEME CLIMATISATION REPARATION::::::::: -->
 var selectprobleme = document.getElementById('selectprobleme');
 var tdreparation = document.querySelector('#tableaureparation td[data-label="Problème"]');
@@ -438,6 +441,23 @@ selectprobleme.addEventListener('change', function() {
   // Mettre à jour le contenu du <td> avec la sélection
     tdreparation.textContent = selectprobleme.value;
 });
+
+// :::::::::::: RECUPERER LA VALEUR DE INPUT NOMBRE SAISI::::::::::::::
+function afficherValeurNombre() {
+  var nombreInput = document.getElementById('nombre');
+  var valeursNombre = document.querySelectorAll('td[data-label="Nombre"]');
+
+  nombreInput.addEventListener('input', function() {
+    var valeur = nombreInput.value;
+
+    valeursNombre.forEach(function(element) {
+      element.textContent = valeur;
+    });
+  });
+}
+afficherValeurNombre();
+
+
 
 
 // :::::::::::::: FONCTION QUI MULTIPLIE DE "Entretien*15 000"ET"Installation*25 000"
@@ -457,7 +477,6 @@ function calculerMontant() {
     document.getElementById('tableauinstall').querySelector('td[data-label="Montant"]').textContent = montantAvecEspacement + ' fcfa';
   }
 }
-
 // Appel de la fonction lorsqu'il y a un changement dans les éléments select et input
 document.getElementById('selectprobleme').addEventListener('change', calculerMontant);
 document.getElementById('nombre').addEventListener('input', calculerMontant);
