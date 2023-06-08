@@ -93,7 +93,6 @@
             <option value="Entretien">Entretien</option>
             <option value="Installation">Installation</option>
             <option value="Reparation">Réparation</option>
-            <!-- <option value="Rocheuse">Boueuse</option> -->
           </select>
       </div>
 
@@ -198,29 +197,30 @@
 
     </tbody>
 
-        <!-- :::::::::CLIMATISATION::::::::: -->
+        <!-- :::::::::CLIMATISATION ENTRETIEN::::::::: -->
         <tbody id="tableauentretien" style="display: none;">
               <tr>
                    <td data-label="Service"  >Climatisation</td>
                    <td data-label="Problème"  >?</td>
-                   <td data-label="Montant"  >?</td>
+                   <td data-label="Montant"  >15 000 fcfa</td>
               </tr>
         </tbody>
 
-         <!-- :::::::::INSTALLATION::::::::: -->
+         <!-- :::::::::CLIMATISATION INSTALLATION::::::::: -->
          <tbody id="tableauinstall" style="display: none;">
             <tr>
-                 <td data-label="Service"  >Installation</td>
+                 <td data-label="Service"  >Climatisation</td>
                  <td data-label="Problème"  >?</td>
-                 <td data-label="Montant"  >?</td>
+                 <td data-label="Montant"  >25 000 fcfa</td>
             </tr>
       </tbody>
 
-        <!-- ::::::::REPARATION:::::::::: -->
+        <!-- ::::::::CLIMATISATION REPARATION:::::::::: -->
         <tbody id="tableaureparation" style="display: none;">
           <tr>
-                   <td data-label="cc?" id="equipetableau" >?</td>
-                   <td data-label="cc?" id="equipetableau" >?</td>
+            <td data-label="Service"  >Climatisation</td>
+            <td data-label="Problème"  >?</td>
+            <td data-label="Montant"  >?</td>
           </tr>
 
       </table>
@@ -405,20 +405,38 @@ function afficherNumero() {
 afficherNumero();
 
 
-// Fonction pour récupérer la valeur de "selectfosse" et l'afficher dans le tableau
-function afficherTypeFosse() {
-  var selectFosse = document.getElementById('selectfosse');
-  var typeFosse = document.querySelector('td[data-label="Type de fosse"]');
-
-  // Événement pour récupérer la valeur sélectionnée
-  selectFosse.addEventListener('change', function() {
-    typeFosse.textContent = selectFosse.value;
-  });
-}
-afficherTypeFosse();
 
 
-// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT ZONE SELECT:::::::::::::
+// :::::: FONCTION QUI RECUPERE LES PROBLEME CLIMATISATION:::::::::::::
+
+// <!-- :::::::::PROBLEME CLIMATISATION ENTRETIEN::::::::: -->
+var selectprobleme = document.getElementById('selectprobleme');
+var tdProbleme = document.querySelector('#tableauentretien td[data-label="Problème"]');
+// Écouter les changements de sélection
+selectprobleme.addEventListener('change', function() {
+  // Mettre à jour le contenu du <td> avec la sélection
+  tdProbleme.textContent = selectprobleme.value;
+});
+
+
+// <!-- :::::::::PROBLEME CLIMATISATION INSTALLATION::::::::: -->
+var selectprobleme = document.getElementById('selectprobleme');
+var tdinstall = document.querySelector('#tableauinstall td[data-label="Problème"]');
+// Écouter les changements de sélection
+selectprobleme.addEventListener('change', function() {
+  // Mettre à jour le contenu du <td> avec la sélection
+    tdinstall.textContent = selectprobleme.value;
+});
+
+// <!-- :::::::::PROBLEME CLIMATISATION REPARATION::::::::: -->
+var selectprobleme = document.getElementById('selectprobleme');
+var tdreparation = document.querySelector('#tableaureparation td[data-label="Problème"]');
+// Écouter les changements de sélection
+selectprobleme.addEventListener('change', function() {
+  // Mettre à jour le contenu du <td> avec la sélection
+    tdreparation.textContent = selectprobleme.value;
+});
+
 
 
 
