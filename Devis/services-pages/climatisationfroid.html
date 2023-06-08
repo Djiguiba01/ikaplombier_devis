@@ -81,18 +81,18 @@
         </div>
 
         <div class="form-group">
-          <select name="" id="selecttype" style="width: 47%;">
-              <option value="" disabled selected>Type</option>
+          <select name="" id="selectservice" style="width: 47%;">
+              <option value="" disabled selected>Service</option>
               <option value="Climatisation">Climatisation</option>
               <option value="Froid">Froid</option>
             </select>
 
             <!-- :::::::AFFICHE Climatisation::::::::::::: -->
-          <select name="" id="selectzone" style="width: 47%; margin-left: 6%; display: none;">
+          <select name="" id="selectprobleme" style="width: 47%; margin-left: 6%; display: none;">
             <option value="" disabled selected>Problème</option>
-            <option value="Standart">Entretien</option>
-            <option value="Rocheuse">Installation</option>
-            <option value="Rocheuse">Réparation</option>
+            <option value="Entretien">Entretien</option>
+            <option value="Installation">Installation</option>
+            <option value="Reparation">Réparation</option>
             <!-- <option value="Rocheuse">Boueuse</option> -->
           </select>
       </div>
@@ -118,7 +118,7 @@
             <option value="Equipesq">Equipé</option>
           </select>
 
-         <!-- <select name="" id="selectzone" style="width: 47%; margin-left: 6%;">
+         <!-- <select name="" id="selectprobleme" style="width: 47%; margin-left: 6%;">
           <option value="" disabled selected>???</option>
           <option value="Standart">???</option>
         </select>  -->
@@ -190,7 +190,7 @@
 
 
         <!-- :::::::::FORAGE::::::::: -->
-        <tbody id="tableauforage" style="display: none;">
+        <tbody id="tableauentreinstall" style="display: none;">
               <tr>
                    <td data-label="Service"  >?</td>
                    <td data-label="Problème"  >?</td>
@@ -199,12 +199,19 @@
         </tbody>
 
         <!-- ::::::::ADDUCTION::::::: -->
-        <tbody id="tableauadduction" style="display: none;">
+        <tbody id="tableaureparation" style="display: none;">
           <tr>
                    <td data-label="cc?" id="equipetableau" >?</td>
                    <td data-label="cc?" id="equipetableau" >?</td>
-
           </tr>
+
+          <!-- ::::::::tableaufroid::::::: -->
+        <tbody id="tableaufroid" style="display: none;">
+            <tr>
+                <td data-label="Service"  >?</td>
+                <td data-label="Problème"  >?</td>
+                <td data-label="Montant"  >?</td>
+            </tr>
 
     </tbody>
       </table>
@@ -255,25 +262,25 @@ afficherContenu();
 
 // :::::::DANS LA FORM AFFICHER LES CONTENUS EN FONCTIONDE LA SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
 function afficherContenuSelect() {
-  var selectType = document.getElementById('selecttype');
-  var selectZone = document.getElementById('selectzone');
+  var selectservice = document.getElementById('selectservice');
+  var selectprobleme = document.getElementById('selectprobleme');
 //   var inputMetre = document.getElementById('metre');
 //   var selectEquipe = document.getElementById('selectequipe');
   var selectAdduct = document.getElementById('selectadduct');
 
-  selectType.addEventListener('change', function() {
-    if (selectType.value === 'Climatisation') {
-      selectZone.style.display = 'block';
+  selectservice.addEventListener('change', function() {
+    if (selectservice.value === 'Climatisation') {
+        selectprobleme.style.display = 'block';
     //   inputMetre.style.display = 'block';
     //   selectEquipe.style.display = 'block';
       selectAdduct.style.display = 'none';
-    } else if (selectType.value === 'Froid') {
-      selectZone.style.display = 'none';
+    } else if (selectservice.value === 'Froid') {
+        selectprobleme.style.display = 'none';
     //   inputMetre.style.display = 'none';
     //   selectEquipe.style.display = 'none';
       selectAdduct.style.display = 'block';
     } else {
-      selectZone.style.display = 'none';
+        selectprobleme.style.display = 'none';
     //   inputMetre.style.display = 'none';
     //   selectEquipe.style.display = 'none';
       selectAdduct.style.display = 'none';
@@ -284,20 +291,39 @@ afficherContenuSelect();
 
 // :::::::DANS LE TABLEAU AFFICHER LES CONTENUS EN FONCTIONDE LA SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
 function afficherContenuSelectTable() {
-  var selectType = document.getElementById('selecttype');
-  var tableauforage = document.getElementById('tableauforage');
-  var tableauadduction = document.getElementById('tableauadduction');
+    // CLIMATISATION "ENTRETIEN ET INSTALLATION"
+  var selectprobleme = document.getElementById('selectprobleme');
+  var selectservice = document.getElementById('selectservice');
+  var tableauentreinstall = document.getElementById('tableauentreinstall');
+  var tableaureparation = document.getElementById('tableaureparation');
 
-  selectType.addEventListener('change', function() {
-    if (selectType.value === 'Climatisation') {
-      tableauforage.style.display = 'block';
-      tableauadduction.style.display = 'none';
-    } else if (selectType.value === 'Froid') {
-      tableauforage.style.display = 'none';
-      tableauadduction.style.display = 'block';
+  selectprobleme.addEventListener('change', function() {
+    if (selectprobleme.value === 'Entretien') {
+        tableauentreinstall.style.display = 'block';
+        tableaureparation.style.display = 'none';
+    } else if (selectprobleme.value === 'Installation') {
+        tableauentreinstall.style.display = 'block';
+        tableaureparation.style.display = 'none';
+    } else if (selectprobleme.value === 'Reparation') {
+        tableauentreinstall.style.display = 'none';
+        tableaureparation.style.display = 'block';
+    }else {
+        tableauentreinstall.style.display = 'none';
+        tableaureparation.style.display = 'none';
+    }
+  });
+
+//   DANS ID "selectservice" SI ON  SELECTIONNE "FROID" AFFICHE TABLEAU 
+  selectservice.addEventListener('change', function() {
+    if (selectservice.value === 'Froid') {
+        tableauentreinstall.style.display = 'none';
+        tableaureparation.style.display = 'none';
+        tableaufroid.style.display = 'block';
     } else {
-      tableauforage.style.display = 'none';
-      tableauadduction.style.display = 'none';
+        tableauentreinstall.style.display = 'none';
+        tableaureparation.style.display = 'none';
+        tableaufroid.style.display = 'none';
+
     }
   });
 }
