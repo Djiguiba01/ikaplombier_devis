@@ -98,13 +98,13 @@
 
           <!-- :::::::AFFICHE Climatisation::::::::::::: -->
         <div class="form-group" >
-          <!-- <input type="number" min="1" placeholder="Combien de mètre" class="form-control" id="metre" style="display: none;"> -->
+          <input type="number" min="1" placeholder="Nombre appareil" class="form-control" id="nombre" style="display: none;">
 
-          <select name="" id="selectequipe" style="width: 47%; display: none;">
+          <!-- <select name="" id="selectequipe" style="width: 47%; display: none;">
             <option value="" disabled selected>Equipements</option>
             <option value="Equipe">Equipé</option>
             <option value="Nom Equipe">Non équipé</option>
-          </select>
+          </select> -->
           
         </div>
 
@@ -178,16 +178,16 @@
     <table class="table">
 
               <!-- :::::::::FORAGE ENTETE::::::::: -->
-        <thead >
+        <!-- <thead >
             <tr >
              <th>Zone</th>
              <th>Mètre</th>
              <th>Equipement</th>
              <th>Montant</th>
             </tr>
-        </thead>
+        </thead> -->
 
-         <!-- ::::::::FROID::::::: -->
+         <!-- ::::::::SERVICE FROID::::::: -->
          <tbody id="tableaufroid" style="display: none;">
             <tr>
                 <td data-label="Service"  >Froid</td>
@@ -261,6 +261,8 @@
   var inputs = document.querySelectorAll('input');
   for (var i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener('input', function() {
+    // // Appel de la fonction pour mettre à jour le montant dans le tableau
+    // multiplierNombre();
       sectioncorps.style.display = 'block';
       telecharger.style.display = 'block';
     });
@@ -273,24 +275,24 @@ afficherContenu();
 function afficherContenuSelect() {
   var selectservice = document.getElementById('selectservice');
   var selectprobleme = document.getElementById('selectprobleme');
-//   var inputMetre = document.getElementById('metre');
+  var inputNombre = document.getElementById('nombre');
 //   var selectEquipe = document.getElementById('selectequipe');
   var selectAdduct = document.getElementById('selectadduct');
 
   selectservice.addEventListener('change', function() {
     if (selectservice.value === 'Climatisation') {
         selectprobleme.style.display = 'block';
-    //   inputMetre.style.display = 'block';
+      inputNombre.style.display = 'block';
     //   selectEquipe.style.display = 'block';
       selectAdduct.style.display = 'none';
     } else if (selectservice.value === 'Froid') {
         selectprobleme.style.display = 'none';
-    //   inputMetre.style.display = 'none';
+      inputNombre.style.display = 'none';
     //   selectEquipe.style.display = 'none';
       selectAdduct.style.display = 'block';
     } else {
         selectprobleme.style.display = 'none';
-    //   inputMetre.style.display = 'none';
+      inputNombre.style.display = 'none';
     //   selectEquipe.style.display = 'none';
       selectAdduct.style.display = 'none';
     }
@@ -437,6 +439,28 @@ selectprobleme.addEventListener('change', function() {
     tdreparation.textContent = selectprobleme.value;
 });
 
+
+// :::::::::::::: FONCTION QUI MULTIPLIE DE "Entretien*15 000"ET"Installation*25 000"
+function calculerMontant() {
+  var selectprobleme = document.getElementById('selectprobleme');
+  var nombreInput = document.getElementById('nombre');
+
+  var montant = 0;
+
+  if (selectprobleme.value === 'Entretien') {
+    montant = nombreInput.value * 15000;
+    var montantAvecEspacement = montant.toLocaleString('fr-FR');
+    document.getElementById('tableauentretien').querySelector('td[data-label="Montant"]').textContent = montantAvecEspacement + ' fcfa';
+  } else if (selectprobleme.value === 'Installation') {
+    montant = nombreInput.value * 25000;
+    var montantAvecEspacement = montant.toLocaleString('fr-FR');
+    document.getElementById('tableauinstall').querySelector('td[data-label="Montant"]').textContent = montantAvecEspacement + ' fcfa';
+  }
+}
+
+// Appel de la fonction lorsqu'il y a un changement dans les éléments select et input
+document.getElementById('selectprobleme').addEventListener('change', calculerMontant);
+document.getElementById('nombre').addEventListener('input', calculerMontant);
 
 
 
