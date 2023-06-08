@@ -188,32 +188,41 @@
             </tr>
         </thead>
 
+         <!-- ::::::::FROID::::::: -->
+         <tbody id="tableaufroid" style="display: none;">
+            <tr>
+                <td data-label="Service"  >Froid</td>
+                <td data-label="Problème"  >?</td>
+                <td data-label="Montant"  >?</td>
+            </tr>
 
-        <!-- :::::::::FORAGE::::::::: -->
-        <tbody id="tableauentreinstall" style="display: none;">
+    </tbody>
+
+        <!-- :::::::::CLIMATISATION::::::::: -->
+        <tbody id="tableauentretien" style="display: none;">
               <tr>
-                   <td data-label="Service"  >?</td>
+                   <td data-label="Service"  >Climatisation</td>
                    <td data-label="Problème"  >?</td>
                    <td data-label="Montant"  >?</td>
               </tr>
         </tbody>
 
-        <!-- ::::::::ADDUCTION::::::: -->
+         <!-- :::::::::INSTALLATION::::::::: -->
+         <tbody id="tableauinstall" style="display: none;">
+            <tr>
+                 <td data-label="Service"  >Installation</td>
+                 <td data-label="Problème"  >?</td>
+                 <td data-label="Montant"  >?</td>
+            </tr>
+      </tbody>
+
+        <!-- ::::::::REPARATION:::::::::: -->
         <tbody id="tableaureparation" style="display: none;">
           <tr>
                    <td data-label="cc?" id="equipetableau" >?</td>
                    <td data-label="cc?" id="equipetableau" >?</td>
           </tr>
 
-          <!-- ::::::::tableaufroid::::::: -->
-        <tbody id="tableaufroid" style="display: none;">
-            <tr>
-                <td data-label="Service"  >?</td>
-                <td data-label="Problème"  >?</td>
-                <td data-label="Montant"  >?</td>
-            </tr>
-
-    </tbody>
       </table>
 
 
@@ -294,21 +303,26 @@ function afficherContenuSelectTable() {
     // CLIMATISATION "ENTRETIEN ET INSTALLATION"
   var selectprobleme = document.getElementById('selectprobleme');
   var selectservice = document.getElementById('selectservice');
-  var tableauentreinstall = document.getElementById('tableauentreinstall');
+  var tableauentretien = document.getElementById('tableauentretien');
+  var tableauinstall = document.getElementById('tableauinstall');
   var tableaureparation = document.getElementById('tableaureparation');
 
   selectprobleme.addEventListener('change', function() {
     if (selectprobleme.value === 'Entretien') {
-        tableauentreinstall.style.display = 'block';
+        tableauentretien.style.display = 'block';
+        tableauinstall.style.display = 'none';
         tableaureparation.style.display = 'none';
     } else if (selectprobleme.value === 'Installation') {
-        tableauentreinstall.style.display = 'block';
+        tableauinstall.style.display = 'block';
+        tableauentretien.style.display = 'none';
         tableaureparation.style.display = 'none';
     } else if (selectprobleme.value === 'Reparation') {
-        tableauentreinstall.style.display = 'none';
+        tableauentretien.style.display = 'none';
+        tableauinstall.style.display = 'none';
         tableaureparation.style.display = 'block';
     }else {
-        tableauentreinstall.style.display = 'none';
+        tableauentretien.style.display = 'none';
+        tableauinstall.style.display = 'none';
         tableaureparation.style.display = 'none';
     }
   });
@@ -316,11 +330,13 @@ function afficherContenuSelectTable() {
 //   DANS ID "selectservice" SI ON  SELECTIONNE "FROID" AFFICHE TABLEAU 
   selectservice.addEventListener('change', function() {
     if (selectservice.value === 'Froid') {
-        tableauentreinstall.style.display = 'none';
+        tableauentretien.style.display = 'none';
+        tableauinstall.style.display = 'none';
         tableaureparation.style.display = 'none';
         tableaufroid.style.display = 'block';
     } else {
-        tableauentreinstall.style.display = 'none';
+        tableauentretien.style.display = 'none';
+        tableauinstall.style.display = 'none';
         tableaureparation.style.display = 'none';
         tableaufroid.style.display = 'none';
 
