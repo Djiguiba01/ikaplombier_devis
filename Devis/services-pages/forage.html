@@ -224,10 +224,14 @@
         <div class="modalite">
             <div class="tranche">Le payement est dû en 2 tranches</div>
             <div class="num">
+
                 <p id="conditforage" style="display: none;">
                   Si la profondeur dépasse 100 m vous allez payer 7 000 fcfa par mètre.
-                  <p>Le prix du tuyaux (PVC) est 30 000 fcfa les 3 mètres.</p>
                 </p>
+                <p id="prixtuyaux" style="display: none;">
+                  Le prix du tuyaux (PVC) est 30 000 fcfa les 3 mètres.
+                </p>
+
                 <p>Numéro : (+223) 74 24 00 74</p>
                 
             </div>
@@ -274,6 +278,7 @@ function afficherContenuSelect() {
   var selectEquipe = document.getElementById('selectequipe');
   var selectAdduct = document.getElementById('selectadduct');
   var conditforage = document.getElementById('conditforage');
+  var prixtuyaux = document.getElementById('prixtuyaux');
   var buttonforage = document.getElementById('buttonforage');
   var buttoneau = document.getElementById('buttoneau');
 
@@ -284,6 +289,7 @@ function afficherContenuSelect() {
       selectEquipe.style.display = 'block';
       selectAdduct.style.display = 'none';
       conditforage.style.display = 'block';
+      prixtuyaux.style.display = 'block';
       buttonforage.style.display = 'block';
       buttoneau.style.display = 'none';
 
@@ -292,12 +298,14 @@ function afficherContenuSelect() {
       // inputMetre.style.display = 'none';
       selectEquipe.style.display = 'none';
       conditforage.style.display = 'none';
+      prixtuyaux.style.display = 'none';
       selectAdduct.style.display = 'block';
       buttonforage.style.display = 'none';
       buttoneau.style.display = 'block';
     } else {
       selectZone.style.display = 'none';
       conditforage.style.display = 'none';
+      prixtuyaux.style.display = 'none';
       // inputMetre.style.display = 'none';
       selectEquipe.style.display = 'none';
       selectAdduct.style.display = 'none';
