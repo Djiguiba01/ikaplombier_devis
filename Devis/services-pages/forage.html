@@ -149,8 +149,8 @@
   <section id="sectioncorps" style="display: none; margin-bottom: 4%;">
 
     <div class="header">
-        <h3>Devis Forage</h3>
-        <img src="image-services/logo.png" alt="sss">
+        <h3>Devis </h3>
+        <!-- <img src="image-services/logo.png" alt="sss"> -->
     </div>
 
     <hr style="border: 1px solid #3f0dca; margin-top: 3%; margin-bottom: 3%;">
@@ -270,6 +270,44 @@
 afficherContenu();
 
 
+// ::::::::::::::AFFICHER NOM DEVIS SELECTIONNER:::::::::::::
+function afficherDevis() {
+  var selecttype = document.getElementById('selecttype');
+  var header = document.querySelector('.header');
+  var devisText = document.createElement('h3');
+
+  // Ajoute une image à l'élément header
+  var image = document.createElement('img');
+  image.src = 'image-services/logo.png';
+  header.appendChild(image);
+
+  selecttype.addEventListener('change', function() {
+    var selectedOption = selecttype.value;
+
+    if (selectedOption === 'Forage') {
+      devisText.textContent = 'Devis Forage';
+    } else if (selectedOption === 'Adduction') {
+      devisText.textContent = 'Devis Adduction';
+    } else {
+      devisText.textContent = 'Devis ?';
+    }
+
+    // Supprime les anciens éléments s'ils existent dans le header
+    while (header.firstChild) {
+      header.removeChild(header.firstChild);
+    }
+
+    // Ajoute le nouveau texte dans le header
+    header.appendChild(devisText);
+   // Ajoute l'image à l'élément header
+        header.appendChild(image);
+  });
+}
+// Appel de la fonction pour activer le comportement
+afficherDevis();
+
+
+
 // :::::::DANS LA FORM AFFICHER LES CONTENUS EN FONCTIONDE LA SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
 function afficherContenuSelect() {
   var selectType = document.getElementById('selecttype');
@@ -316,6 +354,8 @@ function afficherContenuSelect() {
 }
 afficherContenuSelect();
 
+
+
 // :::::::DANS LE TABLEAU AFFICHER LES CONTENUS EN FONCTIONDE LA SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
 function afficherContenuSelectTable() {
   var selectType = document.getElementById('selecttype');
@@ -342,8 +382,6 @@ afficherContenuSelectTable();
 
 
 
-
-
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NOM SAISI:::::::::::::
 function afficherNom() {
   var nomInput = document.getElementById('nom');
@@ -355,6 +393,7 @@ function afficherNom() {
   });
 }
 afficherNom();
+
 
 
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT PRENOM SAISI:::::::::::::
@@ -370,6 +409,7 @@ function afficherPrenom() {
 afficherPrenom();
 
 
+
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT VILLE SAISI:::::::::::::
 function afficherVille() {
   var villeInput = document.getElementById('ville');
@@ -381,6 +421,7 @@ function afficherVille() {
   });
 }
 afficherVille();
+
 
 
 // :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT NUMERO SAISI:::::::::::::
@@ -408,8 +449,9 @@ function afficherSelection() {
   zoneCell.textContent = selectedZone;
 }
 
-// ::::::RECUPERE AUTOMATIQUEMENT EQUIPEMENT SELECT:::::::::::::
 
+
+// ::::::RECUPERE AUTOMATIQUEMENT EQUIPEMENT SELECT:::::::::::::
 function afficherSelectionE() {
   var selectequipe = document.getElementById('selectequipe');
   var selectedOption = selectequipe.options[selectequipe.selectedIndex].text;
@@ -445,20 +487,6 @@ function afficherMontant() {
   });
 }
 afficherMontant();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -505,6 +533,7 @@ function downloadPDF() {
 document.getElementById("telecharger").addEventListener("click", function () {
   downloadPDF();
 });
+
 
 </script>
 
