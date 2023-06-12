@@ -421,22 +421,22 @@ function afficherMontant() {
     
     if (selectzone.value === "" || selectequipe.value === "") {
       // Au moins l'un des champs est vide, n'affiche pas le montant
-      montantTd.textContent = "";
+      montantTd.textContent = "?";
       
       if (selectzone.value === "") {
-        console.log("Veuillez sélectionner une zone.");
+        alert("Veuillez sélectionner une zone.");
       }
       
       if (selectequipe.value === "") {
-        console.log("Veuillez sélectionner une équipe.");
+        alert("Veuillez sélectionner équipement.");
       }
     } else {
       montantTd.textContent = "700 000 FCFA";
     }
   });
 }
-
 afficherMontant();
+
 
 
 
