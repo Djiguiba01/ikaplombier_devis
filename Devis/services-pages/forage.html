@@ -88,20 +88,20 @@
             </select>
 
             <!-- :::::::AFFICHE FORAGE::::::::::::: -->
-          <select name="" id="selectzone" style="width: 47%; margin-left: 6%; display: none;">
+          <select name="" id="selectzone" onchange="afficherSelection()" style="width: 47%; margin-left: 6%; display: none;">
             <option value="" disabled selected>Zones</option>
             <option value="Standart">Sableuse</option>
             <option value="Rocheuse">Rocheuse</option>
-            <option value="Rocheuse">Terre fin</option>
-            <option value="Rocheuse">Boueuse</option>
+            <option value="Terre fin">Terre fin</option>
+            <option value="Boueuse">Boueuse</option>
           </select>
       </div>
 
           <!-- :::::::AFFICHE FORAGE::::::::::::: -->
         <div class="form-group" >
-          <input type="number" min="1" placeholder="Combien de mètre" class="form-control" id="metre" style="display: none;">
+          <!-- <input type="number" min="1" placeholder="Combien de mètre" class="form-control" id="metre" style="display: none;"> -->
 
-          <select name="" id="selectequipe" style="width: 47%; display: none;">
+          <select name="" id="selectequipe" onchange="afficherSelectionE()" style="width: 47%; display: none;">
             <option value="" disabled selected>Equipements</option>
             <option value="Equipe">Equipé</option>
             <option value="Nom Equipe">Non équipé</option>
@@ -124,11 +124,17 @@
         </select>  -->
     </div>
 
-        <!-- Button Ajouter:::::::::::::: -->
-      <a href="#Devis" id="septcent" class="btn" style="text-decoration: none;" onclick="verifierChamps()">
-        AJOUTER 
+        <!-- Button FORAGE:::::::::::::: -->
+      <a href="#Devis" id="buttonforage" class="btn" style="text-decoration: none; display: none;" >
+        AJOUTER
         <span class="fas fa-chevron-right"></span>
       </a>
+
+         <!-- Button ADDUCTION D'EAU:::::::::::::: -->
+         <a href="#Devis" id="buttoneau" class="btn" style="text-decoration: none; display: none;">
+          AJOUTER
+          <span class="fas fa-chevron-right"></span>
+        </a>
      
         
       </form>
@@ -193,9 +199,9 @@
         <tbody id="tableauforage" style="display: none;">
               <tr>
                    <td data-label="Zone"  >?</td>
-                   <td data-label="Mètre"  >vvvvvv?</td>
-                   <td data-label="Equipement" >uuuuu?</td>
-                   <td data-label="Montant"  >hhhhh?</td>
+                   <td data-label="Mètre"  >100 m</td>
+                   <td data-label="Equipement" >?</td>
+                   <td data-label="Montant"  >?</td>
               </tr>
         </tbody>
 
@@ -218,6 +224,9 @@
         <div class="modalite">
             <div class="tranche">Le payement est dû en 2 tranches</div>
             <div class="num">
+                <p id="conditforage" style="display: none;">
+                  Si la profondeur dépasse 100 m vous allez payer 7 000 fcfa par mètre
+                </p>
                 <p>Numéro : (+223) 74 24 00 74</p>
                 
             </div>
@@ -258,26 +267,39 @@ afficherContenu();
 function afficherContenuSelect() {
   var selectType = document.getElementById('selecttype');
   var selectZone = document.getElementById('selectzone');
-  var inputMetre = document.getElementById('metre');
+  // var inputMetre = document.getElementById('metre');
   var selectEquipe = document.getElementById('selectequipe');
   var selectAdduct = document.getElementById('selectadduct');
+  var conditforage = document.getElementById('conditforage');
+  var buttonforage = document.getElementById('buttonforage');
+  var buttoneau = document.getElementById('buttoneau');
 
   selectType.addEventListener('change', function() {
     if (selectType.value === 'Forage') {
       selectZone.style.display = 'block';
-      inputMetre.style.display = 'block';
+      // inputMetre.style.display = 'block';
       selectEquipe.style.display = 'block';
       selectAdduct.style.display = 'none';
+      conditforage.style.display = 'block';
+      buttonforage.style.display = 'block';
+      buttoneau.style.display = 'none';
+
     } else if (selectType.value === 'Adduction') {
       selectZone.style.display = 'none';
-      inputMetre.style.display = 'none';
+      // inputMetre.style.display = 'none';
       selectEquipe.style.display = 'none';
+      conditforage.style.display = 'none';
       selectAdduct.style.display = 'block';
+      buttonforage.style.display = 'none';
+      buttoneau.style.display = 'block';
     } else {
       selectZone.style.display = 'none';
-      inputMetre.style.display = 'none';
+      conditforage.style.display = 'none';
+      // inputMetre.style.display = 'none';
       selectEquipe.style.display = 'none';
       selectAdduct.style.display = 'none';
+      buttonforage.style.display = 'none';
+      buttoneau.style.display = 'none';
     }
   });
 }
@@ -364,22 +386,57 @@ function afficherNumero() {
 afficherNumero();
 
 
-// Fonction pour récupérer la valeur de "selectfosse" et l'afficher dans le tableau
-function afficherTypeFosse() {
-  var selectFosse = document.getElementById('selectfosse');
-  var typeFosse = document.querySelector('td[data-label="Type de fosse"]');
 
-  // Événement pour récupérer la valeur sélectionnée
-  selectFosse.addEventListener('change', function() {
-    typeFosse.textContent = selectFosse.value;
+// ::::::RECUPERE AUTOMATIQUEMENT ZONE SELECT:::::::::::::
+function afficherSelection() {
+  var selectZone = document.getElementById('selectzone');
+  var tableauforage = document.getElementById('tableauforage');
+  var zoneCell = tableauforage.querySelector('td[data-label="Zone"]');
+
+  var selectedZone = selectZone.value;
+  zoneCell.textContent = selectedZone;
+}
+
+// ::::::RECUPERE AUTOMATIQUEMENT EQUIPEMENT SELECT:::::::::::::
+
+function afficherSelectionE() {
+  var selectequipe = document.getElementById('selectequipe');
+  var selectedOption = selectequipe.options[selectequipe.selectedIndex].text;
+  var equipeValue = document.querySelector('td[data-label="Equipement"]');
+  equipeValue.textContent = selectedOption;
+}
+
+
+
+// :::::::::::::::
+function afficherMontant() {
+  var tableauforage = document.getElementById("tableauforage");
+  var montantTd = tableauforage.querySelector('td[data-label="Montant"]');
+  
+  var buttonforage = document.getElementById("buttonforage");
+  
+  buttonforage.addEventListener("click", function() {
+    var selectzone = document.getElementById("selectzone");
+    var selectequipe = document.getElementById("selectequipe");
+    
+    if (selectzone.value === "" || selectequipe.value === "") {
+      // Au moins l'un des champs est vide, n'affiche pas le montant
+      montantTd.textContent = "";
+      
+      if (selectzone.value === "") {
+        console.log("Veuillez sélectionner une zone.");
+      }
+      
+      if (selectequipe.value === "") {
+        console.log("Veuillez sélectionner une équipe.");
+      }
+    } else {
+      montantTd.textContent = "700 000 FCFA";
+    }
   });
 }
-afficherTypeFosse();
 
-
-// :::::: FONCTION QUI RECUPERE AUTOMATIQUEMENT ZONE SELECT:::::::::::::
-
-
+afficherMontant();
 
 
 
