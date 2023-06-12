@@ -225,13 +225,16 @@
             <div class="tranche">Le payement est dû en 2 tranches</div>
             <div class="num">
                 <p id="conditforage" style="display: none;">
-                  Si la profondeur dépasse 100 m vous allez payer 7 000 fcfa par mètre
+                  Si la profondeur dépasse 100 m vous allez payer 7 000 fcfa par mètre.
+                  <p>Le prix du tuyaux (PVC) est 30 000 fcfa les 3 mètres.</p>
                 </p>
                 <p>Numéro : (+223) 74 24 00 74</p>
                 
             </div>
         </div>
       </div>
+
+      
 
 </section>
 </div>
@@ -406,9 +409,7 @@ function afficherSelectionE() {
   equipeValue.textContent = selectedOption;
 }
 
-
-
-// :::::::::::::::
+// :::::::::::::::AFFICHER LE MONTANT SI ON CLIQUE SUR BUTTON id="buttonforage"::::::
 function afficherMontant() {
   var tableauforage = document.getElementById("tableauforage");
   var montantTd = tableauforage.querySelector('td[data-label="Montant"]');
