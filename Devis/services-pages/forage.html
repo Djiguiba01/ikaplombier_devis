@@ -460,23 +460,20 @@ function afficherSelection() {
 // :::::::::::::::AFFICHER LE MONTANT SI ON CLIQUE SUR BUTTON id="buttonforage"::::::
 function afficherMontant() {
   var selectZone = document.getElementById('selectzone');
-  var buttonForage = document.getElementById('buttonforage');
-  var tableauForage = document.getElementById('tableauforage');
-  var montantCell = document.querySelector('#tableauforage [data-label="Montant"]');
-
+  var montantCell = document.querySelector('#tableauforage td[data-label="Montant"]');
+  
   selectZone.addEventListener('change', function() {
-    if (selectZone.value === 'Boueuse') {
+    if (selectZone.value === 'Standart' || selectZone.value === 'Rocheuse' || selectZone.value === 'Terre fin') {
+      montantCell.textContent = '1 000 000 FCFA';
+    } else if (selectZone.value === 'Boueuse') {
       montantCell.textContent = '1 500 000 FCFA';
     } else {
-      montantCell.textContent = '1 000 000 FCFA';
+      montantCell.textContent = '?';
     }
-  });
-
-  buttonForage.addEventListener('click', function() {
-    tableauForage.style.display = 'table-row-group';
   });
 }
 afficherMontant();
+
 
 
 
