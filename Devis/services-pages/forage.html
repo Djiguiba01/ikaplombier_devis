@@ -208,8 +208,8 @@
         <!-- ::::::::ADDUCTION::::::: -->
         <tbody id="tableauadduction" style="display: none;">
           <tr>
-                   <td data-label="cc?" id="equipetableau" >?</td>
-                   <td data-label="cc?" id="equipetableau" >?</td>
+                   <td data-label="Installation" id="equipetableau" >Complète</td>
+                   <td data-label="Montant" class="montantadduct" id="equipetableau" ></td>
 
           </tr>
 
@@ -286,7 +286,7 @@ function afficherDevis() {
     if (selectedOption === 'Forage') {
       devisText.textContent = 'Devis Forage';
     } else if (selectedOption === 'Adduction') {
-      devisText.textContent = 'Devis Adduction';
+      devisText.textContent = 'Devis Adduction Eau';
     } else {
       devisText.textContent = 'Devis ?';
     }
@@ -473,6 +473,26 @@ function afficherMontant() {
   });
 }
 afficherMontant();
+
+
+// :::::::::::::::::
+function afficherMontant() {
+  var selectType = document.getElementById('selecttype');
+  var tableauAdduction = document.getElementById('tableauadduction');
+  var montantAdduct = tableauAdduction.getElementsByClassName('montantadduct')[0];
+
+  selectType.addEventListener('change', function() {
+    if (selectType.value === 'Adduction') {
+      montantAdduct.textContent = '1 500 000 /hectar';
+    } else {
+      montantAdduct.textContent = '';
+    }
+  });
+}
+afficherMontant();
+
+
+
 
 
 
