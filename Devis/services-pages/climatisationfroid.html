@@ -568,7 +568,7 @@ function downloadPDF() {
     useCORS: true
   }).then(function (canvas) {
     var imgData = canvas.toDataURL("image/png", 1.0);
-    var pdf = new jsPDF("p", "mm", "a4");
+    var pdf = new jsPDF("p", "mm", "a4", true);
     var width = pdf.internal.pageSize.getWidth();
     var height = pdf.internal.pageSize.getHeight();
 
