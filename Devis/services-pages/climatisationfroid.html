@@ -553,7 +553,7 @@ function makePDF() {
 
     var doc = new jsPDF();
     doc.setFont('Arial');
-    doc.save("forageadduct.pdf");
+    doc.save("climatisationfroid.pdf");
   });
 }
 
@@ -573,7 +573,7 @@ function downloadPDF() {
     var height = pdf.internal.pageSize.getHeight();
 
     pdf.addImage(imgData, "PNG", 0, 0, width, height);
-    pdf.save("forageadduct.pdf");
+    pdf.save("climatisationfroid.pdf");
   });
 }
 document.getElementById("telecharger").addEventListener("click", function () {

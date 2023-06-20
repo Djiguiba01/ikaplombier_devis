@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forage Adduction d'eau</title>
+  <title>Plomberie</title>
 
   <!-- ::CSS::::::: -->
   <link rel="stylesheet" href="servicepages.css">
@@ -64,7 +64,7 @@
 
       <form action="" >
 
-        <h3>Devis Forage adduction d'eau </h3>
+        <h3>Plomberie</h3>
 
         <div class="form-group">
           <input type="text" placeholder="Votre nom" class="form-control" id="nom">
@@ -81,27 +81,26 @@
         </div>
 
         <div class="form-group">
-          <select name="" id="selecttype" style="width: 47%;">
-              <option value="" disabled selected>Type</option>
-              <option value="Forage">Forage</option>
-              <option value="Adduction">Adduction d'éau</option>
+          <select name="" id="selectservice" style="width: 47%;">
+              <option value="" disabled selected>Service</option>
+              <option value="Climatisation">???</option>
+              <option value="Froid">???</option>
             </select>
 
-            <!-- :::::::AFFICHE FORAGE::::::::::::: -->
-          <select name="" id="selectzone" onchange="afficherSelection()" style="width: 47%; margin-left: 6%; display: none;">
-            <option value="" disabled selected>Zones</option>
-            <option value="Standart">Sableuse</option>
-            <option value="Rocheuse">Rocheuse</option>
-            <option value="Terre fin">Terre fin</option>
-            <option value="Boueuse">Boueuse</option>
+            <!-- :::::::AFFICHE Climatisation::::::::::::: -->
+          <select name="" id="selectprobleme" style="width: 47%; margin-left: 6%; display: none;">
+            <option value="" disabled selected>Problème</option>
+            <option value="Entretien">Entretien</option>
+            <option value="Installation">Installation</option>
+            <option value="Reparation">Réparation</option>
           </select>
       </div>
 
-          <!-- :::::::AFFICHE FORAGE::::::::::::: -->
+          <!-- :::::::AFFICHE Climatisation::::::::::::: -->
         <div class="form-group" >
-          <!-- <input type="number" min="1" placeholder="Combien de mètre" class="form-control" id="metre" style="display: none;"> -->
+          <input type="number" min="1" placeholder="Nombre appareil" class="form-control" id="nombre" style="display: none;">
 
-          <!-- <select name="" id="selectequipe" onchange="afficherSelectionE()" style="width: 47%; display: none;">
+          <!-- <select name="" id="selectequipe" style="width: 47%; display: none;">
             <option value="" disabled selected>Equipements</option>
             <option value="Equipe">Equipé</option>
             <option value="Nom Equipe">Non équipé</option>
@@ -111,30 +110,24 @@
 
         
 
-        <!-- :::::::AFFICHE ADDUCTIOND'EAU::::::::::::: -->
+        <!-- :::::::AFFICHE Froid::::::::::::: -->
          <div class="form-group" >
         <select name="" id="selectadduct" style="width: 47%; display: none;">
-            <option value="" disabled selected>???ffff</option>
-            <option value="Equipesq">yyyy</option>
+            <option value="" disabled selected>Problème</option>
+            <option value="Equipesq">Réparation</option>
           </select>
 
-         <!-- <select name="" id="selectzone" style="width: 47%; margin-left: 6%;">
+         <!-- <select name="" id="selectprobleme" style="width: 47%; margin-left: 6%;">
           <option value="" disabled selected>???</option>
           <option value="Standart">???</option>
         </select>  -->
     </div>
 
-            <!-- :::::::Button FORAGE:::::::::::::: -->
-          <a href="#Devis" id="buttonforage" class="btn" style="text-decoration: none; display: none;" >
-            AJOUTER
-            <span class="fas fa-chevron-right"></span>
-          </a>
-
-         <!-- ::::::Button ADDUCTION D'EAU:::::::::::::: -->
-         <a href="#Devis" id="buttoneau" class="btn" style="text-decoration: none; display: none;">
-          AJOUTER
-          <span class="fas fa-chevron-right"></span>
-        </a>
+        <!-- Button Ajouter:::::::::::::: -->
+      <a href="#Devis" id="septcent" class="btn" style="text-decoration: none;">
+        AJOUTER 
+        <span class="fas fa-chevron-right"></span>
+      </a>
      
         
       </form>
@@ -149,7 +142,7 @@
   <section id="sectioncorps" style="display: none; margin-bottom: 4%;">
 
     <div class="header">
-        <h3>Devis </h3>
+        <h3>Devis ?</h3>
         <!-- <img src="image-services/logo.png" alt="sss"> -->
     </div>
 
@@ -185,35 +178,53 @@
     <table class="table">
 
               <!-- :::::::::FORAGE ENTETE::::::::: -->
-        <thead >
+        <!-- <thead >
             <tr >
              <th>Zone</th>
              <th>Mètre</th>
              <th>Equipement</th>
              <th>Montant</th>
             </tr>
-        </thead>
+        </thead> -->
 
+         <!-- ::::::::SERVICE FROID::::::: -->
+         <tbody id="tableaufroid" style="display: none;">
+            <tr>
+                <td data-label="Service"  >?</td>
+                <td data-label="Problème"  >?</td>
+                <td data-label="Montant"  >?</td>
+            </tr>
 
-        <!-- :::::::::FORAGE::::::::: -->
-        <tbody id="tableauforage" style="display: none;">
+    </tbody>
+
+        <!-- :::::::::CLIMATISATION ENTRETIEN::::::::: -->
+        <tbody id="tableauentretien" style="display: none;">
               <tr>
-                   <td data-label="Zone"  >?</td>
-                   <td data-label="Mètre"  >100 m</td>
-                   <td data-label="Equipement" >Non Equipé</td>
+                   <td data-label="Service"  >Climatisation</td>
+                   <td data-label="Problème"  >?</td>
+                   <td data-label="Nombre"  >?</td>
                    <td data-label="Montant"  >?</td>
               </tr>
         </tbody>
 
-        <!-- ::::::::ADDUCTION::::::: -->
-        <tbody id="tableauadduction" style="display: none;">
-          <tr>
-                   <td data-label="Installation" id="equipetableau" >Complète</td>
-                   <td data-label="Montant" class="montantadduct" id="equipetableau" ></td>
+         <!-- :::::::::CLIMATISATION INSTALLATION::::::::: -->
+         <tbody id="tableauinstall" style="display: none;">
+            <tr>
+                 <td data-label="Service"  >Climatisation</td>
+                 <td data-label="Problème"  >?</td>
+                 <td data-label="Nombre"  >?</td>
+                 <td data-label="Montant"  >?</td>
+            </tr>
+      </tbody>
 
+        <!-- ::::::::CLIMATISATION REPARATION:::::::::: -->
+        <tbody id="tableaureparation" style="display: none;">
+          <tr>
+            <td data-label="Service"  >Climatisation</td>
+            <td data-label="Problème"  >?</td>
+            <td data-label="Montant"  >?</td>
           </tr>
 
-    </tbody>
       </table>
 
 
@@ -224,14 +235,6 @@
         <div class="modalite">
             <div class="tranche">Le payement est dû en 2 tranches</div>
             <div class="num">
-
-                <p id="conditforage" style="display: none;">
-                  Si la profondeur dépasse 100 m vous allez payer 7 000 fcfa par mètre.
-                </p>
-                <p id="prixtuyaux" style="display: none;">
-                  Le prix du tuyaux (PVC) est 30 000 fcfa les 3 mètres.
-                </p>
-
                 <p>Numéro : (+223) 74 24 00 74</p>
                 
             </div>
@@ -243,6 +246,15 @@
 
 <!-- :::::::::::BUTTON TELECHARGEMENT:::::::::::::: -->
 <button type="button" id="telecharger" style="display: none;" >Télécharger PDF</button>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -260,6 +272,8 @@
   var inputs = document.querySelectorAll('input');
   for (var i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener('input', function() {
+    // // Appel de la fonction pour mettre à jour le montant dans le tableau
+    // multiplierNombre();
       sectioncorps.style.display = 'block';
       telecharger.style.display = 'block';
     });
@@ -268,10 +282,9 @@
 afficherContenu();
 
 
-
 // ::::::::::::::AFFICHER NOM DEVIS SELECTIONNER:::::::::::::
 function afficherDevis() {
-  var selecttype = document.getElementById('selecttype');
+  var selectService = document.getElementById('selectservice');
   var header = document.querySelector('.header');
   var devisText = document.createElement('h3');
 
@@ -280,13 +293,13 @@ function afficherDevis() {
   image.src = 'image-services/logo.png';
   header.appendChild(image);
 
-  selecttype.addEventListener('change', function() {
-    var selectedOption = selecttype.value;
+  selectService.addEventListener('change', function() {
+    var selectedOption = selectService.value;
 
-    if (selectedOption === 'Forage') {
-      devisText.textContent = 'Devis Forage';
-    } else if (selectedOption === 'Adduction') {
-      devisText.textContent = 'Devis Adduction Eau';
+    if (selectedOption === 'Climatisation') {
+      devisText.textContent = 'Devis ? AAA';
+    } else if (selectedOption === 'Froid') {
+      devisText.textContent = 'Devis ? BBB';
     } else {
       devisText.textContent = 'Devis ?';
     }
@@ -309,45 +322,28 @@ afficherDevis();
 
 // :::::::DANS LA FORM AFFICHER LES CONTENUS EN FONCTIONDE LA SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
 function afficherContenuSelect() {
-  var selectType = document.getElementById('selecttype');
-  var selectZone = document.getElementById('selectzone');
-  // var inputMetre = document.getElementById('metre');
-  // var selectEquipe = document.getElementById('selectequipe');
+  var selectservice = document.getElementById('selectservice');
+  var selectprobleme = document.getElementById('selectprobleme');
+  var inputNombre = document.getElementById('nombre');
+//   var selectEquipe = document.getElementById('selectequipe');
   var selectAdduct = document.getElementById('selectadduct');
-  var conditforage = document.getElementById('conditforage');
-  var prixtuyaux = document.getElementById('prixtuyaux');
-  var buttonforage = document.getElementById('buttonforage');
-  var buttoneau = document.getElementById('buttoneau');
 
-  selectType.addEventListener('change', function() {
-    if (selectType.value === 'Forage') {
-      selectZone.style.display = 'block';
-      // inputMetre.style.display = 'block';
-      // selectEquipe.style.display = 'block';
+  selectservice.addEventListener('change', function() {
+    if (selectservice.value === 'Climatisation') {
+        selectprobleme.style.display = 'block';
+      inputNombre.style.display = 'block';
+    //   selectEquipe.style.display = 'block';
       selectAdduct.style.display = 'none';
-      conditforage.style.display = 'block';
-      prixtuyaux.style.display = 'block';
-      buttonforage.style.display = 'block';
-      buttoneau.style.display = 'none';
-
-    } else if (selectType.value === 'Adduction') {
-      selectZone.style.display = 'none';
-      // inputMetre.style.display = 'none';
-      // selectEquipe.style.display = 'none';
-      conditforage.style.display = 'none';
-      prixtuyaux.style.display = 'none';
+    } else if (selectservice.value === 'Froid') {
+        selectprobleme.style.display = 'none';
+      inputNombre.style.display = 'none';
+    //   selectEquipe.style.display = 'none';
       selectAdduct.style.display = 'block';
-      buttonforage.style.display = 'none';
-      buttoneau.style.display = 'block';
     } else {
-      selectZone.style.display = 'none';
-      conditforage.style.display = 'none';
-      prixtuyaux.style.display = 'none';
-      // inputMetre.style.display = 'none';
-      // selectEquipe.style.display = 'none';
+        selectprobleme.style.display = 'none';
+      inputNombre.style.display = 'none';
+    //   selectEquipe.style.display = 'none';
       selectAdduct.style.display = 'none';
-      buttonforage.style.display = 'none';
-      buttoneau.style.display = 'none';
     }
   });
 }
@@ -357,25 +353,52 @@ afficherContenuSelect();
 
 // :::::::DANS LE TABLEAU AFFICHER LES CONTENUS EN FONCTIONDE LA SELECT OPTION {[FORRAGE/ADDUCTION]} ::::::::::::
 function afficherContenuSelectTable() {
-  var selectType = document.getElementById('selecttype');
-  var tableauforage = document.getElementById('tableauforage');
-  var tableauadduction = document.getElementById('tableauadduction');
+    // CLIMATISATION "ENTRETIEN ET INSTALLATION"
+  var selectprobleme = document.getElementById('selectprobleme');
+  var selectservice = document.getElementById('selectservice');
+  var tableauentretien = document.getElementById('tableauentretien');
+  var tableauinstall = document.getElementById('tableauinstall');
+  var tableaureparation = document.getElementById('tableaureparation');
 
-  selectType.addEventListener('change', function() {
-    if (selectType.value === 'Forage') {
-      tableauforage.style.display = 'block';
-      tableauadduction.style.display = 'none';
-    } else if (selectType.value === 'Adduction') {
-      tableauforage.style.display = 'none';
-      tableauadduction.style.display = 'block';
+  selectprobleme.addEventListener('change', function() {
+    if (selectprobleme.value === 'Entretien') {
+        tableauentretien.style.display = 'block';
+        tableauinstall.style.display = 'none';
+        tableaureparation.style.display = 'none';
+    } else if (selectprobleme.value === 'Installation') {
+        tableauinstall.style.display = 'block';
+        tableauentretien.style.display = 'none';
+        tableaureparation.style.display = 'none';
+    } else if (selectprobleme.value === 'Reparation') {
+        tableauentretien.style.display = 'none';
+        tableauinstall.style.display = 'none';
+        tableaureparation.style.display = 'block';
+    }else {
+        tableauentretien.style.display = 'none';
+        tableauinstall.style.display = 'none';
+        tableaureparation.style.display = 'none';
+    }
+  });
+
+
+
+//   DANS ID "selectservice" SI ON  SELECTIONNE "FROID" AFFICHE TABLEAU 
+  selectservice.addEventListener('change', function() {
+    if (selectservice.value === 'Froid') {
+        tableauentretien.style.display = 'none';
+        tableauinstall.style.display = 'none';
+        tableaureparation.style.display = 'none';
+        tableaufroid.style.display = 'block';
     } else {
-      tableauforage.style.display = 'none';
-      tableauadduction.style.display = 'none';
+        tableauentretien.style.display = 'none';
+        tableauinstall.style.display = 'none';
+        tableaureparation.style.display = 'none';
+        tableaufroid.style.display = 'none';
+
     }
   });
 }
 afficherContenuSelectTable();
-
 
 
 
@@ -436,62 +459,78 @@ afficherNumero();
 
 
 
-// ::::::RECUPERE AUTOMATIQUEMENT ZONE SELECT:::::::::::::
-function afficherSelection() {
-  var selectZone = document.getElementById('selectzone');
-  var tableauforage = document.getElementById('tableauforage');
-  var zoneCell = tableauforage.querySelector('td[data-label="Zone"]');
+// :::::: FONCTION QUI RECUPERE LES PROBLEME CLIMATISATION:::::::::::::
 
-  var selectedZone = selectZone.value;
-  zoneCell.textContent = selectedZone;
-}
-
-
-
-// ::::::RECUPERE AUTOMATIQUEMENT EQUIPEMENT SELECT:::::::::::::
-// function afficherSelectionE() {
-//   var selectequipe = document.getElementById('selectequipe');
-//   var selectedOption = selectequipe.options[selectequipe.selectedIndex].text;
-//   var equipeValue = document.querySelector('td[data-label="Equipement"]');
-//   equipeValue.textContent = selectedOption;
-// }
+// <!-- :::::::::PROBLEME CLIMATISATION ENTRETIEN::::::::: -->
+var selectprobleme = document.getElementById('selectprobleme');
+var tdProbleme = document.querySelector('#tableauentretien td[data-label="Problème"]');
+// Écouter les changements de sélection
+selectprobleme.addEventListener('change', function() {
+  // Mettre à jour le contenu du <td> avec la sélection
+  tdProbleme.textContent = selectprobleme.value;
+});
 
 
-// :::::::::::::::AFFICHER LE MONTANT SI ON CLIQUE SUR BUTTON id="buttonforage"::::::
-function afficherMontantForage() {
-  var selectZone = document.getElementById('selectzone');
-  var montantCell = document.querySelector('#tableauforage td[data-label="Montant"]');
-  
-  selectZone.addEventListener('change', function() {
-    if (selectZone.value === 'Standart' || selectZone.value === 'Rocheuse' || selectZone.value === 'Terre fin') {
-      montantCell.textContent = '1 000 000 FCFA';
-    } else if (selectZone.value === 'Boueuse') {
-      montantCell.textContent = '1 500 000 FCFA';
-    } else {
-      montantCell.textContent = '?';
-    }
+
+// <!-- :::::::::PROBLEME CLIMATISATION INSTALLATION::::::::: -->
+var selectprobleme = document.getElementById('selectprobleme');
+var tdinstall = document.querySelector('#tableauinstall td[data-label="Problème"]');
+// Écouter les changements de sélection
+selectprobleme.addEventListener('change', function() {
+  // Mettre à jour le contenu du <td> avec la sélection
+    tdinstall.textContent = selectprobleme.value;
+});
+
+
+
+// <!-- :::::::::PROBLEME CLIMATISATION REPARATION::::::::: -->
+var selectprobleme = document.getElementById('selectprobleme');
+var tdreparation = document.querySelector('#tableaureparation td[data-label="Problème"]');
+// Écouter les changements de sélection
+selectprobleme.addEventListener('change', function() {
+  // Mettre à jour le contenu du <td> avec la sélection
+    tdreparation.textContent = selectprobleme.value;
+});
+
+
+
+// :::::::::::: RECUPERER LA VALEUR DE INPUT NOMBRE SAISI::::::::::::::
+function afficherValeurNombre() {
+  var nombreInput = document.getElementById('nombre');
+  var valeursNombre = document.querySelectorAll('td[data-label="Nombre"]');
+
+  nombreInput.addEventListener('input', function() {
+    var valeur = nombreInput.value;
+
+    valeursNombre.forEach(function(element) {
+      element.textContent = valeur;
+    });
   });
 }
-afficherMontantForage();
+afficherValeurNombre();
 
 
-// :::::::::::::::::
-function afficherMontant() {
-  var selectType = document.getElementById('selecttype');
-  var tableauAdduction = document.getElementById('tableauadduction');
-  var montantAdduct = tableauAdduction.getElementsByClassName('montantadduct')[0];
 
-  selectType.addEventListener('change', function() {
-    if (selectType.value === 'Adduction') {
-      montantAdduct.textContent = '1 500 000 /hectar';
-    } else {
-      montantAdduct.textContent = '';
-    }
-  });
+// :::::::::::::: FONCTION QUI MULTIPLIE DE "Entretien*15 000"ET"Installation*25 000"
+function calculerMontant() {
+  var selectprobleme = document.getElementById('selectprobleme');
+  var nombreInput = document.getElementById('nombre');
+
+  var montant = 0;
+
+  if (selectprobleme.value === 'Entretien') {
+    montant = nombreInput.value * 15000;
+    var montantAvecEspacement = montant.toLocaleString('fr-FR');
+    document.getElementById('tableauentretien').querySelector('td[data-label="Montant"]').textContent = montantAvecEspacement + ' fcfa';
+  } else if (selectprobleme.value === 'Installation') {
+    montant = nombreInput.value * 25000;
+    var montantAvecEspacement = montant.toLocaleString('fr-FR');
+    document.getElementById('tableauinstall').querySelector('td[data-label="Montant"]').textContent = montantAvecEspacement + ' fcfa';
+  }
 }
-afficherMontant();
-
-
+// Appel de la fonction lorsqu'il y a un changement dans les éléments select et input
+document.getElementById('selectprobleme').addEventListener('change', calculerMontant);
+document.getElementById('nombre').addEventListener('input', calculerMontant);
 
 
 
@@ -514,7 +553,7 @@ function makePDF() {
 
     var doc = new jsPDF();
     doc.setFont('Arial');
-    doc.save("forageadduct.pdf");
+    doc.save("plomberie.pdf");
   });
 }
 
@@ -534,13 +573,12 @@ function downloadPDF() {
     var height = pdf.internal.pageSize.getHeight();
 
     pdf.addImage(imgData, "PNG", 0, 0, width, height);
-    pdf.save("forageadduct.pdf");
+    pdf.save("plomberie.pdf");
   });
 }
 document.getElementById("telecharger").addEventListener("click", function () {
   downloadPDF();
 });
-
 
 </script>
 
